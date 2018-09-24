@@ -1,3 +1,5 @@
+const valid = require('valid-url')
+
 const {Client, RichEmbed} = require('discord.js')
 const mongoose = require('mongoose')
 const Reaction = require('./Data/Schema/reaction.js')
@@ -112,39 +114,48 @@ client.on('message', message => {
             message.channel.send(embed)
         }
         else{
-            Reaction.find({'name': arr[1]}, 'url', (err, url) => {
-                if (err){
-                    const embed = new RichEmbed()
-                        .setColor('#FF0000')
-                        .setDescription(err.content)
-                    message.channel.send(embed)
-                }
-                else if (url) {
-                    if (url.length) {
+            if (valid.isWebUri(arr[2])){
+                Reaction.find({'name': arr[1]}, 'url', (err, url) => {
+                    if (err){
                         const embed = new RichEmbed()
                             .setColor('#FF0000')
-                            .setDescription("Reaction with that name already exists")
+                            .setDescription(err.content)
                         message.channel.send(embed)
                     }
-                    else {
+                    else if (url) {
+                        if (url.length) {
+                            const embed = new RichEmbed()
+                                .setColor('#FF0000')
+                                .setDescription("Reaction with that name already exists")
+                            message.channel.send(embed)
+                        }
+                        else {
 
-                        Reaction.create({'name': arr[1], 'url': arr[2]}, (err, reaction) => {
-                            if (err) {
-                                const embed = new RichEmbed()
-                                    .setColor('#FF0000')
-                                    .setDescription(err.content)
-                                message.channel.send(embed)
-                            }
-                            else if (reaction) {
-                                const embed = new RichEmbed()
-                                    .setColor('#00FF00')
-                                    .setDescription("Saved the reaction")
-                                message.channel.send(embed)
-                            }
-                        })
+                            Reaction.create({'name': arr[1], 'url': arr[2]}, (err, reaction) => {
+                                if (err) {
+                                    const embed = new RichEmbed()
+                                        .setColor('#FF0000')
+                                        .setDescription(err.content)
+                                    message.channel.send(embed)
+                                }
+                                else if (reaction) {
+                                    const embed = new RichEmbed()
+                                        .setColor('#00FF00')
+                                        .setDescription("Saved the reaction")
+                                    message.channel.send(embed)
+                                }
+                            })
+                        }
                     }
-                }
-            })
+                })
+            }
+            else{
+                const embed = new RichEmbed()
+                    .setColor('#FF0000')
+                    .setDescription("Invalid URL")
+                message.channel.send(embed)
+            }
+
         }
     }
     else if (message.content.match(/^::delete($|\s.*)/) || message.content.match(/^::d($|\s.*)/)){
