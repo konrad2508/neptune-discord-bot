@@ -159,7 +159,7 @@ client.on('message', message => {
         }
     }
     else if (message.content.match(/^::delete($|\s.*)/) || message.content.match(/^::d($|\s.*)/)){
-        if (message.author.id != 320694341494505472){
+        if (message.author.id != process.env.ADMIN_ID){
             const embed = new RichEmbed()
                 .setColor('#FF0000')
                 .setDescription("You do not have access to this command")
