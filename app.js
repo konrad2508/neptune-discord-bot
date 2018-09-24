@@ -38,8 +38,8 @@ client.on('message', message => {
             .setTitle('List of commands')
             .setColor('#00FF00')
             .addField("```::react Name```", 'Reacts with **Name**.')
-            .addField("```::add Name URL```", "Adds a reaction named **Name**. URL must lead to an image/gif.")
-            .addField("```::list```", "Lists available reactions")
+            .addField("```::add Name URL```", "Adds a reaction named **Name**. **URL** must lead to an image/gif.")
+            .addField("```::list```", "Lists available reactions.")
         message.channel.send(embed)
     }
     else if (message.content === '::list' || message.content === '::l'){
