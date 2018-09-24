@@ -37,7 +37,9 @@ client.on('message', message => {
         const embed = new RichEmbed()
             .setTitle('List of commands')
             .setColor('#00FF00')
-            .setDescription("```::react Name``` Reacts with **Name**\n\n```::add Name URL``` Adds a reaction named **Name**\n\n```::list``` Lists available reactions")
+            .addField("```::react Name```", 'Reacts with **Name**.')
+            .addField("```::add Name URL```", "Adds a reaction named **Name**. URL must lead to an image/gif.")
+            .addField("```::list```", "Lists available reactions")
         message.channel.send(embed)
     }
     else if (message.content === '::list' || message.content === '::l'){
