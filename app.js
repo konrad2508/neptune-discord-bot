@@ -66,7 +66,7 @@ client.on('message', message => {
             }
         })
     }
-    else if (message.content.match(/^::react(^|\s).*/) || message.content.match(/^::r(^|\s).*/)){
+    else if (message.content.match(/^::react($|\s.*)/) || message.content.match(/^::r($|\s.*)/)){
         let arr = message.content.split(" ")
         if (arr.length === 1){
             const embed = new RichEmbed()
@@ -97,7 +97,7 @@ client.on('message', message => {
             })
         }
     }
-    else if (message.content.match(/^::add(^|\s).*/) || message.content.match(/^::a(^|\s).*/)){
+    else if (message.content.match(/^::add($|\s.*)/) || message.content.match(/^::a($|\s.*)/)){
         let arr = message.content.split(" ")
         if (arr.length === 1){
             const embed = new RichEmbed()
@@ -147,7 +147,7 @@ client.on('message', message => {
             })
         }
     }
-    else if (message.content.match(/^::delete(^|\s).*/) || message.content.match(/^::d(^|\s).*/)){
+    else if (message.content.match(/^::delete($|\s.*)/) || message.content.match(/^::d($|\s.*)/)){
         if (message.author.id != 320694341494505472){
             const embed = new RichEmbed()
                 .setColor('#FF0000')
