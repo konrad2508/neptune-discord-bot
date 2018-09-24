@@ -70,6 +70,7 @@ client.on('message', message => {
     }
     else if (message.content.match(/^::react($|\s.*)/) || message.content.match(/^::r($|\s.*)/)){
         let arr = message.content.split(" ")
+        message.delete(1000)
         if (arr.length === 1){
             const embed = new RichEmbed()
                 .setColor('#FF0000')
