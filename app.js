@@ -93,7 +93,7 @@ client.on('message', message => {
                         .setImage(url[0].url)
                         .setThumbnail(url[0].name)
                     message.channel.send(embed)
-                    message.delete(100)
+                    message.delete(1000)
                 }
                 else{
                     const embed = new RichEmbed()
