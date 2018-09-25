@@ -91,9 +91,9 @@ client.on('message', message => {
                         .setColor('#00FF00')
                         .setTitle(message.member.user.tag + ' reacts')
                         .setImage(url[0].url)
-                        .setThumbnail(url[0].name)
+                        .setFooter(url[0].name)
                     message.channel.send(embed)
-                    message.delete(1000)
+                    message.delete(100)
                 }
                 else{
                     const embed = new RichEmbed()
