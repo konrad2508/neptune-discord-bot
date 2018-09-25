@@ -72,7 +72,6 @@ client.on('message', message => {
     }
     else if (message.content.match(/^::react($|\s.*)/) || message.content.match(/^::r($|\s.*)/)){
         let arr = message.content.split(" ")
-        message.delete(1000)
         if (arr.length === 1){
             const embed = new RichEmbed()
                 .setColor('#FF0000')
@@ -80,7 +79,7 @@ client.on('message', message => {
             message.channel.send(embed)
         }
         else{
-            Reaction.find({'name': arr[1]}, 'url', (err, url) => {
+            Reaction.find({'name': arr[1]}, 'name url', (err, url) => {
                 if (err){
                     const embed = new RichEmbed()
                         .setColor('#FF0000')
@@ -92,7 +91,9 @@ client.on('message', message => {
                         .setColor('#00FF00')
                         .setTitle(message.member.user.tag + ' reacts')
                         .setImage(url[0].url)
+                        .setThumbnail(url[0].name)
                     message.channel.send(embed)
+                    message.delete(100)
                 }
                 else{
                     const embed = new RichEmbed()
