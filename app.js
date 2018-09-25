@@ -91,7 +91,7 @@ client.on('message', message => {
                         .setColor('#00FF00')
                         .setTitle(message.member.user.tag + ' reacts')
                         .setImage(url[0].url)
-                        .setFooter(url[0].name)
+                        .setFooter('Reaction name: ' + url[0].name)
                     message.channel.send(embed)
                     message.delete(100)
                 }
