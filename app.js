@@ -62,6 +62,7 @@ client.on('message', message => {
                 message.channel.send(embed).then(msg => {
                     msg.delete(10000)
                 })
+                message.delete(100)
             }
             else{
                 const embed = new RichEmbed()
