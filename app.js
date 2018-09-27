@@ -59,14 +59,19 @@ client.on('message', message => {
                     .setTitle('List of commands')
                     .setColor('#00FF00')
                     .setDescription(names.sort((a,b) => { return (a.toLowerCase() < b.toLowerCase()) ? -1 : 1}).join("\n"))
-                message.channel.send(embed)
+                message.channel.send(embed).then(msg => {
+                    msg.delete(10000)
+                })
             }
             else{
                 const embed = new RichEmbed()
                     .setTitle('List of commands')
                     .setColor('#00FF00')
                     .setDescription("No reactions added")
-                message.channel.send(embed)
+                message.channel.send(embed).then(msg => {
+                    msg.delete(10000)
+                })
+                message.delete(100)
             }
         })
     }
