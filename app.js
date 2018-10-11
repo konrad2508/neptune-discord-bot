@@ -33,13 +33,7 @@ client.on('ready', () => {
 })
 
 client.on('message', message => {
-    if (message.guild.id !== '251786602135683073' || message.guild.id !== '490996959956434944'){
-        const embed = new RichEmbed()
-            .setColor('#FF0000')
-            .setDescription("Fuck off")
-        message.channel.send(embed)
-    }
-    else if (message.content === '::help' || message.content === '::h'){
+    if (message.content === '::help' || message.content === '::h'){
         const embed = new RichEmbed()
             .setTitle('List of commands')
             .setColor('#00FF00')
