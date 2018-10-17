@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8823d205-44c9-4413-948d-0c9f33b7a26a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -17,36 +18,38 @@
     <session id="-62285275">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="12" />
+          <entry key="project.closed" value="13" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.19" value="1" />
           <entry key="project.open.time.20" value="1" />
           <entry key="project.open.time.22" value="1" />
-          <entry key="project.open.time.23" value="2" />
+          <entry key="project.open.time.23" value="3" />
           <entry key="project.open.time.4" value="1" />
           <entry key="project.open.time.40" value="1" />
           <entry key="project.open.time.45" value="1" />
           <entry key="project.open.time.6" value="1" />
           <entry key="project.open.time.7" value="2" />
-          <entry key="project.opened" value="13" />
+          <entry key="project.opened" value="14" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="js" value="3" />
           <entry key="json" value="1" />
+          <entry key="ts" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="JSON" value="1" />
           <entry key="JavaScript" value="3" />
+          <entry key="TypeScript" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="js" value="3234" />
+          <entry key="js" value="3428" />
           <entry key="json" value="6" />
           <entry key="txt" value="9" />
         </counts>
@@ -54,8 +57,13 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JSON" value="6" />
-          <entry key="JavaScript" value="3234" />
+          <entry key="JavaScript" value="3428" />
           <entry key="PLAIN_TEXT" value="9" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.js.language.service.starts">
+        <counts>
+          <entry key="TypeScriptServerServiceImpl" value="1" />
         </counts>
       </usages-collector>
     </session>
@@ -74,17 +82,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="35" column="4" selection-start-line="35" selection-start-column="4" selection-end-line="35" selection-end-column="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/package.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="25" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
+            <state relative-caret-position="472">
+              <caret line="236" column="4" selection-start-line="236" selection-start-column="4" selection-end-line="236" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -127,9 +126,9 @@
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="260" />
-    <option name="y" value="20" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="969" />
+    <option name="y" value="51" />
     <option name="width" value="1400" />
     <option name="height" value="1000" />
   </component>
@@ -162,6 +161,7 @@
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="ts.external.directory.path" value="E:\Program Files\JetBrains\WebStorm 2018.2.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -202,7 +202,8 @@
       <workItem from="1537811320172" duration="792000" />
       <workItem from="1537888094801" duration="1331000" />
       <workItem from="1538082838860" duration="965000" />
-      <workItem from="1539288117830" duration="667000" />
+      <workItem from="1539288117830" duration="2102000" />
+      <workItem from="1539730300937" duration="4304000" />
     </task>
     <task id="LOCAL-00001" summary="polishing">
       <created>1537888319205</created>
@@ -215,16 +216,17 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23175000" />
+    <option name="totallyTimeSpent" value="28914000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="969" y="51" width="1400" height="1000" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18545838" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25844347" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="TypeScript" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.329718" />
@@ -235,7 +237,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50052685" side_tool="true" weight="0.20932755" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49947312" visible="true" weight="0.20932755" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49947312" visible="true" weight="0.22286375" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -267,10 +269,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/discord.js/typings/index.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="517" column="24" selection-start-line="517" selection-start-column="24" selection-end-line="517" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="35" column="4" selection-start-line="35" selection-start-column="4" selection-end-line="35" selection-end-column="4" />
+        <state relative-caret-position="472">
+          <caret line="236" column="4" selection-start-line="236" selection-start-column="4" selection-end-line="236" selection-end-column="4" />
         </state>
       </provider>
     </entry>

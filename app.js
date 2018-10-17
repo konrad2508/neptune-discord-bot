@@ -169,7 +169,7 @@ client.on('message', message => {
         }
     }
     else if (message.content.match(/^::delete($|\s.*)/) || message.content.match(/^::d($|\s.*)/)){
-        if (message.author.id != process.env.ADMIN_ID){
+        if (message.author.id !== process.env.ADMIN_ID){
             const embed = new RichEmbed()
                 .setColor('#FF0000')
                 .setDescription("You do not have access to this command")
@@ -216,6 +216,24 @@ client.on('message', message => {
                 })
             }
         }
+    }
+    else if (message.content.match(/^::join($|\s.*)/)){
+        if(message.member.voiceChannel){
+            if(!message.guild.voiceConnection){
+                message.member.voiceChannel.join();
+            }
+        }
+        else{
+            const embed = new RichEmbed()
+                .setColor('#FF0000')
+                .setDescription("You must be in a voice channel")
+            message.channel.send(embed)
+        }
+    }
+    else if (message.content.match(/^::leave($|\s.*)/)){
+            if (message.guild.voiceConnection){
+                message.guild.voiceChannel.disconnect();
+            }
     }
 })
 
