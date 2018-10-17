@@ -219,14 +219,14 @@ client.on('message', message => {
     }
     else if (message.content.match(/^::join($|\s.*)/)){
         if(message.member.voiceChannel){
-            // if(!message.guild.voiceConnection){
+            if(message.guild.voiceConnection){
                 message.member.voiceChannel.join().then(connection => {
                     const embed = new RichEmbed()
                         .setColor('#00FF00')
                         .setDescription("Joined voice channel")
                     message.channel.send(embed)
                 });
-            // }
+            }
         }
         else{
             const embed = new RichEmbed()
