@@ -50,7 +50,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="js" value="5076" />
+          <entry key="js" value="5415" />
           <entry key="json" value="6" />
           <entry key="txt" value="9" />
         </counts>
@@ -58,7 +58,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JSON" value="6" />
-          <entry key="JavaScript" value="5076" />
+          <entry key="JavaScript" value="5415" />
           <entry key="PLAIN_TEXT" value="9" />
         </counts>
       </usages-collector>
@@ -74,8 +74,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="579">
-              <caret line="333" column="63" selection-start-line="333" selection-start-column="63" selection-end-line="333" selection-end-column="63" />
+            <state relative-caret-position="613">
+              <caret line="344" column="70" lean-forward="true" selection-start-line="344" selection-start-column="70" selection-end-line="344" selection-end-column="70" />
               <folding>
                 <element signature="e#427#435#0" />
                 <element signature="e#1037#1446#0" />
@@ -85,6 +85,8 @@
                 <element signature="e#6761#8862#0" />
                 <element signature="e#8905#9599#0" />
                 <element signature="e#9643#9981#0" />
+                <element signature="e#10036#12205#0" />
+                <element signature="e#11672#11737#0" />
               </folding>
             </state>
           </provider>
@@ -217,7 +219,7 @@
       <workItem from="1539730300937" duration="9752000" />
       <workItem from="1539776753961" duration="857000" />
       <workItem from="1539777723840" duration="386000" />
-      <workItem from="1539793737701" duration="3149000" />
+      <workItem from="1539793737701" duration="3573000" />
     </task>
     <task id="LOCAL-00001" summary="polishing">
       <created>1537888319205</created>
@@ -230,7 +232,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38754000" />
+    <option name="totallyTimeSpent" value="39178000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -294,8 +296,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="579">
-          <caret line="333" column="63" selection-start-line="333" selection-start-column="63" selection-end-line="333" selection-end-column="63" />
+        <state relative-caret-position="613">
+          <caret line="344" column="70" lean-forward="true" selection-start-line="344" selection-start-column="70" selection-end-line="344" selection-end-column="70" />
           <folding>
             <element signature="e#427#435#0" />
             <element signature="e#1037#1446#0" />
@@ -305,6 +307,8 @@
             <element signature="e#6761#8862#0" />
             <element signature="e#8905#9599#0" />
             <element signature="e#9643#9981#0" />
+            <element signature="e#10036#12205#0" />
+            <element signature="e#11672#11737#0" />
           </folding>
         </state>
       </provider>

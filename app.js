@@ -335,6 +335,16 @@ client.on('message', message => {
             message.channel.send(embed)
         }
     }
+    else if (message.content === '::beta'){
+        const embed = new RichEmbed()
+            .setTitle('List of commands in testing phase')
+            .setColor('#00FF00')
+            .addField("```::join```", 'Joins your voice channel.')
+            .addField("```::leave```", 'Leaves voice channel.')
+            .addField("```::play URL```", "Queues song from YouTube to play. Undefined behavior for non-YouTube URLs. Audio quality may be bad, WIP.")
+            .addField("```::skip```", "Skips currently playing song.")
+        message.channel.send(embed)
+    }
 })
 
 client.login(process.env.BOT_TOKEN)
