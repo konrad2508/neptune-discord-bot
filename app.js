@@ -5,12 +5,39 @@ const mongoose = require('mongoose')
 const Reaction = require('./Data/Schema/reaction.js')
 const express = require('express')
 const https = require('https')
+const YTDL = require('ytdl-core')
 
 const app = express()
 
 app.listen(process.env.PORT || 8080)
 
 const client = new Client()
+
+let servers = {}
+let connections = {}
+
+let PlayFunc = (message) =>{
+    let server = servers[message.guild.id]
+    let connection = connections[message.guild.id]
+    server.dispatcher = connection.playStream(YTDL(server.queue[0], {filter: "audioonly"}))
+    const embed = new RichEmbed()
+        .setColor('#00FF00')
+        .setDescription("Playing " + server.queue[0])
+    message.channel.send(embed)
+    server.queue.shift()
+    server.dispatcher.on("end", () => {
+        if (server.queue[0]){
+            PlayFunc(message)
+        }
+        else{
+            servers[message.guild.id] = undefined;
+            const embed = new RichEmbed()
+                .setColor('#00FF00')
+                .setDescription("Queue ended")
+            message.channel.send(embed)
+        }
+    })
+}
 
 mongoose.connect("mongodb://@ds139187.mlab.com:39187/reactbot-db", {
     'user': process.env.DBUSER,
@@ -220,7 +247,8 @@ client.on('message', message => {
     else if (message.content === '::join'){
         if(message.member.voiceChannel){
             if(!message.guild.voiceConnection){
-                message.member.voiceChannel.join().then( () => {
+                message.member.voiceChannel.join().then( (connection) => {
+                    connections[message.guild.id] = connection
                     const embed = new RichEmbed()
                         .setColor('#00FF00')
                         .setDescription("Joined voice channel")
@@ -238,6 +266,7 @@ client.on('message', message => {
     else if (message.content === '::leave'){
         if (message.guild.voiceConnection){
             message.guild.voiceConnection.disconnect()
+            connections[message.guild.id] = null
             const embed = new RichEmbed()
                 .setColor('#00FF00')
                 .setDescription("Left voice channel")
@@ -245,23 +274,42 @@ client.on('message', message => {
         }
     }
     else if (message.content.match(/^::play($|\s.*)/)){
-        let arr = message.content.split(" ")
-        if (arr.length === 1){
-            const embed = new RichEmbed()
-                .setColor('#FF0000')
-                .setDescription("Specify URL of the song")
-            message.channel.send(embed)
-        }
-        else{
-            if (valid.isWebUri(arr[1])){
-                //TODO: implement loading song and playing it
-            }
-            else{
+        if (message.guild.voiceConnection){
+            let arr = message.content.split(" ")
+            if (arr.length === 1){
                 const embed = new RichEmbed()
                     .setColor('#FF0000')
-                    .setDescription("Invalid URL")
+                    .setDescription("Specify URL of the song")
                 message.channel.send(embed)
             }
+            else{
+                if (valid.isWebUri(arr[1])){
+                    if (servers[message.guild.id]){
+                        servers[message.guild.id].queue.push(arr[1])
+                        const embed = new RichEmbed()
+                            .setColor('#00FF00')
+                            .setDescription("Added " + arr[1] + " to the queue")
+                        message.channel.send(embed)
+                    }
+                    else{
+                        servers[message.guild.id] = {queue: []}
+                        servers[message.guild.id].queue.push(arr[1])
+                        PlayFunc(message)
+                    }
+                }
+                else{
+                    const embed = new RichEmbed()
+                        .setColor('#FF0000')
+                        .setDescription("Invalid URL")
+                    message.channel.send(embed)
+                }
+            }
+        }
+        else{
+            const embed = new RichEmbed()
+                .setColor('#FF0000')
+                .setDescription("Bot must be in a voice channel")
+            message.channel.send(embed)
         }
     }
     else if (message.content === '::skip'){
