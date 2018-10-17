@@ -235,8 +235,16 @@ client.on('message', message => {
             message.channel.send(embed)
         }
     }
-    else if (message.content.match(/^::leave($|\s.*)/)){
+    else if (message.content === '::leave'){
+        const embed = new RichEmbed()
+            .setColor('#00FF00')
+            .setDescription("k1")
+        message.channel.send(embed)
             if (message.guild.voiceConnection){
+                const embed = new RichEmbed()
+                    .setColor('#00FF00')
+                    .setDescription("k2")
+                message.channel.send(embed)
                 message.guild.voiceChannel.disconnect();
             }
     }
