@@ -27,7 +27,7 @@ let playFunc = (message) =>{
     server.queue.shift()
     server.dispatcher.on("end", () => {
         if (server.queue[0]){
-            PlayFunc(message)
+            playFunc(message)
         }
         else{
             servers[message.guild.id] = undefined;

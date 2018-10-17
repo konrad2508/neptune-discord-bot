@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8823d205-44c9-4413-948d-0c9f33b7a26a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-    </list>
+    <list default="true" id="8823d205-44c9-4413-948d-0c9f33b7a26a" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -17,7 +15,7 @@
     <session id="-62285275">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="16" />
+          <entry key="project.closed" value="17" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.19" value="1" />
@@ -74,10 +72,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="205">
-              <caret line="316" column="51" lean-forward="true" selection-start-line="316" selection-start-column="51" selection-end-line="316" selection-end-column="51" />
+            <state relative-caret-position="545">
+              <caret line="305" column="54" selection-start-line="305" selection-start-column="54" selection-end-line="305" selection-end-column="54" />
               <folding>
                 <element signature="e#427#435#0" />
+                <element signature="n#!!block;n#extractHostname#0" />
+                <element signature="n#!!block;n#extractRootDomain#0" />
                 <element signature="e#1037#1446#0" />
                 <element signature="e#1518#2810#0" />
                 <element signature="e#2907#4153#0" />
@@ -85,7 +85,9 @@
                 <element signature="e#6761#8862#0" />
                 <element signature="e#8905#9599#0" />
                 <element signature="e#9643#9981#0" />
+                <element signature="e#10036#12205#0" />
                 <element signature="e#11672#11737#0" />
+                <element signature="e#13187#13203#0" />
               </folding>
             </state>
           </provider>
@@ -218,7 +220,7 @@
       <workItem from="1539730300937" duration="9752000" />
       <workItem from="1539776753961" duration="857000" />
       <workItem from="1539777723840" duration="386000" />
-      <workItem from="1539793737701" duration="4385000" />
+      <workItem from="1539793737701" duration="4803000" />
     </task>
     <task id="LOCAL-00001" summary="polishing">
       <created>1537888319205</created>
@@ -231,7 +233,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39990000" />
+    <option name="totallyTimeSpent" value="40408000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -295,10 +297,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="316" column="51" lean-forward="true" selection-start-line="316" selection-start-column="51" selection-end-line="316" selection-end-column="51" />
+        <state relative-caret-position="545">
+          <caret line="305" column="54" selection-start-line="305" selection-start-column="54" selection-end-line="305" selection-end-column="54" />
           <folding>
             <element signature="e#427#435#0" />
+            <element signature="n#!!block;n#extractHostname#0" />
+            <element signature="n#!!block;n#extractRootDomain#0" />
             <element signature="e#1037#1446#0" />
             <element signature="e#1518#2810#0" />
             <element signature="e#2907#4153#0" />
@@ -306,7 +310,9 @@
             <element signature="e#6761#8862#0" />
             <element signature="e#8905#9599#0" />
             <element signature="e#9643#9981#0" />
+            <element signature="e#10036#12205#0" />
             <element signature="e#11672#11737#0" />
+            <element signature="e#13187#13203#0" />
           </folding>
         </state>
       </provider>
