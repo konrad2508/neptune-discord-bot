@@ -220,7 +220,7 @@ client.on('message', message => {
     else if (message.content === '::join'){
         if(message.member.voiceChannel){
             if(!message.guild.voiceConnection){
-                message.member.voiceChannel.join().then(connection => {
+                message.member.voiceChannel.join().then( () => {
                     const embed = new RichEmbed()
                         .setColor('#00FF00')
                         .setDescription("Joined voice channel")
@@ -237,8 +237,36 @@ client.on('message', message => {
     }
     else if (message.content === '::leave'){
         if (message.guild.voiceConnection){
-            message.guild.voiceConnection.disconnect();
+            message.guild.voiceConnection.disconnect().then( () => {
+                const embed = new RichEmbed()
+                    .setColor('#00FF00')
+                    .setDescription("Left voice channel")
+                message.channel.send(embed)
+            });
         }
+    }
+    else if (message.content.match(/^::play($|\s.*)/)){
+        let arr = message.content.split(" ")
+        if (arr.length === 1){
+            const embed = new RichEmbed()
+                .setColor('#FF0000')
+                .setDescription("Specify URL of the song")
+            message.channel.send(embed)
+        }
+        else{
+            if (valid.isWebUri(arr[1])){
+                //TODO: implement loading song and playing it
+            }
+            else{
+                const embed = new RichEmbed()
+                    .setColor('#FF0000')
+                    .setDescription("Invalid URL")
+                message.channel.send(embed)
+            }
+        }
+    }
+    else if (message.content === '::skip'){
+        //TODO: implement skipping currently playing song
     }
 })
 
