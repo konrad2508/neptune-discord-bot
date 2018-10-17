@@ -123,7 +123,7 @@
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1400" />
@@ -200,7 +200,7 @@
       <workItem from="1537888094801" duration="1331000" />
       <workItem from="1538082838860" duration="965000" />
       <workItem from="1539288117830" duration="2102000" />
-      <workItem from="1539730300937" duration="7441000" />
+      <workItem from="1539730300937" duration="7971000" />
     </task>
     <task id="LOCAL-00001" summary="polishing">
       <created>1537888319205</created>
@@ -213,7 +213,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32051000" />
+    <option name="totallyTimeSpent" value="32581000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
