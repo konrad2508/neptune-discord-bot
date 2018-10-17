@@ -223,7 +223,7 @@ client.on('message', message => {
                 .setColor('#00FF00')
                 .setDescription("k1")
             message.channel.send(embed)
-            if(message.guild.voiceConnection){
+            if(!message.guild.voiceConnection){
                 const embed = new RichEmbed()
                     .setColor('#00FF00')
                     .setDescription("k2")
