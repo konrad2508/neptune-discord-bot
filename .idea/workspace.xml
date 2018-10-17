@@ -50,7 +50,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="js" value="5454" />
+          <entry key="js" value="5493" />
           <entry key="json" value="6" />
           <entry key="txt" value="9" />
         </counts>
@@ -58,7 +58,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JSON" value="6" />
-          <entry key="JavaScript" value="5454" />
+          <entry key="JavaScript" value="5493" />
           <entry key="PLAIN_TEXT" value="9" />
         </counts>
       </usages-collector>
@@ -74,8 +74,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="907">
-              <caret line="357" column="109" lean-forward="true" selection-start-line="357" selection-start-column="109" selection-end-line="357" selection-end-column="109" />
+            <state relative-caret-position="205">
+              <caret line="316" column="51" lean-forward="true" selection-start-line="316" selection-start-column="51" selection-end-line="316" selection-end-column="51" />
               <folding>
                 <element signature="e#427#435#0" />
                 <element signature="e#1037#1446#0" />
@@ -218,7 +218,7 @@
       <workItem from="1539730300937" duration="9752000" />
       <workItem from="1539776753961" duration="857000" />
       <workItem from="1539777723840" duration="386000" />
-      <workItem from="1539793737701" duration="4002000" />
+      <workItem from="1539793737701" duration="4385000" />
     </task>
     <task id="LOCAL-00001" summary="polishing">
       <created>1537888319205</created>
@@ -231,7 +231,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39607000" />
+    <option name="totallyTimeSpent" value="39990000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -295,8 +295,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="907">
-          <caret line="357" column="109" lean-forward="true" selection-start-line="357" selection-start-column="109" selection-end-line="357" selection-end-column="109" />
+        <state relative-caret-position="205">
+          <caret line="316" column="51" lean-forward="true" selection-start-line="316" selection-start-column="51" selection-end-line="316" selection-end-column="51" />
           <folding>
             <element signature="e#427#435#0" />
             <element signature="e#1037#1446#0" />
