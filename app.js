@@ -236,17 +236,9 @@ client.on('message', message => {
         }
     }
     else if (message.content === '::leave'){
-        const embed = new RichEmbed()
-            .setColor('#00FF00')
-            .setDescription("k1")
-        message.channel.send(embed)
-            if (message.guild.voiceConnection){
-                const embed = new RichEmbed()
-                    .setColor('#00FF00')
-                    .setDescription("k2")
-                message.channel.send(embed)
-                message.guild.voiceChannel.disconnect();
-            }
+        if (message.guild.voiceConnection){
+            message.guild.voiceConnection.disconnect();
+        }
     }
 })
 
