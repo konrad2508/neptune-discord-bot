@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8823d205-44c9-4413-948d-0c9f33b7a26a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-    </list>
+    <list default="true" id="8823d205-44c9-4413-948d-0c9f33b7a26a" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -72,7 +70,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="245">
+            <state relative-caret-position="381">
               <caret line="221" column="47" selection-start-line="221" selection-start-column="47" selection-end-line="221" selection-end-column="47" />
             </state>
           </provider>
@@ -202,7 +200,7 @@
       <workItem from="1537888094801" duration="1331000" />
       <workItem from="1538082838860" duration="965000" />
       <workItem from="1539288117830" duration="2102000" />
-      <workItem from="1539730300937" duration="7189000" />
+      <workItem from="1539730300937" duration="7441000" />
     </task>
     <task id="LOCAL-00001" summary="polishing">
       <created>1537888319205</created>
@@ -215,11 +213,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="31799000" />
+    <option name="totallyTimeSpent" value="32051000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18545838" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -277,7 +274,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
+        <state relative-caret-position="381">
           <caret line="221" column="47" selection-start-line="221" selection-start-column="47" selection-end-line="221" selection-end-column="47" />
         </state>
       </provider>
