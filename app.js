@@ -217,9 +217,17 @@ client.on('message', message => {
             }
         }
     }
-    else if (message.content.match(/^::join($|\s.*)/)){
+    else if (message.content === '::join'){
         if(message.member.voiceChannel){
+            const embed = new RichEmbed()
+                .setColor('#00FF00')
+                .setDescription("k1")
+            message.channel.send(embed)
             if(message.guild.voiceConnection){
+                const embed = new RichEmbed()
+                    .setColor('#00FF00')
+                    .setDescription("k2")
+                message.channel.send(embed)
                 message.member.voiceChannel.join().then(connection => {
                     const embed = new RichEmbed()
                         .setColor('#00FF00')
