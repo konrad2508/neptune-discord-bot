@@ -237,12 +237,11 @@ client.on('message', message => {
     }
     else if (message.content === '::leave'){
         if (message.guild.voiceConnection){
-            message.guild.voiceConnection.disconnect().then( () => {
-                const embed = new RichEmbed()
-                    .setColor('#00FF00')
-                    .setDescription("Left voice channel")
-                message.channel.send(embed)
-            });
+            message.guild.voiceConnection.disconnect()
+            const embed = new RichEmbed()
+                .setColor('#00FF00')
+                .setDescription("Left voice channel")
+            message.channel.send(embed)
         }
     }
     else if (message.content.match(/^::play($|\s.*)/)){
