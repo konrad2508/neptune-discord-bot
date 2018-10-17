@@ -16,7 +16,7 @@ const client = new Client()
 let servers = {}
 let connections = {}
 
-let PlayFunc = (message) =>{
+let playFunc = (message) =>{
     let server = servers[message.guild.id]
     let connection = connections[message.guild.id]
     server.dispatcher = connection.playStream(YTDL(server.queue[0], {filter: "audioonly"}))
@@ -37,6 +37,20 @@ let PlayFunc = (message) =>{
             message.channel.send(embed)
         }
     })
+}
+
+let extractRootDomain = (url) => {
+    var domain = extractHostname(url),
+        splitArr = domain.split('.'),
+        arrLen = splitArr.length;
+
+    if (arrLen > 2) {
+        domain = splitArr[arrLen - 2] + '.' + splitArr[arrLen - 1];
+        if (splitArr[arrLen - 2].length == 2 && splitArr[arrLen - 1].length == 2) {
+            domain = splitArr[arrLen - 3] + '.' + domain;
+        }
+    }
+    return domain;
 }
 
 mongoose.connect("mongodb://@ds139187.mlab.com:39187/reactbot-db", {
@@ -283,7 +297,7 @@ client.on('message', message => {
                 message.channel.send(embed)
             }
             else{
-                if (valid.isWebUri(arr[1])){
+                if (valid.isWebUri(arr[1]) && extractRootDomain(arr[1]) === 'youtube.com'){
                     if (servers[message.guild.id]){
                         servers[message.guild.id].queue.push(arr[1])
                         const embed = new RichEmbed()
@@ -294,7 +308,7 @@ client.on('message', message => {
                     else{
                         servers[message.guild.id] = {queue: []}
                         servers[message.guild.id].queue.push(arr[1])
-                        PlayFunc(message)
+                        playFunc(message)
                     }
                 }
                 else{
@@ -341,7 +355,7 @@ client.on('message', message => {
             .setColor('#00FF00')
             .addField("```::join```", 'Joins your voice channel.')
             .addField("```::leave```", 'Leaves voice channel.')
-            .addField("```::play URL```", "Queues song from YouTube to play. Undefined behavior for non-YouTube URLs. Audio quality may be bad, WIP.")
+            .addField("```::play URL```", "Queues song from YouTube to play. Audio quality may be bad, WIP.")
             .addField("```::skip```", "Skips currently playing song.")
         message.channel.send(embed)
     }
