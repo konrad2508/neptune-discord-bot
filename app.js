@@ -39,18 +39,20 @@ let playFunc = (message) =>{
     })
 }
 
-let extractRootDomain = (url) => {
-    var domain = extractHostname(url),
-        splitArr = domain.split('.'),
-        arrLen = splitArr.length;
+let  extractHostname = (url) => {
+    let hostname;
 
-    if (arrLen > 2) {
-        domain = splitArr[arrLen - 2] + '.' + splitArr[arrLen - 1];
-        if (splitArr[arrLen - 2].length == 2 && splitArr[arrLen - 1].length == 2) {
-            domain = splitArr[arrLen - 3] + '.' + domain;
-        }
+    if (url.indexOf("//") > -1) {
+        hostname = url.split('/')[2];
     }
-    return domain;
+    else {
+        hostname = url.split('/')[0];
+    }
+
+    hostname = hostname.split(':')[0];
+    hostname = hostname.split('?')[0];
+
+    return hostname;
 }
 
 mongoose.connect("mongodb://@ds139187.mlab.com:39187/reactbot-db", {
@@ -297,7 +299,7 @@ client.on('message', message => {
                 message.channel.send(embed)
             }
             else{
-                if (valid.isWebUri(arr[1]) && extractRootDomain(arr[1]) === 'youtube.com'){
+                if (valid.isWebUri(arr[1]) && extractHostname(arr[1]) === 'youtube.com'){
                     if (servers[message.guild.id]){
                         servers[message.guild.id].queue.push(arr[1])
                         const embed = new RichEmbed()
