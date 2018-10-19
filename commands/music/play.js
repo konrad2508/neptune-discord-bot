@@ -1,37 +1,6 @@
 const commando = require('discord.js-commando');
 const {RichEmbed} = require('discord.js');
-const valid = require('valid-url');
 const YTDL = require('ytdl-core');
-
-let extractHostname = (url) => {
-    let hostname;
-
-    if (url.indexOf("//") > -1) {
-        hostname = url.split('/')[2];
-    }
-    else {
-        hostname = url.split('/')[0];
-    }
-
-    hostname = hostname.split(':')[0];
-    hostname = hostname.split('?')[0];
-
-    return hostname;
-};
-
-let extractRootDomain = (url) => {
-    let domain = extractHostname(url),
-        splitArr = domain.split('.'),
-        arrLen = splitArr.length;
-
-    if (arrLen > 2) {
-        domain = splitArr[arrLen - 2] + '.' + splitArr[arrLen - 1];
-        if (splitArr[arrLen - 2].length === 2 && splitArr[arrLen - 1].length === 2) {
-            domain = splitArr[arrLen - 3] + '.' + domain;
-        }
-    }
-    return domain;
-};
 
 class PlayCommand extends commando.Command {
     constructor(client) {
@@ -92,7 +61,6 @@ class PlayCommand extends commando.Command {
                 message.channel.send(embed);
             }
             else {
-                // if (valid.isWebUri(url) && extractRootDomain(url) === 'youtube.com' || extractRootDomain(url) === 'youtu.be') {
                 if (YTDL.validateURL(url)) {
                     YTDL.getInfo(url, (err, info) => {
                         if (servers[message.guild.id]) {

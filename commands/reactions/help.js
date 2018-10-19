@@ -12,7 +12,7 @@ class HelpCommand extends commando.Command {
         });
     }
 
-    async run(message, args) {
+    async run(message) {
 
         const embed = new RichEmbed()
             .setTitle('List of commands')
