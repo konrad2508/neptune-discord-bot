@@ -26,7 +26,8 @@ db.once('open', () => {
 });
 
 const client = new commando.Client({
-    commandPrefix: '?'
+    commandPrefix: '?',
+    unknownCommandResponse: false
 });
 
 global.servers = {};
