@@ -96,16 +96,7 @@ client.on('ready', () => {
 });
 
 client.on('message', message => {
-    if (message.content === '::help' || message.content === '::h'){
-        const embed = new RichEmbed()
-            .setTitle('List of commands')
-            .setColor('#00FF00')
-            .addField("```::react Name```", 'Reacts with **Name**.')
-            .addField("```::add Name URL```", "Adds a reaction named **Name**. **URL** must lead to an image/gif.")
-            .addField("```::list```", "Lists available reactions.");
-        message.channel.send(embed);
-    }
-    else if (message.content === '::list' || message.content === '::l'){
+    if (message.content === '::list' || message.content === '::l'){
         Reaction.find({}, 'name', (err, reactions) =>{
             if (err){
                 const embed = new RichEmbed()
