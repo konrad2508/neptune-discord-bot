@@ -26,6 +26,7 @@ const client = new commando.Client({
 });
 client.registry.registerGroup('reactions', 'Reactions')
     .registerGroup('music', 'Music')
+    .registerDefaultTypes()
     .registerCommandsIn(__dirname + "/commands");
 client.on('ready', () => {
     console.log('Ready!');
