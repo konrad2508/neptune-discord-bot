@@ -6,7 +6,8 @@ class HelpCommand extends commando.Command {
         super(client, {
             name: 'help',
             group: 'basic',
-            memberName: 'help'
+            memberName: 'help',
+            description: 'chuj'
         });
     }
 
