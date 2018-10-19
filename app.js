@@ -78,7 +78,9 @@ db.once('open', () => {
     console.log('Connection open')
 });
 
-const client = new commando.Client();
+const client = new commando.Client({
+    commandPrefix: '?'
+});
 
 let servers = {};
 let connections = {};
