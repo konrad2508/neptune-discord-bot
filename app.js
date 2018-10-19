@@ -34,6 +34,7 @@ global.connections = {};
 
 client.registry
     .registerGroup('basic', 'Basic')
+    .registerGroup('music', 'Music')
     .registerCommandsIn(__dirname + "/commands");
 
 client.on('ready', () => {
