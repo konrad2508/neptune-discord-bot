@@ -16,7 +16,6 @@ class DeleteCommand extends commando.Command {
                     key: 'name',
                     prompt: 'Reaction name',
                     type: 'string',
-                    default: null,
                 }
             ]
         });
@@ -31,7 +30,7 @@ class DeleteCommand extends commando.Command {
             message.channel.send(embed);
         }
         else {
-            if (name === 'null') {
+            if (name === null) {
                 const embed = new RichEmbed()
                     .setColor('#FF0000')
                     .setDescription("Specify reaction name to delete");

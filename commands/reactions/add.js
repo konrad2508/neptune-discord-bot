@@ -16,13 +16,11 @@ class AddCommand extends commando.Command {
                     key: 'name',
                     prompt: 'Reaction name',
                     type: 'string',
-                    default: null,
                 },
                 {
                     key: 'url',
                     prompt: 'Reaction URL',
                     type: 'string',
-                    default: null,
                 }
             ]
         });

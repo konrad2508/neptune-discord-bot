@@ -45,7 +45,6 @@ class PlayCommand extends commando.Command {
                     key: 'url',
                     prompt: 'Song URL',
                     type: 'string',
-                    default: null
                 }
             ]
         });
