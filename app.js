@@ -1,3 +1,5 @@
+import {RichEmbed} from "discord.js";
+
 const valid = require('valid-url')
 
 const commando = require('discord.js-commando')
@@ -92,7 +94,7 @@ client.on('ready', () => {
 
 client.on('message', message => {
     if (message.content === '::help' || message.content === '::h'){
-        const embed = new commando.RichEmbed()
+        const embed = new RichEmbed()
             .setTitle('List of commands')
             .setColor('#00FF00')
             .addField("```::react Name```", 'Reacts with **Name**.')
@@ -103,7 +105,7 @@ client.on('message', message => {
     else if (message.content === '::list' || message.content === '::l'){
         Reaction.find({}, 'name', (err, reactions) =>{
             if (err){
-                const embed = new commando.RichEmbed()
+                const embed = new RichEmbed()
                     .setColor('#FF0000')
                     .setDescription(err.content)
                 message.channel.send(embed)
@@ -113,7 +115,7 @@ client.on('message', message => {
                 for (let i = 0; i < reactions.length; i++){
                     names.push(reactions[i].name)
                 }
-                const embed = new commando.RichEmbed()
+                const embed = new RichEmbed()
                     .setTitle('List of commands')
                     .setColor('#00FF00')
                     .setDescription(names.sort((a,b) => { return (a.toLowerCase() < b.toLowerCase()) ? -1 : 1}).join("\n"))
@@ -123,7 +125,7 @@ client.on('message', message => {
                 message.delete(100)
             }
             else{
-                const embed = new commando.RichEmbed()
+                const embed = new RichEmbed()
                     .setTitle('List of commands')
                     .setColor('#00FF00')
                     .setDescription("No reactions added")
@@ -137,7 +139,7 @@ client.on('message', message => {
     else if (message.content.match(/^::react($|\s.*)/) || message.content.match(/^::r($|\s.*)/)){
         let arr = message.content.split(" ")
         if (arr.length === 1){
-            const embed = new commando.RichEmbed()
+            const embed = new RichEmbed()
                 .setColor('#FF0000')
                 .setDescription("Specify reaction name")
             message.channel.send(embed)
@@ -145,13 +147,13 @@ client.on('message', message => {
         else{
             Reaction.find({'name': arr[1]}, 'name url', (err, url) => {
                 if (err){
-                    const embed = new commando.RichEmbed()
+                    const embed = new RichEmbed()
                         .setColor('#FF0000')
                         .setDescription(err.content)
                     message.channel.send(embed)
                 }
                 else if (url.length){
-                    const embed = new commando.RichEmbed()
+                    const embed = new RichEmbed()
                         .setColor('#00FF00')
                         .setTitle(message.member.user.tag + ' reacts with ' + url[0].name)
                         .setImage(url[0].url)
@@ -159,7 +161,7 @@ client.on('message', message => {
                     message.delete(100)
                 }
                 else{
-                    const embed = new commando.RichEmbed()
+                    const embed = new RichEmbed()
                         .setColor('#FF0000')
                         .setDescription("Reaction does not exist")
                     message.channel.send(embed)
@@ -170,13 +172,13 @@ client.on('message', message => {
     else if (message.content.match(/^::add($|\s.*)/) || message.content.match(/^::a($|\s.*)/)){
         let arr = message.content.split(" ")
         if (arr.length === 1){
-            const embed = new commando.RichEmbed()
+            const embed = new RichEmbed()
                 .setColor('#FF0000')
                 .setDescription("Specify reaction name to add")
             message.channel.send(embed)
         }
         else if (arr.length === 2){
-            const embed = new commando.RichEmbed()
+            const embed = new RichEmbed()
                 .setColor('#FF0000')
                 .setDescription("Specify URL of the reaction")
             message.channel.send(embed)
@@ -185,14 +187,14 @@ client.on('message', message => {
             if (valid.isWebUri(arr[2])){
                 Reaction.find({'name': arr[1]}, 'url', (err, url) => {
                     if (err){
-                        const embed = new commando.RichEmbed()
+                        const embed = new RichEmbed()
                             .setColor('#FF0000')
                             .setDescription(err.content)
                         message.channel.send(embed)
                     }
                     else if (url) {
                         if (url.length) {
-                            const embed = new commando.RichEmbed()
+                            const embed = new RichEmbed()
                                 .setColor('#FF0000')
                                 .setDescription("Reaction with that name already exists")
                             message.channel.send(embed)
@@ -201,13 +203,13 @@ client.on('message', message => {
 
                             Reaction.create({'name': arr[1], 'url': arr[2]}, (err, reaction) => {
                                 if (err) {
-                                    const embed = new commando.RichEmbed()
+                                    const embed = new RichEmbed()
                                         .setColor('#FF0000')
                                         .setDescription(err.content)
                                     message.channel.send(embed)
                                 }
                                 else if (reaction) {
-                                    const embed = new commando.RichEmbed()
+                                    const embed = new RichEmbed()
                                         .setColor('#00FF00')
                                         .setDescription("Saved the reaction")
                                     message.channel.send(embed)
@@ -218,7 +220,7 @@ client.on('message', message => {
                 })
             }
             else{
-                const embed = new commando.RichEmbed()
+                const embed = new RichEmbed()
                     .setColor('#FF0000')
                     .setDescription("Invalid URL")
                 message.channel.send(embed)
@@ -228,7 +230,7 @@ client.on('message', message => {
     }
     else if (message.content.match(/^::delete($|\s.*)/) || message.content.match(/^::d($|\s.*)/)){
         if (message.author.id !== process.env.ADMIN_ID){
-            const embed = new commando.RichEmbed()
+            const embed = new RichEmbed()
                 .setColor('#FF0000')
                 .setDescription("You do not have access to this command")
             message.channel.send(embed)
@@ -236,7 +238,7 @@ client.on('message', message => {
         else {
             let arr = message.content.split(" ")
             if (arr.length === 1) {
-                const embed = new commando.RichEmbed()
+                const embed = new RichEmbed()
                     .setColor('#FF0000')
                     .setDescription("Specify reaction name to delete")
                 message.channel.send(embed)
@@ -244,7 +246,7 @@ client.on('message', message => {
             else if (arr.length === 2) {
                 Reaction.find({'name': arr[1]}, 'url', (err, reaction) => {
                     if (err) {
-                        const embed = new commando.RichEmbed()
+                        const embed = new RichEmbed()
                             .setColor('#FF0000')
                             .setDescription(err.content)
                         message.channel.send(embed)
@@ -252,13 +254,13 @@ client.on('message', message => {
                     else if (reaction.length) {
                         Reaction.findOneAndDelete({'name': arr[1]}, (err) => {
                             if (err) {
-                                const embed = new commando.RichEmbed()
+                                const embed = new RichEmbed()
                                     .setColor('#FF0000')
                                     .setDescription(err.content)
                                 message.channel.send(embed)
                             }
                             else {
-                                const embed = new commando.RichEmbed()
+                                const embed = new RichEmbed()
                                     .setColor('#00FF00')
                                     .setDescription("Reaction successfully deleted")
                                 message.channel.send(embed)
@@ -266,7 +268,7 @@ client.on('message', message => {
                         })
                     }
                     else {
-                        const embed = new commando.RichEmbed()
+                        const embed = new RichEmbed()
                             .setColor('#FF0000')
                             .setDescription("Reaction does not exist")
                         message.channel.send(embed)
@@ -280,7 +282,7 @@ client.on('message', message => {
             if(!message.guild.voiceConnection){
                 message.member.voiceChannel.join().then( (connection) => {
                     connections[message.guild.id] = connection
-                    const embed = new commando.RichEmbed()
+                    const embed = new RichEmbed()
                         .setColor('#00FF00')
                         .setDescription("Joined voice channel")
                     message.channel.send(embed)
@@ -288,7 +290,7 @@ client.on('message', message => {
             }
         }
         else{
-            const embed = new commando.RichEmbed()
+            const embed = new RichEmbed()
                 .setColor('#FF0000')
                 .setDescription("You must be in a voice channel")
             message.channel.send(embed)
@@ -298,7 +300,7 @@ client.on('message', message => {
         if (message.guild.voiceConnection){
             message.guild.voiceConnection.disconnect()
             connections[message.guild.id] = null
-            const embed = new commando.RichEmbed()
+            const embed = new RichEmbed()
                 .setColor('#00FF00')
                 .setDescription("Left voice channel")
             message.channel.send(embed)
@@ -308,7 +310,7 @@ client.on('message', message => {
         if (message.guild.voiceConnection){
             let arr = message.content.split(" ")
             if (arr.length === 1){
-                const embed = new commando.RichEmbed()
+                const embed = new RichEmbed()
                     .setColor('#FF0000')
                     .setDescription("Specify URL of the song")
                 message.channel.send(embed)
@@ -317,7 +319,7 @@ client.on('message', message => {
                 if (valid.isWebUri(arr[1]) && extractRootDomain(arr[1]) === 'youtube.com'){
                     if (servers[message.guild.id]){
                         servers[message.guild.id].queue.push(arr[1])
-                        const embed = new commando.RichEmbed()
+                        const embed = new RichEmbed()
                             .setColor('#00FF00')
                             .setDescription("Added " + arr[1] + " to the queue")
                         message.channel.send(embed)
@@ -329,7 +331,7 @@ client.on('message', message => {
                     }
                 }
                 else{
-                    const embed = new commando.RichEmbed()
+                    const embed = new RichEmbed()
                         .setColor('#FF0000')
                         .setDescription("Invalid URL")
                     message.channel.send(embed)
@@ -337,7 +339,7 @@ client.on('message', message => {
             }
         }
         else{
-            const embed = new commando.RichEmbed()
+            const embed = new RichEmbed()
                 .setColor('#FF0000')
                 .setDescription("Bot must be in a voice channel")
             message.channel.send(embed)
@@ -347,27 +349,27 @@ client.on('message', message => {
         if (message.guild.voiceConnection){
             if (servers[message.guild.id]){
                 servers[message.guild.id].dispatcher.end()
-                const embed = new commando.RichEmbed()
+                const embed = new RichEmbed()
                     .setColor('#00FF00')
                     .setDescription("Skipped currently playing song")
                 message.channel.send(embed)
             }
             else{
-                const embed = new commando.RichEmbed()
+                const embed = new RichEmbed()
                     .setColor('#FF0000')
                     .setDescription("No song is currently playing")
                 message.channel.send(embed)
             }
         }
         else{
-            const embed = new commando.RichEmbed()
+            const embed = new RichEmbed()
                 .setColor('#FF0000')
                 .setDescription("Bot must be in a voice channel")
             message.channel.send(embed)
         }
     }
     else if (message.content === '::beta'){
-        const embed = new commando.RichEmbed()
+        const embed = new RichEmbed()
             .setTitle('List of commands in testing phase')
             .setColor('#00FF00')
             .addField("```::join```", 'Joins your voice channel.')
