@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8823d205-44c9-4413-948d-0c9f33b7a26a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/commands/music/play.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/music/play.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -55,7 +53,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="js" value="6590" />
+          <entry key="js" value="6593" />
           <entry key="json" value="6" />
           <entry key="txt" value="9" />
         </counts>
@@ -63,7 +61,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JSON" value="6" />
-          <entry key="JavaScript" value="6590" />
+          <entry key="JavaScript" value="6593" />
           <entry key="PLAIN_TEXT" value="9" />
         </counts>
       </usages-collector>
@@ -76,10 +74,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="513">
+            <state relative-caret-position="564">
               <caret line="47" lean-forward="true" selection-start-line="47" selection-end-line="47" />
             </state>
           </provider>
@@ -103,11 +101,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/commands/music/play.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="79" column="132" selection-start-line="79" selection-start-column="132" selection-end-line="79" selection-end-column="132" />
+            <state relative-caret-position="340">
+              <caret line="79" column="43" selection-start-line="79" selection-start-column="43" selection-end-line="79" selection-end-column="43" />
               <folding>
                 <element signature="e#157#887#0" />
                 <element signature="e#921#1177#0" />
@@ -199,8 +197,8 @@
         <option value="$PROJECT_DIR$/commands/music/skip.js" />
         <option value="$PROJECT_DIR$/commands/music/leave.js" />
         <option value="$PROJECT_DIR$/commands/music/join.js" />
-        <option value="$PROJECT_DIR$/commands/music/play.js" />
         <option value="$PROJECT_DIR$/app.js" />
+        <option value="$PROJECT_DIR$/commands/music/play.js" />
       </list>
     </option>
   </component>
@@ -323,7 +321,7 @@
       <workItem from="1539824657104" duration="211000" />
       <workItem from="1539903348800" duration="1041000" />
       <workItem from="1539949450004" duration="1162000" />
-      <workItem from="1539964341781" duration="6778000" />
+      <workItem from="1539964341781" duration="6923000" />
     </task>
     <task id="LOCAL-00001" summary="polishing">
       <created>1537888319205</created>
@@ -336,7 +334,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="49774000" />
+    <option name="totallyTimeSpent" value="49919000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -471,22 +469,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="564">
+          <caret line="47" lean-forward="true" selection-start-line="47" selection-end-line="47" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/commands/music/play.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="79" column="132" selection-start-line="79" selection-start-column="132" selection-end-line="79" selection-end-column="132" />
+        <state relative-caret-position="340">
+          <caret line="79" column="43" selection-start-line="79" selection-start-column="43" selection-end-line="79" selection-end-column="43" />
           <folding>
             <element signature="e#157#887#0" />
             <element signature="e#921#1177#0" />
             <element signature="e#1213#1597#0" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="513">
-          <caret line="47" lean-forward="true" selection-start-line="47" selection-end-line="47" />
         </state>
       </provider>
     </entry>

@@ -77,7 +77,7 @@ class PlayCommand extends commando.Command {
                 message.channel.send(embed);
             }
             else{
-                if (valid.isWebUri(arr[1]) && extractRootDomain(arr[1]) === 'youtube.com' || extractRootDomain(arr[1]) === 'youtu.be){
+                if (valid.isWebUri(arr[1]) && extractRootDomain(arr[1]) === 'youtube.com' || extractRootDomain(arr[1]) === 'youtu.be'){
                     if (servers[message.guild.id]){
                         servers[message.guild.id].queue.push(arr[1]);
                         const embed = new RichEmbed()
