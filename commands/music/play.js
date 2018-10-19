@@ -43,9 +43,9 @@ class PlayCommand extends commando.Command {
             args: [
                 {
                     key: 'url',
-                    type: 'string',
                     prompt: 'Song URL',
-                    default: 'null'
+                    type: 'string',
+                    default: null
                 }
             ]
         });
@@ -85,7 +85,7 @@ class PlayCommand extends commando.Command {
     async run(message, {url}) {
 
         if (message.guild.voiceConnection) {
-            if (url === 'null') {
+            if (url === null) {
                 const embed = new RichEmbed()
                     .setColor('#FF0000')
                     .setDescription("Specify URL of the song");

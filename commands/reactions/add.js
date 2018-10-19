@@ -14,15 +14,15 @@ class AddCommand extends commando.Command {
             args: [
                 {
                     key: 'name',
-                    type: 'string',
                     prompt: 'Reaction name',
-                    default: 'null'
+                    type: 'string',
+                    default: null,
                 },
                 {
                     key: 'url',
-                    type: 'string',
                     prompt: 'Reaction URL',
-                    default: 'null'
+                    type: 'string',
+                    default: null,
                 }
             ]
         });
@@ -30,13 +30,13 @@ class AddCommand extends commando.Command {
 
     async run(message, {name, url}) {
 
-        if (name === 'null') {
+        if (name === null) {
             const embed = new RichEmbed()
                 .setColor('#FF0000')
                 .setDescription("Specify reaction name to add");
             message.channel.send(embed);
         }
-        else if (url === 'null') {
+        else if (url === null) {
             const embed = new RichEmbed()
                 .setColor('#FF0000')
                 .setDescription("Specify URL of the reaction");
