@@ -15,21 +15,22 @@ class ReactCommand extends commando.Command {
                     key: 'name',
                     prompt: 'Reaction name',
                     type: 'string',
+                    default: null
                 }
             ]
         });
     }
 
-    async run(message, {name}) {
+    async run(message, args) {
 
-        if (name === null) {
+        if (args.name === null) {
             const embed = new RichEmbed()
                 .setColor('#FF0000')
                 .setDescription("Specify reaction name");
             message.channel.send(embed);
         }
         else {
-            Reaction.find({'name': name}, 'name url', (err, response) => {
+            Reaction.find({'name': args.name}, 'name url', (err, response) => {
                 if (err) {
                     const embed = new RichEmbed()
                         .setColor('#FF0000')

@@ -16,12 +16,13 @@ class DeleteCommand extends commando.Command {
                     key: 'name',
                     prompt: 'Reaction name',
                     type: 'string',
+                    default: null
                 }
             ]
         });
     }
 
-    async run(message, {name}) {
+    async run(message, args) {
 
         if (message.author.id !== process.env.ADMIN_ID) {
             const embed = new RichEmbed()
@@ -30,19 +31,19 @@ class DeleteCommand extends commando.Command {
             message.channel.send(embed);
         }
         else {
-            if (name === null) {
+            if (args.name) {
                 const embed = new RichEmbed()
                     .setColor('#FF0000')
                     .setDescription("Specify reaction name to delete");
                 message.channel.send(embed);
             }
             else {
-                Reaction.find({'name': name}, 'url', (err, reaction) => {
+                Reaction.find({'name': args.name}, 'url', (err, reaction) => {
                     if (err) {
                         console.log(err.content)
                     }
                     else if (reaction.length) {
-                        Reaction.findOneAndDelete({'name': name}, (err) => {
+                        Reaction.findOneAndDelete({'name': args.name}, (err) => {
                             if (err) {
                                 console.log(err.content)
                             }

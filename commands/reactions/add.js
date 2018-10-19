@@ -16,33 +16,35 @@ class AddCommand extends commando.Command {
                     key: 'name',
                     prompt: 'Reaction name',
                     type: 'string',
+                    default: null
                 },
                 {
                     key: 'url',
                     prompt: 'Reaction URL',
                     type: 'string',
+                    default: null
                 }
             ]
         });
     }
 
-    async run(message, {name, url}) {
+    async run(message, args) {
 
-        if (name === null) {
+        if (args.name) {
             const embed = new RichEmbed()
                 .setColor('#FF0000')
                 .setDescription("Specify reaction name to add");
             message.channel.send(embed);
         }
-        else if (url === null) {
+        else if (args.url) {
             const embed = new RichEmbed()
                 .setColor('#FF0000')
                 .setDescription("Specify URL of the reaction");
             message.channel.send(embed);
         }
         else {
-            if (valid.isWebUri(url)) {
-                Reaction.find({'name': name}, 'url', (err, ret_url) => {
+            if (valid.isWebUri(args.url)) {
+                Reaction.find({'name': args.name}, 'url', (err, ret_url) => {
                     if (err) {
                         console.log(err.content)
                     }
@@ -54,7 +56,7 @@ class AddCommand extends commando.Command {
                             message.channel.send(embed);
                         }
                         else {
-                            Reaction.create({'name': name, 'url': url}, (err, reaction) => {
+                            Reaction.create({'name': args.name, 'url': args.url}, (err, reaction) => {
                                 if (err) console.log(err.content);
                                 else if (reaction) {
                                     const embed = new RichEmbed()
