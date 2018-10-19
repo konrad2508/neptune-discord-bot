@@ -1,8 +1,9 @@
 const commando = require('discord.js-commando');
-const { RichEmbed } = require('discord.js');
+const {RichEmbed} = require('discord.js');
 
 class LeaveCommand extends commando.Command {
-    constructor(client){
+
+    constructor(client) {
         super(client, {
             name: 'leave',
             group: 'music',
@@ -11,9 +12,9 @@ class LeaveCommand extends commando.Command {
         });
     }
 
-    async run(message, args){
+    async run(message) {
 
-        if (message.guild.voiceConnection){
+        if (message.guild.voiceConnection) {
             message.guild.voiceConnection.disconnect();
             connections[message.guild.id] = null;
             const embed = new RichEmbed()
@@ -23,6 +24,7 @@ class LeaveCommand extends commando.Command {
         }
 
     }
+
 }
 
 module.exports = LeaveCommand;

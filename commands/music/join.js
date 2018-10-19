@@ -2,7 +2,7 @@ const commando = require('discord.js-commando');
 const { RichEmbed } = require('discord.js');
 
 class JoinCommand extends commando.Command {
-    constructor(client){
+    constructor(client) {
         super(client, {
             name: 'join',
             group: 'music',
@@ -11,11 +11,11 @@ class JoinCommand extends commando.Command {
         });
     }
 
-    async run(message, args){
+    async run(message) {
 
-        if(message.member.voiceChannel){
-            if(!message.guild.voiceConnection){
-                message.member.voiceChannel.join().then( (connection) => {
+        if (message.member.voiceChannel) {
+            if (!message.guild.voiceConnection) {
+                message.member.voiceChannel.join().then((connection) => {
                     connections[message.guild.id] = connection;
                     const embed = new RichEmbed()
                         .setColor('#00FF00')
@@ -24,7 +24,7 @@ class JoinCommand extends commando.Command {
                 });
             }
         }
-        else{
+        else {
             const embed = new RichEmbed()
                 .setColor('#FF0000')
                 .setDescription("You must be in a voice channel");

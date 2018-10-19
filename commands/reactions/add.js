@@ -1,80 +1,81 @@
 const commando = require('discord.js-commando');
-const { RichEmbed } = require('discord.js');
+const {RichEmbed} = require('discord.js');
 const Reaction = require('../../Data/Schema/reaction.js');
 const valid = require('valid-url');
 
 class AddCommand extends commando.Command {
-    constructor(client){
+    constructor(client) {
         super(client, {
             name: 'add',
-            group: 'basic',
+            group: 'reactions',
             memberName: 'add',
             description: 'Adds reaction',
-            aliases: ['a']
+            aliases: ['a'],
+            args: [
+                {
+                    key: 'name',
+                    type: 'string',
+                    default: null
+                },
+                {
+                    key: 'url',
+                    type: 'string',
+                    default: null
+                }
+            ]
         });
     }
 
-    async run(message, args){
+    async run(message, {name, url}) {
 
-        let arr = message.content.split(" ");
-        if (arr.length === 1){
+        if (name === null) {
             const embed = new RichEmbed()
                 .setColor('#FF0000')
                 .setDescription("Specify reaction name to add");
             message.channel.send(embed);
         }
-        else if (arr.length === 2){
+        else if (url === null) {
             const embed = new RichEmbed()
                 .setColor('#FF0000')
                 .setDescription("Specify URL of the reaction");
             message.channel.send(embed);
         }
-        else{
-            if (valid.isWebUri(arr[2])){
-                Reaction.find({'name': arr[1]}, 'url', (err, url) => {
-                    if (err){
-                        const embed = new RichEmbed()
-                            .setColor('#FF0000')
-                            .setDescription(err.content);
-                        message.channel.send(embed);
+        else {
+            if (valid.isWebUri(url)) {
+                Reaction.find({'name': name}, 'url', (err, ret_url) => {
+                    if (err) {
+                        console.log(err.content)
                     }
-                    else if (url) {
-                        if (url.length) {
+                    else if (ret_url) {
+                        if (ret_url.length) {
                             const embed = new RichEmbed()
                                 .setColor('#FF0000')
                                 .setDescription("Reaction with that name already exists");
                             message.channel.send(embed);
                         }
                         else {
-
-                            Reaction.create({'name': arr[1], 'url': arr[2]}, (err, reaction) => {
-                                if (err) {
-                                    const embed = new RichEmbed()
-                                        .setColor('#FF0000')
-                                        .setDescription(err.content);
-                                    message.channel.send(embed);
-                                }
+                            Reaction.create({'name': name, 'url': url}, (err, reaction) => {
+                                if (err) console.log(err.content);
                                 else if (reaction) {
                                     const embed = new RichEmbed()
                                         .setColor('#00FF00')
                                         .setDescription("Saved the reaction");
                                     message.channel.send(embed);
                                 }
-                            })
+                            });
                         }
                     }
-                })
+                });
             }
-            else{
+            else {
                 const embed = new RichEmbed()
                     .setColor('#FF0000')
                     .setDescription("Invalid URL");
                 message.channel.send(embed);
             }
-
         }
-
     }
+
 }
 
 module.exports = AddCommand;

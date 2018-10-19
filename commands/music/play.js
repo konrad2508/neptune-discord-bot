@@ -1,30 +1,7 @@
 const commando = require('discord.js-commando');
-const { RichEmbed } = require('discord.js');
+const {RichEmbed} = require('discord.js');
 const valid = require('valid-url');
 const YTDL = require('ytdl-core');
-
-let playFunc = (message) =>{
-    let server = servers[message.guild.id];
-    let connection = connections[message.guild.id];
-    server.dispatcher = connection.playStream(YTDL(server.queue[0], {filter: "audioonly"}));
-    const embed = new RichEmbed()
-        .setColor('#00FF00')
-        .setDescription("Playing " + server.queue[0]);
-    message.channel.send(embed);
-    server.queue.shift();
-    server.dispatcher.on("end", () => {
-        if (server.queue[0]){
-            playFunc(message);
-        }
-        else{
-            servers[message.guild.id] = undefined;
-            const embed = new RichEmbed()
-                .setColor('#00FF00')
-                .setDescription("Queue ended");
-            message.channel.send(embed);
-        }
-    })
-};
 
 let extractHostname = (url) => {
     let hostname;
@@ -57,41 +34,82 @@ let extractRootDomain = (url) => {
 };
 
 class PlayCommand extends commando.Command {
-    constructor(client){
+    constructor(client) {
         super(client, {
             name: 'play',
             group: 'music',
             memberName: 'play',
-            description: 'Plays song from YouTube'
+            description: 'Plays song from YouTube',
+            args: [
+                {
+                    key: 'url',
+                    type: 'string',
+                    default: null
+                }
+            ]
         });
     }
 
-    async run(message, args){
+    _playFunc(message) {
 
-        if (message.guild.voiceConnection){
-            let arr = message.content.split(" ");
-            if (arr.length === 1){
+        let server = servers[message.guild.id];
+        let connection = connections[message.guild.id];
+
+        server.dispatcher = connection.playStream(YTDL(server.queue[0], {filter: "audioonly"}));
+
+        YTDL.getInfo(server.queue[0], (err, info) => {
+            const embed = new RichEmbed()
+                .setColor('#00FF00')
+                .setDescription("Playing **" + info.title + "**");
+            message.channel.send(embed);
+        });
+
+        server.queue.shift();
+
+        server.dispatcher.on("end", () => {
+            if (server.queue[0]) {
+                this._playFunc(message);
+            }
+            else {
+                servers[message.guild.id] = undefined;
+                const embed = new RichEmbed()
+                    .setColor('#00FF00')
+                    .setDescription("Queue ended");
+                message.channel.send(embed);
+            }
+        });
+
+    }
+
+    async run(message, {url}) {
+
+        if (message.guild.voiceConnection) {
+            if (url === null) {
                 const embed = new RichEmbed()
                     .setColor('#FF0000')
                     .setDescription("Specify URL of the song");
                 message.channel.send(embed);
             }
-            else{
-                if (valid.isWebUri(arr[1]) && extractRootDomain(arr[1]) === 'youtube.com' || extractRootDomain(arr[1]) === 'youtu.be'){
-                    if (servers[message.guild.id]){
-                        servers[message.guild.id].queue.push(arr[1]);
-                        const embed = new RichEmbed()
-                            .setColor('#00FF00')
-                            .setDescription("Added " + arr[1] + " to the queue");
-                        message.channel.send(embed);
-                    }
-                    else{
-                        servers[message.guild.id] = {queue: []};
-                        servers[message.guild.id].queue.push(arr[1]);
-                        playFunc(message);
-                    }
+            else {
+                // if (valid.isWebUri(url) && extractRootDomain(url) === 'youtube.com' || extractRootDomain(url) === 'youtu.be') {
+                if (YTDL.validateURL(url)) {
+                    YTDL.getInfo(url, (err, info) => {
+                        if (servers[message.guild.id]) {
+                            servers[message.guild.id].queue.push(url);
+                            const embed = new RichEmbed()
+                                .setColor('#00FF00')
+                                .setDescription("Added **" + info.title + "** to the queue");
+                            message.channel.send(embed);
+                        }
+                        else {
+                            servers[message.guild.id] = {queue: []};
+                            servers[message.guild.id].queue.push(url);
+                            this._playFunc(message);
+                        }
+
+                    });
                 }
-                else{
+                else {
                     const embed = new RichEmbed()
                         .setColor('#FF0000')
                         .setDescription("Invalid URL");
@@ -99,7 +117,7 @@ class PlayCommand extends commando.Command {
                 }
             }
         }
-        else{
+        else {
             const embed = new RichEmbed()
                 .setColor('#FF0000')
                 .setDescription("Bot must be in a voice channel");

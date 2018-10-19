@@ -1,49 +1,50 @@
 const commando = require('discord.js-commando');
-const { RichEmbed } = require('discord.js');
+const {RichEmbed} = require('discord.js');
 const Reaction = require('../../Data/Schema/reaction.js');
 
 class DeleteCommand extends commando.Command {
-    constructor(client){
+
+    constructor(client) {
         super(client, {
             name: 'delete',
-            group: 'basic',
+            group: 'reactions',
             memberName: 'delete',
             description: 'Deletes reaction',
-            aliases: ['d']
+            aliases: ['d'],
+            args: [
+                {
+                    key: 'name',
+                    type: 'string',
+                    default: null
+                }
+            ]
         });
     }
 
-    async run(message, args){
+    async run(message, {name}) {
 
-        if (message.author.id !== process.env.ADMIN_ID){
+        if (message.author.id !== process.env.ADMIN_ID) {
             const embed = new RichEmbed()
                 .setColor('#FF0000')
                 .setDescription("You do not have access to this command");
             message.channel.send(embed);
         }
         else {
-            let arr = message.content.split(" ");
-            if (arr.length === 1) {
+            if (name === null) {
                 const embed = new RichEmbed()
                     .setColor('#FF0000')
                     .setDescription("Specify reaction name to delete");
                 message.channel.send(embed);
             }
-            else if (arr.length === 2) {
-                Reaction.find({'name': arr[1]}, 'url', (err, reaction) => {
+            else {
+                Reaction.find({'name': name}, 'url', (err, reaction) => {
                     if (err) {
-                        const embed = new RichEmbed()
-                            .setColor('#FF0000')
-                            .setDescription(err.content);
-                        message.channel.send(embed);
+                        console.log(err.content)
                     }
                     else if (reaction.length) {
-                        Reaction.findOneAndDelete({'name': arr[1]}, (err) => {
+                        Reaction.findOneAndDelete({'name': name}, (err) => {
                             if (err) {
-                                const embed = new RichEmbed()
-                                    .setColor('#FF0000')
-                                    .setDescription(err.content);
-                                message.channel.send(embed);
+                                console.log(err.content)
                             }
                             else {
                                 const embed = new RichEmbed()
@@ -51,7 +52,7 @@ class DeleteCommand extends commando.Command {
                                     .setDescription("Reaction successfully deleted");
                                 message.channel.send(embed);
                             }
-                        })
+                        });
                     }
                     else {
                         const embed = new RichEmbed()
@@ -59,11 +60,12 @@ class DeleteCommand extends commando.Command {
                             .setDescription("Reaction does not exist");
                         message.channel.send(embed);
                     }
-                })
+                });
             }
         }
 
     }
+
 }
 
 module.exports = DeleteCommand;
