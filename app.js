@@ -1,7 +1,6 @@
-import {RichEmbed} from "discord.js";
-
 const valid = require('valid-url')
 
+const { RichEmbed } = require('discord.js')
 const commando = require('discord.js-commando')
 const mongoose = require('mongoose')
 const Reaction = require('./Data/Schema/reaction.js')
