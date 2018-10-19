@@ -7,7 +7,8 @@ class HelpCommand extends commando.Command {
             name: 'help',
             group: 'basic',
             memberName: 'help',
-            description: 'chuj'
+            description: 'Returns help for the bot',
+            aliases: ['h']
         });
     }
 
