@@ -15,7 +15,7 @@ class ReactCommand extends commando.Command {
                     key: 'name',
                     type: 'string',
                     prompt: 'Reaction name',
-                    default: null
+                    default: 'null'
                 }
             ]
         });
@@ -23,7 +23,7 @@ class ReactCommand extends commando.Command {
 
     async run(message, {name}) {
 
-        if (name === null) {
+        if (name === 'null') {
             const embed = new RichEmbed()
                 .setColor('#FF0000')
                 .setDescription("Specify reaction name");
