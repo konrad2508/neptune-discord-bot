@@ -9,6 +9,7 @@
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "discord.js": "^11.4.2",
+    "discord.js-commando": "^0.10.0",
     "express": "~4.16.0",
     "ffmpeg": "0.0.4",
     "http-errors": "~1.6.2",

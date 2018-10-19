@@ -1,6 +1,7 @@
 const valid = require('valid-url')
 
-const {Client, RichEmbed} = require('discord.js')
+const Commando = require('discord.js-commando')
+const RichEmbed = require('discord.js')
 const mongoose = require('mongoose')
 const Reaction = require('./Data/Schema/reaction.js')
 const express = require('express')
@@ -10,11 +11,6 @@ const YTDL = require('ytdl-core')
 const app = express()
 
 app.listen(process.env.PORT || 8080)
-
-const client = new Client()
-
-let servers = {}
-let connections = {}
 
 let playFunc = (message) =>{
     let server = servers[message.guild.id]
@@ -75,11 +71,17 @@ mongoose.connect("mongodb://@ds139187.mlab.com:39187/reactbot-db", {
     'useNewUrlParser': true,
 })
 
-let db = mongoose.connection
+const db = mongoose.connection
+
 db.on('error', console.error.bind(console, 'connection error:'))
 db.once('open', () => {
     console.log('Connection open')
 })
+
+const client = new Commando.Client()
+
+let servers = {}
+let connections = {}
 
 client.on('ready', () => {
     console.log('Ready!')
