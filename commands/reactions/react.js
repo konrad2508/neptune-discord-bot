@@ -14,7 +14,7 @@ class ReactCommand extends commando.Command {
                 {
                     key: 'name',
                     prompt: 'Reaction name',
-                    type: 'string',
+                    type: 'integer',
                     default: null
                 }
             ]
