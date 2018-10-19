@@ -15,6 +15,7 @@ class DeleteCommand extends commando.Command {
                 {
                     key: 'name',
                     type: 'string',
+                    prompt: 'Reaction name',
                     default: null
                 }
             ]
