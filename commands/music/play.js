@@ -82,10 +82,10 @@ class PlayCommand extends commando.Command {
 
     }
 
-    async run(message, args) {
+    async run(message, {url}) {
 
         if (message.guild.voiceConnection) {
-            if (args.url) {
+            if (!url) {
                 const embed = new RichEmbed()
                     .setColor('#FF0000')
                     .setDescription("Specify URL of the song");
@@ -93,10 +93,10 @@ class PlayCommand extends commando.Command {
             }
             else {
                 // if (valid.isWebUri(url) && extractRootDomain(url) === 'youtube.com' || extractRootDomain(url) === 'youtu.be') {
-                if (YTDL.validateURL(args.url)) {
-                    YTDL.getInfo(args.url, (err, info) => {
+                if (YTDL.validateURL(url)) {
+                    YTDL.getInfo(url, (err, info) => {
                         if (servers[message.guild.id]) {
-                            servers[message.guild.id].queue.push(args.url);
+                            servers[message.guild.id].queue.push(url);
                             const embed = new RichEmbed()
                                 .setColor('#00FF00')
                                 .setDescription("Added **" + info.title + "** to the queue");
@@ -104,7 +104,7 @@ class PlayCommand extends commando.Command {
                         }
                         else {
                             servers[message.guild.id] = {queue: []};
-                            servers[message.guild.id].queue.push(args.url);
+                            servers[message.guild.id].queue.push(url);
                             this._playFunc(message);
                         }
 
