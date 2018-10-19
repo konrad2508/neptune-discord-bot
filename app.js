@@ -46,8 +46,4 @@ client.on('ready', () => {
     }, 100000);
 });
 
-// client.on('message', message => {
-//
-// });
-
 client.login(process.env.BOT_TOKEN);
