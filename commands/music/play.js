@@ -1,7 +1,6 @@
 const commando = require('discord.js-commando');
 const {RichEmbed} = require('discord.js');
 const YTDL = require('ytdl-core');
-const YTDL_info = require('ytdl-getinfo');
 
 class PlayCommand extends commando.Command {
     constructor(client) {
@@ -80,24 +79,10 @@ class PlayCommand extends commando.Command {
                     });
                 }
                 else {
-                    // const embed = new RichEmbed()
-                    //     .setColor('#FF0000')
-                    //     .setDescription("Invalid URL");
-                    // message.channel.send(embed);
-                    YTDL_info.getInfo(url).then(info => {
-                        if (servers[message.guild.id]) {
-                            servers[message.guild.id].queue.push(info.items[0].url);
-                            const embed = new RichEmbed()
-                                .setColor('#00FF00')
-                                .setDescription("Added **" + info.items[0].title + "** to the queue");
-                            message.channel.send(embed);
-                        }
-                        else {
-                            servers[message.guild.id] = {queue: []};
-                            servers[message.guild.id].queue.push(info.items[0].url);
-                            this._playFunc(message);
-                        }
-                    });
+                    const embed = new RichEmbed()
+                        .setColor('#FF0000')
+                        .setDescription("Invalid URL");
+                    message.channel.send(embed);
                 }
             }
         }
