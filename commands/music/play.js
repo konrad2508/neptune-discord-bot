@@ -1,6 +1,7 @@
 const commando = require('discord.js-commando');
 const {RichEmbed} = require('discord.js');
 const YTDL = require('ytdl-core');
+const YTDL_info = require('ytdl-getinfo');
 
 class PlayCommand extends commando.Command {
     constructor(client) {
@@ -83,7 +84,7 @@ class PlayCommand extends commando.Command {
                     //     .setColor('#FF0000')
                     //     .setDescription("Invalid URL");
                     // message.channel.send(embed);
-                    YTDL.getInfo(url, (err, info) => {
+                    YTDL_info.getInfo(url).then(info => {
                         if (servers[message.guild.id]) {
                             servers[message.guild.id].queue.push(info.items[0].url);
                             const embed = new RichEmbed()
