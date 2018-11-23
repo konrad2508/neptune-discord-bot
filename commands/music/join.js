@@ -12,7 +12,6 @@ class JoinCommand extends commando.Command {
     }
 
     async run(message) {
-
         if (message.member.voiceChannel) {
             if (!message.guild.voiceConnection) {
                 message.member.voiceChannel.join().then((connection) => {

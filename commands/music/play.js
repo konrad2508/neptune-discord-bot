@@ -8,50 +8,65 @@ class PlayCommand extends commando.Command {
             name: 'play',
             group: 'music',
             memberName: 'play',
+            argsPromptLimit: 0,
             description: 'Plays song from YouTube',
-            args: [
+            aliases: ['p'],
+            args:[
                 {
                     key: 'url',
-                    prompt: 'Song URL',
                     type: 'string',
-                    default: null
+                    prompt: 'Url of the song',
+                    default: ''
                 }
             ]
+
         });
     }
 
     _playFunc(message) {
-
         let server = servers[message.guild.id];
         let connection = connections[message.guild.id];
 
-        server.dispatcher = connection.playStream(YTDL(server.queue[0], {filter: "audioonly"}));
+        server.dispatcher = connection.playStream(YTDL(server.queue[0], {filter: "audioonly", quality: "highestaudio"}));
 
         YTDL.getInfo(server.queue[0], (err, info) => {
-            const embed = new RichEmbed()
-                .setColor('#00FF00')
-                .setDescription("Playing **" + info.title + "**");
-            message.channel.send(embed);
+            if (server.queue){
+                if (info){
+                    const embed = new RichEmbed()
+                        .setColor('#00FF00')
+                        .setDescription("Playing **" + info.title + "**");
+                    message.channel.send(embed);
+                }
+                else{
+                    const embed = new RichEmbed()
+                        .setColor('#FF0000')
+                        .setDescription("Error getting song info");
+                    message.channel.send(embed);
+                }
+            }
         });
 
         server.queue.shift();
 
         server.dispatcher.on("end", () => {
-            if (server.queue[0]) {
-                this._playFunc(message);
-            }
-            else {
-                servers[message.guild.id] = undefined;
-                const embed = new RichEmbed()
-                    .setColor('#00FF00')
-                    .setDescription("Queue ended");
-                message.channel.send(embed);
+            if (server.queue){
+                if (server.queue[0]) {
+                    this._playFunc(message);
+                }
+                else {
+                    servers[message.guild.id] = undefined;
+                    const embed = new RichEmbed()
+                        .setColor('#00FF00')
+                        .setDescription("Queue ended");
+                    message.channel.send(embed);
+                }
             }
         });
 
     }
 
     async run(message, {url}) {
+        url = url.split(" ")[0];
 
         if (message.guild.voiceConnection) {
             if (!url) {
@@ -63,19 +78,26 @@ class PlayCommand extends commando.Command {
             else {
                 if (YTDL.validateURL(url)) {
                     YTDL.getInfo(url, (err, info) => {
-                        if (servers[message.guild.id]) {
-                            servers[message.guild.id].queue.push(url);
-                            const embed = new RichEmbed()
-                                .setColor('#00FF00')
-                                .setDescription("Added **" + info.title + "** to the queue");
-                            message.channel.send(embed);
+                        if (info){
+                            if (servers[message.guild.id]) {
+                                servers[message.guild.id].queue.push(url);
+                                const embed = new RichEmbed()
+                                    .setColor('#00FF00')
+                                    .setDescription("Added **" + info.title + "** to the queue");
+                                message.channel.send(embed);
+                            }
+                            else {
+                                servers[message.guild.id] = {queue: []};
+                                servers[message.guild.id].queue.push(url);
+                                this._playFunc(message);
+                            }
                         }
                         else {
-                            servers[message.guild.id] = {queue: []};
-                            servers[message.guild.id].queue.push(url);
-                            this._playFunc(message);
+                            const embed = new RichEmbed()
+                                .setColor('#FF0000')
+                                .setDescription("Error while adding song to queue, try again or specify different song");
+                            message.channel.send(embed);
                         }
-
                     });
                 }
                 else {
@@ -94,6 +116,7 @@ class PlayCommand extends commando.Command {
         }
 
     }
+
 }
 
 module.exports = PlayCommand;

@@ -6,6 +6,7 @@ const https = require('https');
 const app = express();
 app.listen(process.env.PORT || 8080);
 
+global.prefix = '!';
 global.servers = {};
 global.connections = {};
 
@@ -14,6 +15,7 @@ mongoose.connect(process.env.DB_URL, {
     'pass': process.env.DB_PASS,
     'useNewUrlParser': true,
 });
+
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
@@ -21,18 +23,23 @@ db.once('open', () => {
 });
 
 const client = new commando.Client({
-    commandPrefix: '?',
+    commandPrefix: global.prefix,
     unknownCommandResponse: false
 });
+
 client.registry.registerGroup('reactions', 'Reactions')
     .registerGroup('music', 'Music')
     .registerDefaultTypes()
     .registerCommandsIn(__dirname + "/commands");
+
 client.on('ready', () => {
-    console.log('Ready!');
-    client.user.setGame('?h for help');
+    console.log('Ready');
+    client.user.setActivity('!h for help');
     setInterval(() => {
         https.get(process.env.APP_URL)
-    }, 100000);
+    }, 180000);
 });
+
+client.on('error', console.log);
+
 client.login(process.env.BOT_TOKEN);

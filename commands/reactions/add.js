@@ -9,26 +9,28 @@ class AddCommand extends commando.Command {
             name: 'add',
             group: 'reactions',
             memberName: 'add',
+            argsPromptLimit: 0,
             description: 'Adds reaction',
             aliases: ['a'],
-            args: [
+            args:[
                 {
                     key: 'name',
-                    prompt: 'Reaction name',
                     type: 'string',
-                    default: null
+                    prompt: 'Name of the reaction to add',
+                    default: ''
                 },
                 {
                     key: 'url',
-                    prompt: 'Reaction URL',
                     type: 'string',
-                    default: null
+                    prompt: 'Url of the reaction to add',
+                    default: ''
                 }
             ]
         });
     }
 
     async run(message, {name, url}) {
+        url = url.split(" ")[0];
 
         if (!name) {
             const embed = new RichEmbed()

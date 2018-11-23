@@ -15,7 +15,6 @@ class ListCommand extends commando.Command {
     }
 
     async run(message) {
-
         Reaction.find({}, 'name', (err, reactions) => {
             if (err) {
                 const embed = new RichEmbed()
@@ -35,7 +34,7 @@ class ListCommand extends commando.Command {
                         return (a.toLowerCase() < b.toLowerCase()) ? -1 : 1
                     }).join("\n"));
                 message.channel.send(embed).then(msg => {
-                    msg.delete(10000);
+                    msg.delete(15000);
                 });
                 message.delete(100);
             }

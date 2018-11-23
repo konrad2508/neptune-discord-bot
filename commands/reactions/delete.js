@@ -9,20 +9,22 @@ class DeleteCommand extends commando.Command {
             name: 'delete',
             group: 'reactions',
             memberName: 'delete',
+            argsPromptLimit: 0,
             description: 'Deletes reaction',
             aliases: ['d'],
-            args: [
+            args:[
                 {
                     key: 'name',
-                    prompt: 'Reaction name',
                     type: 'string',
-                    default: null
+                    prompt: 'Name of the reaction to delete',
+                    default: ''
                 }
             ]
         });
     }
 
     async run(message, {name}) {
+        name = name.split(" ")[0];
 
         if (message.author.id !== process.env.ADMIN_ID) {
             const embed = new RichEmbed()

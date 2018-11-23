@@ -8,20 +8,22 @@ class ReactCommand extends commando.Command {
             name: 'react',
             group: 'reactions',
             memberName: 'react',
+            argsPromptLimit: 0,
             description: 'Reacts with specified reaction',
             aliases: ['r'],
-            args: [
+            args:[
                 {
                     key: 'name',
-                    prompt: 'Reaction name',
                     type: 'string',
-                    default: null
+                    prompt: 'Name of the reaction',
+                    default: ''
                 }
             ]
         });
     }
 
     async run(message, {name}) {
+        name = name.split(" ")[0];
 
         if (!name) {
             const embed = new RichEmbed()
