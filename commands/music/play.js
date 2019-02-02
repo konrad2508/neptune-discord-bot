@@ -1,7 +1,6 @@
 const commando = require('discord.js-commando');
 const {RichEmbed} = require('discord.js');
 const YTDL = require('youtube-dl');
-const Request = require('request');
 
 class PlayCommand extends commando.Command {
     constructor(client) {
@@ -28,8 +27,7 @@ class PlayCommand extends commando.Command {
         let server = servers[message.guild.id];
         let connection = connections[message.guild.id];
 
-        // let video = YTDL(server.queue[0], ['--restrict-filenames', '--extract-audio'], null);
-        let video = Request(server.queue[0]);
+        let video = YTDL(server.queue[0], ['--restrict-filenames', '--extract-audio'], null);
 
         server.dispatcher = connection.playStream(video);
 
