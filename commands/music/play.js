@@ -27,7 +27,9 @@ class PlayCommand extends commando.Command {
         let server = servers[message.guild.id];
         let connection = connections[message.guild.id];
 
-        server.dispatcher = connection.playStream(YTDL(server.queue[0], ['--restrict-filenames'], null));
+        let video = YTDL(server.queue[0], ['--restrict-filenames'], null)
+
+        server.dispatcher = connection.playStream(video);
 
         YTDL.getInfo(server.queue[0],['--restrict-filenames'],null, (err, info) => {
             if (server.queue){
