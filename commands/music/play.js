@@ -31,7 +31,7 @@ class PlayCommand extends commando.Command {
 
         server.dispatcher = connection.playStream(video);
 
-        YTDL.getInfo(server.queue[0], ['--restrict-filenames'], null, (err, info) => {
+        YTDL.getInfo(server.queue[0], ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames'], (err, info) => {
             if (server.queue){
                 if (info){
                     const embed = new RichEmbed()
@@ -79,7 +79,7 @@ class PlayCommand extends commando.Command {
             }
             else {
                 if (1 === 1) {
-                    YTDL.getInfo(url, ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames'], null, (err, info) => {
+                    YTDL.getInfo(url, ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames'], (err, info) => {
                         if (info){
                             if (servers[message.guild.id]) {
                                 servers[message.guild.id].queue.push(url);

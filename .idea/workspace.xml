@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8823d205-44c9-4413-948d-0c9f33b7a26a" name="Default Changelist" comment="Add" />
+    <list default="true" id="8823d205-44c9-4413-948d-0c9f33b7a26a" name="Default Changelist" comment="Add">
+      <change beforePath="$PROJECT_DIR$/commands/music/play.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/music/play.js" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -83,13 +85,13 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gitignore" value="19" />
-          <entry key="js" value="647" />
+          <entry key="js" value="672" />
           <entry key="txt" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JavaScript" value="647" />
+          <entry key="JavaScript" value="672" />
           <entry key="PLAIN_TEXT" value="23" />
         </counts>
       </usages-collector>
@@ -148,8 +150,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/commands/music/play.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-986">
-              <caret line="2" column="35" selection-start-line="2" selection-start-column="35" selection-end-line="2" selection-end-column="35" />
+            <state relative-caret-position="238">
+              <caret line="83" column="60" lean-forward="true" selection-start-line="83" selection-start-column="60" selection-end-line="83" selection-end-column="60" />
             </state>
           </provider>
         </entry>
@@ -236,8 +238,8 @@
         <option value="$PROJECT_DIR$/Data/Schema/reaction.js" />
         <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/commands/music/play.js" />
         <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/commands/music/play.js" />
       </list>
     </option>
   </component>
@@ -368,7 +370,7 @@
       <workItem from="1540484555276" duration="19000" />
       <workItem from="1548946842093" duration="299000" />
       <workItem from="1549069610207" duration="2903000" />
-      <workItem from="1549115281791" duration="5118000" />
+      <workItem from="1549115281791" duration="5371000" />
     </task>
     <task id="LOCAL-00001" summary="polishing">
       <created>1537888319205</created>
@@ -381,7 +383,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="72719000" />
+    <option name="totallyTimeSpent" value="72972000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -601,8 +603,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/commands/music/play.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-986">
-          <caret line="2" column="35" selection-start-line="2" selection-start-column="35" selection-end-line="2" selection-end-column="35" />
+        <state relative-caret-position="238">
+          <caret line="83" column="60" lean-forward="true" selection-start-line="83" selection-start-column="60" selection-end-line="83" selection-end-column="60" />
         </state>
       </provider>
     </entry>
