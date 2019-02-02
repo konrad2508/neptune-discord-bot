@@ -17,7 +17,7 @@ mongoose.connect(process.env.DB_URL, {
 });
 
 const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
+db.on('error', console.error.bind(console, 'database connection error:'));
 db.once('open', () => {
     console.log('Connection open')
 });
@@ -40,6 +40,13 @@ client.on('ready', () => {
     }, 180000);
 });
 
-client.on('error', console.log);
+client.on('error', (err) => {
+    console.log("client error:");
+    console.log(err);
+});
 
-client.login(process.env.BOT_TOKEN);
+let loginAttempt = client.login(process.env.BOT_TOKEN);
+loginAttempt.catch((err) => {
+    console.log("login attempt error:");
+    console.log(err);
+});
