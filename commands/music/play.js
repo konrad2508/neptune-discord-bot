@@ -84,6 +84,7 @@ class PlayCommand extends commando.Command {
                             console.log(err);
                         }
                         else {
+                            console.log('ok');
                             // if (info){
                             if (servers[message.guild.id]) {
                                 servers[message.guild.id].queue.push(url);
