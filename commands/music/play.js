@@ -27,9 +27,9 @@ class PlayCommand extends commando.Command {
         let server = servers[message.guild.id];
         let connection = connections[message.guild.id];
 
-        server.dispatcher = connection.playStream(YTDL(server.queue[0], ['--skip-download'], null));
+        server.dispatcher = connection.playStream(YTDL(server.queue[0], ['--restrict-filenames'], null));
 
-        YTDL.getInfo(server.queue[0],[],null, (err, info) => {
+        YTDL.getInfo(server.queue[0],['--restrict-filenames'],null, (err, info) => {
             if (server.queue){
                 if (info){
                     const embed = new RichEmbed()
@@ -76,9 +76,8 @@ class PlayCommand extends commando.Command {
                 message.channel.send(embed);
             }
             else {
-                console.log("XDDD");
                 if (1 === 1) {
-                    YTDL.getInfo(url,[],null, (err, info) => {
+                    YTDL.getInfo(url, ['--restrict-filenames'], null, (err, info) => {
                         if (info){
                             if (servers[message.guild.id]) {
                                 servers[message.guild.id].queue.push(url);
