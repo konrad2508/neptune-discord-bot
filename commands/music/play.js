@@ -27,11 +27,11 @@ class PlayCommand extends commando.Command {
         let server = servers[message.guild.id];
         let connection = connections[message.guild.id];
 
-        let video = YTDL(server.queue[0], ['--restrict-filenames'], null)
+        let video = YTDL(server.queue[0], ['--restrict-filenames', '--extract-audio', '--audio-format mp3'], null);
 
         server.dispatcher = connection.playStream(video);
 
-        YTDL.getInfo(server.queue[0],['--restrict-filenames'],null, (err, info) => {
+        YTDL.getInfo(server.queue[0],['--restrict-filenames', '--extract-audio', '--audio-format mp3'],null, (err, info) => {
             if (server.queue){
                 if (info){
                     const embed = new RichEmbed()
@@ -79,7 +79,7 @@ class PlayCommand extends commando.Command {
             }
             else {
                 if (1 === 1) {
-                    YTDL.getInfo(url, ['--restrict-filenames'], null, (err, info) => {
+                    YTDL.getInfo(url, ['--restrict-filenames', '--extract-audio', '--audio-format mp3'], null, (err, info) => {
                         if (info){
                             if (servers[message.guild.id]) {
                                 servers[message.guild.id].queue.push(url);
