@@ -79,7 +79,7 @@ class PlayCommand extends commando.Command {
             }
             else {
                 if (1 === 1) {
-                    YTDL.getInfo(url, ['--restrict-filenames'], null, (err, info) => {
+                    YTDL.getInfo(url, ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames'], null, (err, info) => {
                         if (info){
                             if (servers[message.guild.id]) {
                                 servers[message.guild.id].queue.push(url);
