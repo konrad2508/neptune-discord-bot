@@ -27,7 +27,7 @@ class PlayCommand extends commando.Command {
         let server = servers[message.guild.id];
         let connection = connections[message.guild.id];
 
-        let video = YTDL(server.queue[0], ['--restrict-filenames'], undefined);
+        let video = YTDL(server.queue[0], ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames'], undefined);
 
         server.dispatcher = connection.playStream(video);
 
@@ -78,36 +78,28 @@ class PlayCommand extends commando.Command {
                 message.channel.send(embed);
             }
             else {
-                if (1 === 1) {
-                    YTDL.getInfo(url, ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames'], null, (err, info) => {
-                        if (info){
-                            if (servers[message.guild.id]) {
-                                servers[message.guild.id].queue.push(url);
-                                const embed = new RichEmbed()
-                                    .setColor('#00FF00')
-                                    .setDescription("Added **" + info.title + "** to the queue");
-                                message.channel.send(embed);
-                            }
-                            else {
-                                servers[message.guild.id] = {queue: []};
-                                servers[message.guild.id].queue.push(url);
-                                this._playFunc(message);
-                            }
-                        }
-                        else {
+                YTDL.getInfo(url, ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames'], null, (err, info) => {
+                    if (info){
+                        if (servers[message.guild.id]) {
+                            servers[message.guild.id].queue.push(url);
                             const embed = new RichEmbed()
-                                .setColor('#FF0000')
-                                .setDescription("Error while adding song to queue, try again or specify different song");
+                                .setColor('#00FF00')
+                                .setDescription("Added **" + info.title + "** to the queue");
                             message.channel.send(embed);
                         }
-                    });
-                }
-                else {
-                    const embed = new RichEmbed()
-                        .setColor('#FF0000')
-                        .setDescription("Invalid URL");
-                    message.channel.send(embed);
-                }
+                        else {
+                            servers[message.guild.id] = {queue: []};
+                            servers[message.guild.id].queue.push(url);
+                            this._playFunc(message);
+                        }
+                    }
+                    else {
+                        const embed = new RichEmbed()
+                            .setColor('#FF0000')
+                            .setDescription("Error while adding song to queue, try again or specify different song");
+                        message.channel.send(embed);
+                    }
+                });
             }
         }
         else {
