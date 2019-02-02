@@ -10,10 +10,14 @@ global.prefix = '!';
 global.servers = {};
 global.connections = {};
 
-mongoose.connect(process.env.DB_URL, {
+let databaseConnectAttempt = mongoose.connect(process.env.DB_URL, {
     'user': process.env.DB_USER,
     'pass': process.env.DB_PASS,
     'useNewUrlParser': true,
+});
+databaseConnectAttempt.catch((err) => {
+    console.log("database connect error:");
+    console.log(err);
 });
 
 const db = mongoose.connection;
@@ -34,7 +38,13 @@ client.registry.registerGroup('reactions', 'Reactions')
 
 client.on('ready', () => {
     console.log('Ready');
-    client.user.setActivity('!h for help');
+
+    let setActivityAttempt = client.user.setActivity('!h for help');
+    setActivityAttempt.catch((err) => {
+        console.log("set activity error:");
+        console.log(err)
+    });
+
     setInterval(() => {
         https.get(process.env.APP_URL)
     }, 180000);

@@ -18,6 +18,7 @@
     "opusscript": "0.0.6",
     "pug": "2.0.0-beta11",
     "valid-url": "^1.0.9",
+    "youtube-dl": "^1.12.2",
     "ytdl-core": "^0.26.2"
   },
   "main": "app.js",

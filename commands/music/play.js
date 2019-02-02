@@ -1,6 +1,6 @@
 const commando = require('discord.js-commando');
 const {RichEmbed} = require('discord.js');
-const YTDL = require('ytdl-core');
+const YTDL = require('youtube-dl');
 
 class PlayCommand extends commando.Command {
     constructor(client) {
@@ -27,9 +27,9 @@ class PlayCommand extends commando.Command {
         let server = servers[message.guild.id];
         let connection = connections[message.guild.id];
 
-        server.dispatcher = connection.playStream(YTDL(server.queue[0], {filter: "audioonly", quality: "highestaudio"}));
+        server.dispatcher = connection.playStream(YTDL(server.queue[0], ['--skip-download'], null));
 
-        YTDL.getInfo(server.queue[0], (err, info) => {
+        YTDL.getInfo(server.queue[0],[],null, (err, info) => {
             if (server.queue){
                 if (info){
                     const embed = new RichEmbed()
@@ -76,8 +76,9 @@ class PlayCommand extends commando.Command {
                 message.channel.send(embed);
             }
             else {
-                if (YTDL.validateURL(url)) {
-                    YTDL.getInfo(url, (err, info) => {
+                console.log("XDDD");
+                if (1 === 1) {
+                    YTDL.getInfo(url,[],null, (err, info) => {
                         if (info){
                             if (servers[message.guild.id]) {
                                 servers[message.guild.id].queue.push(url);
