@@ -80,7 +80,11 @@ class PlayCommand extends commando.Command {
             else {
                 if (1 === 1) {
                     YTDL.getInfo(url, ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames'], (err, info) => {
-                        // if (info){
+                        if (err) {
+                            console.log(err);
+                        }
+                        else {
+                            // if (info){
                             if (servers[message.guild.id]) {
                                 servers[message.guild.id].queue.push(url);
                                 const embed = new RichEmbed()
@@ -93,6 +97,7 @@ class PlayCommand extends commando.Command {
                                 servers[message.guild.id].queue.push(url);
                                 this._playFunc(message);
                             }
+                        }
                         // }
                         // else {
                         //     const embed = new RichEmbed()
