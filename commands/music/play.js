@@ -57,7 +57,9 @@ class PlayCommand extends commando.Command {
     }
 
     async run(message, {url}) {
+        console.log(url)
         url = url.split(" ")[0];
+        console.log(url)
 
         if (message.guild.voiceConnection) {
             if (!url) {
