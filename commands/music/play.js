@@ -36,7 +36,7 @@ class PlayCommand extends commando.Command {
         //     ? YTDL(info.url, {filter: "audioonly", quality: "highestaudio"})
         //     : YoutubeDL(info.url, ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames', '-f bestaudio'], undefined);
 
-        let video = YoutubeDL(info.url, ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames', '--audio-format best', '-x'], undefined);
+        let video = YoutubeDL(info.url, ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames', '-f bestaudio[ext=m4a]'], undefined);
 
         server.dispatcher = connection.playStream(video);
 

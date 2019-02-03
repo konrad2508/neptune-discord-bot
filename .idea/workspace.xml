@@ -85,13 +85,13 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gitignore" value="19" />
-          <entry key="js" value="2415" />
+          <entry key="js" value="2418" />
           <entry key="txt" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JavaScript" value="2415" />
+          <entry key="JavaScript" value="2418" />
           <entry key="PLAIN_TEXT" value="23" />
         </counts>
       </usages-collector>
@@ -142,7 +142,7 @@
         <entry file="file://$PROJECT_DIR$/commands/music/play.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="190">
-              <caret line="38" column="132" lean-forward="true" selection-start-line="38" selection-start-column="132" selection-end-line="38" selection-end-column="132" />
+              <caret line="38" column="127" selection-start-line="38" selection-start-column="127" selection-end-line="38" selection-end-column="127" />
             </state>
           </provider>
         </entry>
@@ -376,7 +376,7 @@
       <workItem from="1549069610207" duration="2903000" />
       <workItem from="1549115281791" duration="8682000" />
       <workItem from="1549159694414" duration="2422000" />
-      <workItem from="1549194330939" duration="5921000" />
+      <workItem from="1549194330939" duration="6248000" />
     </task>
     <task id="LOCAL-00001" summary="polishing">
       <created>1537888319205</created>
@@ -389,7 +389,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="84626000" />
+    <option name="totallyTimeSpent" value="84953000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -402,7 +402,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18545838" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -612,7 +611,7 @@
     <entry file="file://$PROJECT_DIR$/commands/music/play.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
-          <caret line="38" column="132" lean-forward="true" selection-start-line="38" selection-start-column="132" selection-end-line="38" selection-end-column="132" />
+          <caret line="38" column="127" selection-start-line="38" selection-start-column="127" selection-end-line="38" selection-end-column="127" />
         </state>
       </provider>
     </entry>
