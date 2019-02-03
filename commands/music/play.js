@@ -1,6 +1,7 @@
 const commando = require('discord.js-commando');
 const {RichEmbed} = require('discord.js');
-const YTDL = require('youtube-dl');
+const YTDL = require('ytdl-core');
+const YoutubeDL = require('youtube-dl');
 
 class PlayCommand extends commando.Command {
     constructor(client) {
@@ -27,11 +28,15 @@ class PlayCommand extends commando.Command {
         let server = servers[message.guild.id];
         let connection = connections[message.guild.id];
 
-        let video = YTDL(server.queue[0], ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames'], undefined);
+        let url = server.queue[0];
+
+        let video = YTDL.validateURL(url)
+            ? YTDL(url)
+            : YoutubeDL(url, ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames'], undefined);
 
         server.dispatcher = connection.playStream(video);
 
-        YTDL.getInfo(server.queue[0], ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames'], null, (err, info) => {
+        YoutubeDL.getInfo(server.queue[0], ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames'], null, (err, info) => {
             if (server.queue){
                 if (info){
                     const embed = new RichEmbed()
@@ -78,7 +83,7 @@ class PlayCommand extends commando.Command {
                 message.channel.send(embed);
             }
             else {
-                YTDL.getInfo(url, ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames'], null, (err, info) => {
+                YoutubeDL.getInfo(url, ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames'], null, (err, info) => {
                     if (info){
                         if (servers[message.guild.id]) {
                             servers[message.guild.id].queue.push(url);
