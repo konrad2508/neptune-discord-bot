@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="8823d205-44c9-4413-948d-0c9f33b7a26a" name="Default Changelist" comment="Add">
       <change beforePath="$PROJECT_DIR$/commands/music/play.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/music/play.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/music/skip.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/music/skip.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -87,13 +88,13 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gitignore" value="19" />
-          <entry key="js" value="2362" />
+          <entry key="js" value="2415" />
           <entry key="txt" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JavaScript" value="2362" />
+          <entry key="JavaScript" value="2415" />
           <entry key="PLAIN_TEXT" value="23" />
         </counts>
       </usages-collector>
@@ -143,8 +144,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/commands/music/play.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="67" column="27" selection-start-line="67" selection-start-column="27" selection-end-line="67" selection-end-column="27" />
+            <state relative-caret-position="292">
+              <caret line="38" column="132" lean-forward="true" selection-start-line="38" selection-start-column="132" selection-end-line="38" selection-end-column="132" />
             </state>
           </provider>
         </entry>
@@ -152,8 +153,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/commands/music/skip.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="24" column="14" selection-start-line="24" selection-start-column="14" selection-end-line="24" selection-end-column="14" />
+            <state relative-caret-position="289">
+              <caret line="17" column="66" selection-start-line="17" selection-start-column="66" selection-end-line="17" selection-end-column="66" />
             </state>
           </provider>
         </entry>
@@ -246,11 +247,11 @@
         <option value="$PROJECT_DIR$/utils.js" />
         <option value="$PROJECT_DIR$/commands/music/join.js" />
         <option value="$PROJECT_DIR$/commands/music/leave.js" />
-        <option value="$PROJECT_DIR$/commands/music/skip.js" />
         <option value="$PROJECT_DIR$/commands/reactions/add.js" />
         <option value="$PROJECT_DIR$/commands/reactions/delete.js" />
         <option value="$PROJECT_DIR$/commands/reactions/list.js" />
         <option value="$PROJECT_DIR$/commands/reactions/react.js" />
+        <option value="$PROJECT_DIR$/commands/music/skip.js" />
         <option value="$PROJECT_DIR$/commands/music/play.js" />
       </list>
     </option>
@@ -378,7 +379,7 @@
       <workItem from="1549069610207" duration="2903000" />
       <workItem from="1549115281791" duration="8682000" />
       <workItem from="1549159694414" duration="2422000" />
-      <workItem from="1549194330939" duration="5237000" />
+      <workItem from="1549194330939" duration="5663000" />
     </task>
     <task id="LOCAL-00001" summary="polishing">
       <created>1537888319205</created>
@@ -391,7 +392,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="83942000" />
+    <option name="totallyTimeSpent" value="84368000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -562,13 +563,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/commands/music/skip.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="14" selection-start-line="24" selection-start-column="14" selection-end-line="24" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/commands/reactions/delete.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="666">
@@ -611,10 +605,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/commands/music/skip.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="66" selection-start-line="17" selection-start-column="66" selection-end-line="17" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/commands/music/play.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="67" column="27" selection-start-line="67" selection-start-column="27" selection-end-line="67" selection-end-column="27" />
+        <state relative-caret-position="292">
+          <caret line="38" column="132" lean-forward="true" selection-start-line="38" selection-start-column="132" selection-end-line="38" selection-end-column="132" />
         </state>
       </provider>
     </entry>

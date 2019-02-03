@@ -32,9 +32,11 @@ class PlayCommand extends commando.Command {
 
         let info = server.queue[0];
 
-        let video = YTDL.validateURL(info.url)
-            ? YTDL(info.url, {filter: "audioonly", quality: "highestaudio"})
-            : YoutubeDL(info.url, ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames'], undefined);
+        // let video = YTDL.validateURL(info.url)
+        //     ? YTDL(info.url, {filter: "audioonly", quality: "highestaudio"})
+        //     : YoutubeDL(info.url, ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames', '-f bestaudio'], undefined);
+
+        let video = YoutubeDL(info.url, ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames', '-f bestaudio'], undefined);
 
         server.dispatcher = connection.playStream(video);
 
