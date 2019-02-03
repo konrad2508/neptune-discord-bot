@@ -27,20 +27,13 @@ class ReactCommand extends commando.Command {
         name = name.split(" ")[0];
 
         if (!name) {
-            // const embed = new RichEmbed()
-            //     .setColor('#FF0000')
-            //     .setDescription("Specify reaction name");
-            // message.channel.send(embed);
             sendError(message, "Specify reaction name");
         }
         else {
             Reaction.find({'name': name}, 'name url', (err, response) => {
                 if (err) {
-                    // const embed = new RichEmbed()
-                    //     .setColor('#FF0000')
-                    //     .setDescription(err.content);
-                    // message.channel.send(embed);
                     console.log(err.content);
+                    sendError("Something went wrong, try again or specify a different reaction");
                 }
                 else if (response.length) {
                     const embed = new RichEmbed()
@@ -51,10 +44,6 @@ class ReactCommand extends commando.Command {
                     message.delete(100);
                 }
                 else {
-                    // const embed = new RichEmbed()
-                    //     .setColor('#FF0000')
-                    //     .setDescription("Reaction does not exist");
-                    // message.channel.send(embed);
                     sendError(message, "Reaction does not exist");
                 }
             });

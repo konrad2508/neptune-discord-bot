@@ -1,6 +1,7 @@
 const commando = require('discord.js-commando');
 const {RichEmbed} = require('discord.js');
 const Reaction = require('../../Data/Schema/reaction.js');
+const {sendError} = require('../../utils.js');
 
 class ListCommand extends commando.Command {
 
@@ -18,6 +19,7 @@ class ListCommand extends commando.Command {
         Reaction.find({}, 'name', (err, reactions) => {
             if (err) {
                 console.log(err.content);
+                sendError(message, "Something went wrong, try again");
             }
             else if (reactions.length) {
                 let names = [];
