@@ -73,7 +73,7 @@ class PlayCommand extends commando.Command {
                     url = 'ytsearch1:' + url
                 }
 
-                YoutubeDL.getInfo(url, ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames'], null, (err, info) => {
+                YTDL.getInfo(url, (err, info) => {
                     if (info){
                         if (servers[message.guild.id]) {
                             servers[message.guild.id].queue.push(info);
