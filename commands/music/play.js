@@ -30,19 +30,15 @@ class PlayCommand extends commando.Command {
 
         let url = server.queue[0];
 
-        if (YTDL.validateURL(url)){
-            console.log('siemka');
-        }
+        let video = YTDL.validateURL(url)
+            ? YTDL(url, {filter: "audioonly", quality: "lowestaudio"})
+            : YoutubeDL(url, ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames'], undefined);
+
+        server.dispatcher = connection.playStream(video);
 
         YoutubeDL.getInfo(url, ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames'], null, (err, info) => {
             if (server.queue){
                 if (info){
-                    let video = YTDL.validateURL(url)
-                        ? YTDL(url, {filter: "audioonly", quality: "lowestaudio"})
-                        : YoutubeDL(url, ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames'], undefined);
-
-                    server.dispatcher = connection.playStream(video);
-
                     const embed = new RichEmbed()
                         .setColor('#00FF00')
                         .setDescription("Playing **" + info.title + "**");
