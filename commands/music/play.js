@@ -4,6 +4,8 @@ const YTDL = require('ytdl-core');
 const YoutubeDL = require('youtube-dl');
 const {sendOk, sendError} = require('../../utils.js');
 const valid = require('valid-url');
+const http = require('http');
+const JSSoup = require('jssoup').default;
 
 class PlayCommand extends commando.Command {
     constructor(client) {
@@ -37,7 +39,7 @@ class PlayCommand extends commando.Command {
 
         let video = YTDL.validateURL(info.url)
             ? YTDL(info.url, {filter: "audioonly", quality: "highestaudio"})
-            : YoutubeDL(info.url, ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames', '-f bestaudio'], undefined);
+            : YoutubeDL(info.url, ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames'], undefined);
 
 
         server.dispatcher = connection.playStream(video);
@@ -67,9 +69,13 @@ class PlayCommand extends commando.Command {
             }
             else {
                 if (!valid.isWebUri(url)){
-                    url = 'ytsearch1:' + url
+                    // url = 'ytsearch1:' + url
+                    await http.get({host: 'www.youtube.com', port: 80, path: '/results?search_query=' + url}, (res) => {
+                        let soup = new JSSoup(res);
+                        console.log(soup.find({'class':'yt-uix-tile-link'}));
+                    })
                 }
-                console.log(url);
+
                 YoutubeDL.getInfo(url, ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames'], null, (err, info) => {
                     if (info){
 
