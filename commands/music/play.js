@@ -72,6 +72,11 @@ class PlayCommand extends commando.Command {
                 console.log(url);
                 YoutubeDL.getInfo(url, ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames'], null, (err, info) => {
                     if (info){
+
+                        if (YTDL.validateURL(url)){
+                            info.url = url;
+                        }
+
                         if (servers[message.guild.id]) {
                             servers[message.guild.id].queue.push(info);
                             sendOk(message, "Added **" + info.title + "** to the queue");
