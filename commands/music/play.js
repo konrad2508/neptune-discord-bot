@@ -72,7 +72,7 @@ class PlayCommand extends commando.Command {
                     // url = 'ytsearch1:' + url
                     await http.get({host: 'www.youtube.com', port: 80, path: '/results?search_query=' + url}, (res) => {
                         let soup = new JSSoup(res);
-                        console.log(soup.find({'class':'yt-uix-tile-link'}));
+                        console.log(soup.find('yt-uix-tile-link'));
                     })
                 }
 
