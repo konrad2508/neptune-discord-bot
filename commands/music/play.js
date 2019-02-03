@@ -72,7 +72,7 @@ class PlayCommand extends commando.Command {
                 if (!valid.isWebUri(url)){
                     url = 'ytsearch1:' + url
                 }
-
+                console.log(url);
                 YTDL.getInfo(url, (err, info) => {
                     if (info){
                         if (servers[message.guild.id]) {
