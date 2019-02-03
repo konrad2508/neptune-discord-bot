@@ -3,7 +3,7 @@ const {RichEmbed} = require('discord.js');
 const YTDL = require('ytdl-core');
 const YoutubeDL = require('youtube-dl');
 const {sendOk, sendError} = require('../../utils.js');
-
+const valid = require('valid-url');
 
 class PlayCommand extends commando.Command {
     constructor(client) {
@@ -57,15 +57,16 @@ class PlayCommand extends commando.Command {
     }
 
     async run(message, {url}) {
-        console.log(url)
-        url = url.split(" ")[0];
-        console.log(url)
 
         if (message.guild.voiceConnection) {
             if (!url) {
                 sendError(message, "Specify URL of the song");
             }
             else {
+                if (!valid.isWebUri(url)){
+                    url = 'ytsearch1:' + url
+                }
+
                 YoutubeDL.getInfo(url, ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames'], null, (err, info) => {
                     if (info){
                         if (servers[message.guild.id]) {
