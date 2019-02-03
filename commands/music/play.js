@@ -10,7 +10,7 @@ class PlayCommand extends commando.Command {
             group: 'music',
             memberName: 'play',
             argsPromptLimit: 0,
-            description: 'Plays song from YouTube',
+            description: 'Plays song',
             aliases: ['p'],
             args:[
                 {
@@ -35,23 +35,6 @@ class PlayCommand extends commando.Command {
             : YoutubeDL(info.url, ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames'], undefined);
 
         server.dispatcher = connection.playStream(video);
-
-        // YoutubeDL.getInfo(url, ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames'], null, (err, info) => {
-        //     if (server.queue){
-        //         if (info){
-        //             const embed = new RichEmbed()
-        //                 .setColor('#00FF00')
-        //                 .setDescription("Playing **" + info.title + "**");
-        //             message.channel.send(embed);
-        //         }
-        //         else{
-        //             const embed = new RichEmbed()
-        //                 .setColor('#FF0000')
-        //                 .setDescription("Error getting song info");
-        //             message.channel.send(embed);
-        //         }
-        //     }
-        // });
 
         const embed = new RichEmbed()
             .setColor('#00FF00')
