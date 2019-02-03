@@ -13,3 +13,6 @@ function sendError(message, text){
         .setDescription(text);
     message.channel.send(embed);
 }
+
+exports.sendOk = sendOk;
+exports.sendError = sendError;
