@@ -2,7 +2,7 @@ const commando = require('discord.js-commando');
 const {RichEmbed} = require('discord.js');
 const YTDL = require('ytdl-core');
 const YoutubeDL = require('youtube-dl');
-const {sendOk, sendError} = require('utils');
+const {sendOk, sendError} = require('utils.js');
 
 
 class PlayCommand extends commando.Command {
