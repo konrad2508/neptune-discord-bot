@@ -14,5 +14,5 @@ function sendError(message, text){
     message.channel.send(embed);
 }
 
-exports.sendOk = sendOk;
-exports.sendError = sendError;
+module.exports.sendOk = sendOk;
+module.exports.sendError = sendError;
