@@ -2,6 +2,8 @@ const commando = require('discord.js-commando');
 const {RichEmbed} = require('discord.js');
 const YTDL = require('ytdl-core');
 const YoutubeDL = require('youtube-dl');
+const {sendOk, sendError} = require('utils');
+
 
 class PlayCommand extends commando.Command {
     constructor(client) {
@@ -36,10 +38,12 @@ class PlayCommand extends commando.Command {
 
         server.dispatcher = connection.playStream(video);
 
-        const embed = new RichEmbed()
-            .setColor('#00FF00')
-            .setDescription("Playing **" + info.title + "**");
-        message.channel.send(embed);
+        // const embed = new RichEmbed()
+        //     .setColor('#00FF00')
+        //     .setDescription("Playing **" + info.title + "**");
+        // message.channel.send(embed);
+
+        sendOk(message, "Playing **" + info.title + "**");
 
         server.queue.shift();
 
@@ -50,10 +54,12 @@ class PlayCommand extends commando.Command {
                 }
                 else {
                     servers[message.guild.id] = undefined;
-                    const embed = new RichEmbed()
-                        .setColor('#00FF00')
-                        .setDescription("Queue ended");
-                    message.channel.send(embed);
+                    // const embed = new RichEmbed()
+                    //     .setColor('#00FF00')
+                    //     .setDescription("Queue ended");
+                    // message.channel.send(embed);
+
+                    sendOk(message, "Queue ended");
                 }
             }
         });
@@ -65,20 +71,24 @@ class PlayCommand extends commando.Command {
 
         if (message.guild.voiceConnection) {
             if (!url) {
-                const embed = new RichEmbed()
-                    .setColor('#FF0000')
-                    .setDescription("Specify URL of the song");
-                message.channel.send(embed);
+                // const embed = new RichEmbed()
+                //     .setColor('#FF0000')
+                //     .setDescription("Specify URL of the song");
+                // message.channel.send(embed);
+
+                sendError(message, "Specify URL of the song");
             }
             else {
                 YoutubeDL.getInfo(url, ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames'], null, (err, info) => {
                     if (info){
                         if (servers[message.guild.id]) {
                             servers[message.guild.id].queue.push(info);
-                            const embed = new RichEmbed()
-                                .setColor('#00FF00')
-                                .setDescription("Added **" + info.title + "** to the queue");
-                            message.channel.send(embed);
+                            // const embed = new RichEmbed()
+                            //     .setColor('#00FF00')
+                            //     .setDescription("Added **" + info.title + "** to the queue");
+                            // message.channel.send(embed);
+
+                            sendOk(message, "Added **" + info.title + "** to the queue");
                         }
                         else {
                             servers[message.guild.id] = {queue: []};
@@ -87,19 +97,23 @@ class PlayCommand extends commando.Command {
                         }
                     }
                     else {
-                        const embed = new RichEmbed()
-                            .setColor('#FF0000')
-                            .setDescription("Error while adding song to queue, try again or specify different song");
-                        message.channel.send(embed);
+                        // const embed = new RichEmbed()
+                        //     .setColor('#FF0000')
+                        //     .setDescription("Error while adding song to queue, try again or specify different song");
+                        // message.channel.send(embed);
+
+                        sendError(message, "Error while adding song to queue, try again or specify different song");
                     }
                 });
             }
         }
         else {
-            const embed = new RichEmbed()
-                .setColor('#FF0000')
-                .setDescription("Bot must be in a voice channel");
-            message.channel.send(embed);
+            // const embed = new RichEmbed()
+            //     .setColor('#FF0000')
+            //     .setDescription("Bot must be in a voice channel");
+            // message.channel.send(embed);
+
+            sendError(message, "Bot must be in a voice channel");
         }
 
     }
