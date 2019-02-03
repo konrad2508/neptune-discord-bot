@@ -17,10 +17,7 @@ class ListCommand extends commando.Command {
     async run(message) {
         Reaction.find({}, 'name', (err, reactions) => {
             if (err) {
-                const embed = new RichEmbed()
-                    .setColor('#FF0000')
-                    .setDescription(err.content);
-                message.channel.send(embed);
+                console.log(err.content);
             }
             else if (reactions.length) {
                 let names = [];

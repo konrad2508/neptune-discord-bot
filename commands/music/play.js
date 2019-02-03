@@ -2,7 +2,7 @@ const commando = require('discord.js-commando');
 const {RichEmbed} = require('discord.js');
 const YTDL = require('ytdl-core');
 const YoutubeDL = require('youtube-dl');
-const {sendOk, sendError} = require('utils.js');
+const {sendOk, sendError} = require('../../utils.js');
 
 
 class PlayCommand extends commando.Command {
@@ -49,7 +49,6 @@ class PlayCommand extends commando.Command {
                 }
                 else {
                     servers[message.guild.id] = undefined;
-
                     sendOk(message, "Queue ended");
                 }
             }
@@ -69,7 +68,6 @@ class PlayCommand extends commando.Command {
                     if (info){
                         if (servers[message.guild.id]) {
                             servers[message.guild.id].queue.push(info);
-
                             sendOk(message, "Added **" + info.title + "** to the queue");
                         }
                         else {
@@ -79,7 +77,6 @@ class PlayCommand extends commando.Command {
                         }
                     }
                     else {
-
                         sendError(message, "Error while adding song to queue, try again or specify different song");
                     }
                 });

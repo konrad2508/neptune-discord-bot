@@ -1,5 +1,6 @@
 const commando = require('discord.js-commando');
 const {RichEmbed} = require('discord.js');
+const {sendOk} = require('../../utils.js');
 
 class LeaveCommand extends commando.Command {
 
@@ -23,10 +24,12 @@ class LeaveCommand extends commando.Command {
                 servers[message.guild.id] = null;
             }
 
-            const embed = new RichEmbed()
-                .setColor('#00FF00')
-                .setDescription("Left voice channel");
-            message.channel.send(embed);
+            // const embed = new RichEmbed()
+            //     .setColor('#00FF00')
+            //     .setDescription("Left voice channel");
+            // message.channel.send(embed);
+
+            sendOk(message, "Left voice channel");
         }
 
     }
