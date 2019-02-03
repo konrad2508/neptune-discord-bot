@@ -1,11 +1,8 @@
 const commando = require('discord.js-commando');
-const {RichEmbed} = require('discord.js');
 const YTDL = require('ytdl-core');
 const YoutubeDL = require('youtube-dl');
 const {sendOk, sendError} = require('../../utils.js');
 const valid = require('valid-url');
-const http = require('http');
-const JSSoup = require('jssoup').default;
 
 class PlayCommand extends commando.Command {
     constructor(client) {
@@ -34,7 +31,6 @@ class PlayCommand extends commando.Command {
 
         let info = server.queue[0];
 
-        console.log(info.url);
         console.log(YTDL.validateURL(info.url));
 
         let video = YTDL.validateURL(info.url)
@@ -69,23 +65,11 @@ class PlayCommand extends commando.Command {
             }
             else {
                 if (!valid.isWebUri(url)){
-                    // url = 'ytsearch1:' + url
-                    await http.get({host: 'www.youtube.com', port: 80, path: '/results?search_query=' + url}, (res) => {
-                        let body = '';
-                        res.on('data', function(chunk) {
-                            body += chunk;
-                        });
-                        res.on('end', function() {
-                            console.log(body);
-                        });
-                        let soup = new JSSoup(res);
-                        console.log(soup.find('yt-uix-tile-link'));
-                    })
+                    url = 'ytsearch1:' + url
                 }
 
                 YoutubeDL.getInfo(url, ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames'], null, (err, info) => {
                     if (info){
-
                         if (YTDL.validateURL(url)){
                             info.url = url;
                         }
