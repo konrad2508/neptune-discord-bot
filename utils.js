@@ -1,4 +1,4 @@
-import {RichEmbed} from "discord.js";
+const {RichEmbed} = require('discord.js');
 
 function sendOk(message, text){
     const embed = new RichEmbed()
