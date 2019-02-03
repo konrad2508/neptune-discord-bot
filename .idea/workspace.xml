@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8823d205-44c9-4413-948d-0c9f33b7a26a" name="Default Changelist" comment="Add">
-      <change beforePath="$PROJECT_DIR$/commands/music/play.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/music/play.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/music/skip.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/music/skip.js" afterDir="false" />
-    </list>
+    <list default="true" id="8823d205-44c9-4413-948d-0c9f33b7a26a" name="Default Changelist" comment="Add" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -144,7 +141,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/commands/music/play.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="292">
+            <state relative-caret-position="190">
               <caret line="38" column="132" lean-forward="true" selection-start-line="38" selection-start-column="132" selection-end-line="38" selection-end-column="132" />
             </state>
           </provider>
@@ -379,7 +376,7 @@
       <workItem from="1549069610207" duration="2903000" />
       <workItem from="1549115281791" duration="8682000" />
       <workItem from="1549159694414" duration="2422000" />
-      <workItem from="1549194330939" duration="5663000" />
+      <workItem from="1549194330939" duration="5921000" />
     </task>
     <task id="LOCAL-00001" summary="polishing">
       <created>1537888319205</created>
@@ -392,7 +389,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="84368000" />
+    <option name="totallyTimeSpent" value="84626000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -614,7 +611,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/commands/music/play.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
+        <state relative-caret-position="190">
           <caret line="38" column="132" lean-forward="true" selection-start-line="38" selection-start-column="132" selection-end-line="38" selection-end-column="132" />
         </state>
       </provider>
