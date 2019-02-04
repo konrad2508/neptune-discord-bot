@@ -5,7 +5,7 @@ class HelpCommand extends commando.Command {
     constructor(client) {
         super(client, {
             name: 'help',
-            group: 'reactions',
+            group: 'core',
             memberName: 'help',
             description: 'Returns help for the bot',
             aliases: ['h']
@@ -21,7 +21,8 @@ class HelpCommand extends commando.Command {
             .addField("```!list```", "Lists available reactions.")
             .addField("```!join```", "Joins your voice channel.")
             .addField("```!leave```", "Leaves voice channel.")
-            .addField("```!play URL```", "Plays song from **URL**")
+            .addField("```!play <URL | Query>```", "Plays song from **URL** or plays first song from YouTube based on **Query**")
+            .addField("```!nowplaying```", "Shows information about the currently playing song")
             .addField("```!skip```", "Skips currently playing song.");
         message.channel.send(embed);
 

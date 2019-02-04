@@ -33,6 +33,7 @@ const client = new commando.Client({
 
 client.registry.registerGroup('reactions', 'Reactions')
     .registerGroup('music', 'Music')
+    .registerGroup('core', 'Core')
     .registerDefaultTypes()
     .registerCommandsIn(__dirname + "/commands");
 

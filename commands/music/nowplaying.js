@@ -23,7 +23,7 @@ class NowPlayingCommand extends commando.Command {
                 const embed = new RichEmbed()
                     .setTitle(`Now playing: ${title}`)
                     .setColor('#00FF00')
-                    .setDescription(`Current time: \`\`\`${songTime(time, length)}\`\`\``);
+                    .setDescription(`Current time: \`${songTime(time, length)}\``);
                 message.channel.send(embed);
             }
             else {
