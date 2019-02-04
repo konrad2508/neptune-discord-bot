@@ -1,3 +1,6 @@
+const commando = require('discord.js-commando');
+const {sendOk, sendError} = require('../../utils.js');
+
 class NowPlayingCommand extends commando.Command {
     constructor(client) {
         super(client, {

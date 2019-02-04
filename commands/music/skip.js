@@ -1,5 +1,4 @@
 const commando = require('discord.js-commando');
-const {RichEmbed} = require('discord.js');
 const {sendOk, sendError} = require('../../utils.js');
 
 class SkipCommand extends commando.Command {

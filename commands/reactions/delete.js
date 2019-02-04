@@ -1,5 +1,4 @@
 const commando = require('discord.js-commando');
-const {RichEmbed} = require('discord.js');
 const Reaction = require('../../Data/Schema/reaction.js');
 const {sendOk, sendError} = require('../../utils.js');
 

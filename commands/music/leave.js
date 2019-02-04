@@ -1,5 +1,4 @@
 const commando = require('discord.js-commando');
-const {RichEmbed} = require('discord.js');
 const {sendOk} = require('../../utils.js');
 
 class LeaveCommand extends commando.Command {
