@@ -1,5 +1,6 @@
 const commando = require('discord.js-commando');
 const {sendError, songTime} = require('../../utils.js');
+const {RichEmbed} = require('discord.js');
 
 class NowPlayingCommand extends commando.Command {
     constructor(client) {
