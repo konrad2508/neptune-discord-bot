@@ -68,6 +68,9 @@ class PlayCommand extends commando.Command {
 
                 YoutubeDL.getInfo(url, ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames'], null, (err, info) => {
                     if (info){
+
+                        console.log(info);
+
                         if (YTDL.validateURL(url)){
                             info.url = url;
                         }
