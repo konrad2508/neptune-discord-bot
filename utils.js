@@ -12,9 +12,11 @@ function songTime(curr, max) {
     if (currMinutes > 59) {
         currHours = Math.floor(currMinutes / 60);
         currHours = (currHours >= 10) ? currHours : "0" + currHours;
+
         currMinutes = currMinutes - (currHours * 60);
-        currMinutes = (currMinutes >= 10) ? currMinutes : "0" + currMinutes;
     }
+
+    currMinutes = (currMinutes >= 10) ? currMinutes : "0" + currMinutes;
 
     currSeconds = Math.floor(currSeconds % 60);
     currSeconds = (currSeconds >= 10) ? currSeconds : "0" + currSeconds;
