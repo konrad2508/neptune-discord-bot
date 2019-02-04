@@ -1,5 +1,5 @@
 const commando = require('discord.js-commando');
-const {sendOk, sendError} = require('../../utils.js');
+const {sendError, songTime} = require('../../utils.js');
 
 class NowPlayingCommand extends commando.Command {
     constructor(client) {
@@ -16,7 +16,14 @@ class NowPlayingCommand extends commando.Command {
         if (message.guild.voiceConnection) {
             if (servers[message.guild.id]) {
                 let time = servers[message.guild.id].dispatcher.time;
-                sendOk(message, `Playing for ${time}`);
+                let title = servers[message.guild.id].title;
+                let length = servers[message.guild.id].nowplaying.duration;
+
+                const embed = new RichEmbed()
+                    .setTitle(`Now playing: ${title}`)
+                    .setColor('#00FF00')
+                    .setDescription(`Current time: ${songTime(time, length)}`);
+                message.channel.send(embed);
             }
             else {
                 sendError(message, "No song is currently playing");

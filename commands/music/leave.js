@@ -20,6 +20,7 @@ class LeaveCommand extends commando.Command {
 
             if (servers[message.guild.id]){
                 servers[message.guild.id].queue = null;
+                servers[message.guild.id].nowplaying = null;
                 servers[message.guild.id] = null;
             }
 

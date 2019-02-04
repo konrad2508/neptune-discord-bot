@@ -31,14 +31,13 @@ class PlayCommand extends commando.Command {
 
         let info = server.queue[0];
 
-        console.log(info.duration);
-
         let video = YTDL.validateURL(info.url)
             ? YTDL(info.url, {filter: "audioonly", quality: "highestaudio"})
             : YoutubeDL(info.url, ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames'], undefined);
 
 
         server.dispatcher = connection.playStream(video);
+        server.nowplaying = info;
 
         sendOk(message, "Playing **" + info.title + "**");
 
