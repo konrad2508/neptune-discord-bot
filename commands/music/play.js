@@ -31,6 +31,8 @@ class PlayCommand extends commando.Command {
 
         let info = server.queue[0];
 
+        console.log(YTDL.validateURL(info.url));
+
         let video = YTDL.validateURL(info.url)
             ? YTDL(info.url, {filter: "audioonly", quality: "highestaudio"})
             : YoutubeDL(info.url, ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames'], undefined);
@@ -68,8 +70,9 @@ class PlayCommand extends commando.Command {
 
                 YoutubeDL.getInfo(url, ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames'], null, (err, info) => {
                     if (info){
-
-                        console.log(info);
+                        console.log(info.webpage_url);
+                        console.log('---------------------');
+                        console.log(info.thumbnails);
 
                         // if (YTDL.validateURL(url)){
                         //     info.url = url;
