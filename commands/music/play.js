@@ -71,17 +71,19 @@ class PlayCommand extends commando.Command {
 
                         console.log(info);
 
-                        if (YTDL.validateURL(url)){
-                            info.url = url;
-                        }
+                        // if (YTDL.validateURL(url)){
+                        //     info.url = url;
+                        // }
+
+                        let vid = {url: info.thumbnails[0].webpage_url, title: info.title, duration: info._duration_hms};
 
                         if (servers[message.guild.id]) {
-                            servers[message.guild.id].queue.push(info);
+                            servers[message.guild.id].queue.push(vid);
                             sendOk(message, "Added **" + info.title + "** to the queue");
                         }
                         else {
                             servers[message.guild.id] = {queue: []};
-                            servers[message.guild.id].queue.push(info);
+                            servers[message.guild.id].queue.push(vid);
                             this._playFunc(message);
                         }
                     }
