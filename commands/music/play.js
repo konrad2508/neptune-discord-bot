@@ -70,15 +70,15 @@ class PlayCommand extends commando.Command {
 
                 YoutubeDL.getInfo(url, ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames'], null, (err, info) => {
                     if (info){
-                        console.log(info.webpage_url);
-                        console.log('---------------------');
-                        console.log(info.thumbnails);
+                        // console.log(info.webpage_url);
+                        // console.log('---------------------');
+                        // console.log(info.thumbnails);
 
                         // if (YTDL.validateURL(url)){
                         //     info.url = url;
                         // }
 
-                        let vid = {url: info.thumbnails[0].webpage_url, title: info.title, duration: info._duration_hms};
+                        let vid = {url: info.webpage_url, title: info.title, duration: info._duration_hms};
 
                         if (servers[message.guild.id]) {
                             servers[message.guild.id].queue.push(vid);
