@@ -29,19 +29,30 @@ class PlayCommand extends commando.Command {
         let server = servers[message.guild.id];
         let connection = connections[message.guild.id];
 
-        let info = server.queue[0];
+        let info = undefined;
 
-        let video = YTDL.validateURL(info.url)
-            ? YTDL(info.url, {filter: "audioonly", quality: "highestaudio"})
-            : YoutubeDL(info.url, ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames'], undefined);
+        if (nowplaying.loop){
+            info = nowplaying;
+        } else {
+            info = server.queue[0];
 
+            server.queue.shift();
+            server.nowplaying = info;
+        }
+
+        let video = info.video;
+
+        if (!video){
+            video = YTDL.validateURL(info.url)
+                ? YTDL(info.url, {filter: "audioonly", quality: "highestaudio"})
+                : YoutubeDL(info.url, ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames'], undefined);
+
+            info.video = video;
+        }
 
         server.dispatcher = connection.playStream(video);
-        server.nowplaying = info;
 
-        sendOk(message, "Playing **" + info.title + "**");
-
-        server.queue.shift();
+        if (!nowplaying.loop) sendOk(message, "Playing **" + info.title + "**");
 
         server.dispatcher.on("end", () => {
             if (server.queue){
@@ -69,7 +80,13 @@ class PlayCommand extends commando.Command {
 
                 YoutubeDL.getInfo(url, ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames'], null, (err, info) => {
                     if (info){
-                        let vid = {url: info.webpage_url, title: info.title, duration: info._duration_hms};
+                        let vid =   {
+                                        url: info.webpage_url,
+                                        title: info.title,
+                                        duration: info._duration_hms,
+                                        loop: false,
+                                        video: undefined
+                                    };
 
                         if (servers[message.guild.id]) {
                             servers[message.guild.id].queue.push(vid);
