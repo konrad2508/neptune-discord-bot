@@ -17,7 +17,7 @@ class LoopCommand extends commando.Command {
             if (server) {
                 if (server.nowplaying.loop){
                     server.nowplaying.loop = false;
-                    sendOk(message, "**Ending looping of the currently playing song**");
+                    sendOk(message, "**Unlooping currently playing song**");
                 } else{
                     server.nowplaying.loop = true;
                     sendOk(message, "**Looping currently playing song**");
