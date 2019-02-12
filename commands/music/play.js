@@ -31,7 +31,7 @@ class PlayCommand extends commando.Command {
 
         let info = undefined;
 
-        if (server.nowplaying.loop){
+        if (server.nowplaying && server.nowplaying.loop){
             info = server.nowplaying;
         } else {
             info = server.queue[0];
