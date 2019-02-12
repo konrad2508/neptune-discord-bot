@@ -1,6 +1,5 @@
 const commando = require('discord.js-commando');
 const {sendOk, sendError, songTime} = require('../../utils.js');
-const {RichEmbed} = require('discord.js');
 
 class NowPlayingCommand extends commando.Command {
     constructor(client) {
@@ -27,7 +26,7 @@ class NowPlayingCommand extends commando.Command {
                     description += '\nLooped'
                 }
 
-                sendOk(message, `Now playing: [${title}](${url})` + description);
+                sendOk(message, `**Now playing: [${title}](${url})` + description + '**');
             }
             else {
                 sendError(message, "No song is currently playing");

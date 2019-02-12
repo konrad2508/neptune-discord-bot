@@ -46,7 +46,7 @@ class PlayCommand extends commando.Command {
 
         server.dispatcher = connection.playStream(video);
 
-        if (!server.nowplaying.loop) sendOk(message, `Playing **[${info.title}](${info.url})**`);
+        if (!server.nowplaying.loop) sendOk(message, `**Playing [${info.title}](${info.url})**`);
 
         server.dispatcher.on("end", () => {
             if (server.queue){
