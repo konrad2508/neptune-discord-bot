@@ -32,6 +32,7 @@ class PlayCommand extends commando.Command {
         let info = undefined;
 
         if (server.nowplaying && server.nowplaying.loop){
+            console.log('YOOOO');
             info = server.nowplaying;
         } else {
             info = server.queue[0];
@@ -57,6 +58,7 @@ class PlayCommand extends commando.Command {
         server.dispatcher.on("end", () => {
             if (server.queue){
                 if (server.queue[0] || server.nowplaying.loop) {
+                    console.log('hell yeah');
                     this._playFunc(message);
                 }
                 else {
