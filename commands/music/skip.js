@@ -13,9 +13,13 @@ class SkipCommand extends commando.Command {
 
     async run(message) {
         if (message.guild.voiceConnection) {
-            if (servers[message.guild.id]) {
+            let server = servers[message.guild.id];
+            if (server) {
+                if (server.nowplaying.loop){
+                    server.nowplaying.loop = false;
+                }
                 sendOk(message, "Skipped currently playing song");
-                servers[message.guild.id].dispatcher.end();
+                server.dispatcher.end();
             }
             else {
                 sendError(message, "No song is currently playing");

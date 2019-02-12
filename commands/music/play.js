@@ -32,7 +32,6 @@ class PlayCommand extends commando.Command {
         let info = undefined;
 
         if (server.nowplaying && server.nowplaying.loop){
-            console.log('YOOOO');
             info = server.nowplaying;
         } else {
             info = server.queue[0];
@@ -40,16 +39,6 @@ class PlayCommand extends commando.Command {
             server.queue.shift();
             server.nowplaying = info;
         }
-
-        // let video = info.video;
-        //
-        // if (!video){
-        //     video = YTDL.validateURL(info.url)
-        //         ? YTDL(info.url, {filter: "audioonly", quality: "highestaudio"})
-        //         : YoutubeDL(info.url, ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames'], undefined);
-        //
-        //     server.nowplaying.video = video;
-        // }
 
         let video = YTDL.validateURL(info.url)
                 ? YTDL(info.url, {filter: "audioonly", quality: "highestaudio"})
@@ -62,7 +51,6 @@ class PlayCommand extends commando.Command {
         server.dispatcher.on("end", () => {
             if (server.queue){
                 if (server.queue[0] || server.nowplaying.loop) {
-                    console.log('hell yeah');
                     this._playFunc(message);
                 }
                 else {
