@@ -20,6 +20,7 @@ class NowPlayingCommand extends commando.Command {
                 let time = server.dispatcher.time;
                 let title = server.nowplaying.title;
                 let length = server.nowplaying.duration;
+                let url = server.nowplaying.url;
                 let description = `Current time: \`${songTime(time, length)}\``;
 
                 if (server.nowplaying.loop){
@@ -27,7 +28,7 @@ class NowPlayingCommand extends commando.Command {
                 }
 
                 const embed = new RichEmbed()
-                    .setTitle(`Now playing: ${title}`)
+                    .setTitle(`Now playing: [${title}](${url})`)
                     .setColor('#00FF00')
                     .setDescription(description);
                 message.channel.send(embed);
