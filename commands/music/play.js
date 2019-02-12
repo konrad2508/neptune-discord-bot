@@ -56,7 +56,7 @@ class PlayCommand extends commando.Command {
 
         server.dispatcher.on("end", () => {
             if (server.queue){
-                if (server.queue[0]) {
+                if (server.queue[0] || server.nowplaying.loop) {
                     this._playFunc(message);
                 }
                 else {
