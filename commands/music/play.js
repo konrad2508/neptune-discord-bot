@@ -41,15 +41,19 @@ class PlayCommand extends commando.Command {
             server.nowplaying = info;
         }
 
-        let video = info.video;
+        // let video = info.video;
+        //
+        // if (!video){
+        //     video = YTDL.validateURL(info.url)
+        //         ? YTDL(info.url, {filter: "audioonly", quality: "highestaudio"})
+        //         : YoutubeDL(info.url, ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames'], undefined);
+        //
+        //     server.nowplaying.video = video;
+        // }
 
-        if (!video){
-            video = YTDL.validateURL(info.url)
+        let video = YTDL.validateURL(info.url)
                 ? YTDL(info.url, {filter: "audioonly", quality: "highestaudio"})
                 : YoutubeDL(info.url, ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames'], undefined);
-
-            server.nowplaying.video = video;
-        }
 
         server.dispatcher = connection.playStream(video);
 
