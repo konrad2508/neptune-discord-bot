@@ -19,7 +19,7 @@ class ListCommand extends commando.Command {
         Reaction.find({}, 'name', (err, reactions) => {
             if (err) {
                 console.log(err.content);
-                sendError(message, "Something went wrong, try again");
+                sendError(message, "**Something went wrong, try again**");
             }
             else if (reactions.length) {
                 let names = [];

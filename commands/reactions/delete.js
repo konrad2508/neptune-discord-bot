@@ -27,17 +27,17 @@ class DeleteCommand extends commando.Command {
         name = name.split(" ")[0];
 
         if (message.author.id !== process.env.ADMIN_ID) {
-            sendError(message, "You do not have access to this command");
+            sendError(message, "**You do not have access to this command**");
         }
         else {
             if (!name) {
-                sendError(message, "Specify reaction name to delete");
+                sendError(message, "**Specify reaction name to delete**");
             }
             else {
                 Reaction.find({'name': name}, 'url', (err, reaction) => {
                     if (err) {
                         console.log(err.content);
-                        sendError(message, "Something went wrong, the reaction was not deleted");
+                        sendError(message, "**Something went wrong, the reaction was not deleted**");
                     }
                     else if (reaction.length) {
                         Reaction.findOneAndDelete({'name': name}, (err) => {
@@ -45,12 +45,12 @@ class DeleteCommand extends commando.Command {
                                 console.log(err.content)
                             }
                             else {
-                                sendOk(message, "Reaction successfully deleted");
+                                sendOk(message, "**Reaction successfully deleted**");
                             }
                         });
                     }
                     else {
-                        sendError(message, "Reaction does not exist");
+                        sendError(message, "**Reaction does not exist**");
                     }
                 });
             }

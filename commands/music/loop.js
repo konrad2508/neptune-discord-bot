@@ -17,19 +17,19 @@ class LoopCommand extends commando.Command {
             if (server) {
                 if (server.nowplaying.loop){
                     server.nowplaying.loop = false;
-                    sendOk(message, "Ending looping of the currently playing song");
+                    sendOk(message, "**Ending looping of the currently playing song**");
                 } else{
                     server.nowplaying.loop = true;
-                    sendOk(message, "Looping currently playing song");
+                    sendOk(message, "**Looping currently playing song**");
                 }
 
             }
             else {
-                sendError(message, "No song is currently playing");
+                sendError(message, "**No song is currently playing**");
             }
         }
         else {
-            sendError(message, "Bot must be in a voice channel");
+            sendError(message, "**Bot must be in a voice channel**");
         }
 
     }

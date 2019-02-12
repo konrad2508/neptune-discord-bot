@@ -55,7 +55,7 @@ class PlayCommand extends commando.Command {
                 }
                 else {
                     servers[message.guild.id] = undefined;
-                    sendOk(message, "Queue ended");
+                    sendOk(message, "**Queue ended**");
                 }
             }
         });
@@ -65,7 +65,7 @@ class PlayCommand extends commando.Command {
     async run(message, {url}) {
         if (message.guild.voiceConnection) {
             if (!url) {
-                sendError(message, "Specify URL of the song");
+                sendError(message, "**Specify URL of the song**");
             }
             else {
                 if (!valid.isWebUri(url)){
@@ -84,7 +84,7 @@ class PlayCommand extends commando.Command {
 
                         if (servers[message.guild.id]) {
                             servers[message.guild.id].queue.push(vid);
-                            sendOk(message, "Added **" + vid.title + "** to the queue");
+                            sendOk(message, `**Added [${vid.title}](${vid.url}) to the queue**`);
                         }
                         else {
                             servers[message.guild.id] = {queue: []};
@@ -93,13 +93,13 @@ class PlayCommand extends commando.Command {
                         }
                     }
                     else {
-                        sendError(message, "Error while adding song to queue, try again or specify different song");
+                        sendError(message, "**Error while adding song to queue, try again or specify different song**");
                     }
                 });
             }
         }
         else {
-            sendError(message, "Bot must be in a voice channel");
+            sendError(message, "**Bot must be in a voice channel**");
         }
 
     }

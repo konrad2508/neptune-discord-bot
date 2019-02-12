@@ -29,11 +29,11 @@ class NowPlayingCommand extends commando.Command {
                 sendOk(message, `**Now playing: [${title}](${url})` + description + '**');
             }
             else {
-                sendError(message, "No song is currently playing");
+                sendError(message, "**No song is currently playing**");
             }
         }
         else {
-            sendError(message, "Bot must be in a voice channel");
+            sendError(message, "**Bot must be in a voice channel**");
         }
 
     }

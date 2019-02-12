@@ -27,13 +27,13 @@ class ReactCommand extends commando.Command {
         name = name.split(" ")[0];
 
         if (!name) {
-            sendError(message, "Specify reaction name");
+            sendError(message, "**Specify reaction name**");
         }
         else {
             Reaction.find({'name': name}, 'name url', (err, response) => {
                 if (err) {
                     console.log(err.content);
-                    sendError("Something went wrong, try again or specify a different reaction");
+                    sendError("**Something went wrong, try again or specify a different reaction**");
                 }
                 else if (response.length) {
                     const embed = new RichEmbed()
@@ -44,7 +44,7 @@ class ReactCommand extends commando.Command {
                     message.delete(100);
                 }
                 else {
-                    sendError(message, "Reaction does not exist");
+                    sendError(message, "**Reaction does not exist**");
                 }
             });
         }

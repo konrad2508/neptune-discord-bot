@@ -18,15 +18,15 @@ class SkipCommand extends commando.Command {
                 if (server.nowplaying.loop){
                     server.nowplaying.loop = false;
                 }
-                sendOk(message, "Skipped currently playing song");
+                sendOk(message, "**Skipped currently playing song**");
                 server.dispatcher.end();
             }
             else {
-                sendError(message, "No song is currently playing");
+                sendError(message, "**No song is currently playing**");
             }
         }
         else {
-            sendError(message, "Bot must be in a voice channel");
+            sendError(message, "**Bot must be in a voice channel**");
         }
 
     }

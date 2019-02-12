@@ -16,13 +16,13 @@ class JoinCommand extends commando.Command {
             if (!message.guild.voiceConnection) {
                 message.member.voiceChannel.join().then((connection) => {
                     connections[message.guild.id] = connection;
-                    sendOk(message, "Joined voice channel");
+                    sendOk(message, "**Joined voice channel**");
 
                 });
             }
         }
         else {
-            sendError(message, "You must be in a voice channel");
+            sendError(message, "**You must be in a voice channel**");
         }
     }
 }

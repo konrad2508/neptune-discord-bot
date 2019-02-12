@@ -24,7 +24,7 @@ class LeaveCommand extends commando.Command {
                 servers[message.guild.id] = null;
             }
 
-            sendOk(message, "Left voice channel");
+            sendOk(message, "**Left voice channel**");
         }
 
     }
