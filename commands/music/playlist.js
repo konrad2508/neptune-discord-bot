@@ -47,21 +47,15 @@ class PlaylistCommand extends commando.Command {
                         const embed = new RichEmbed()
                             .setTitle('List of playlists')
                             .setColor('#00FF00')
-                            .setDescription(ret.join('\n'));
-                        message.channel.send(embed).then(msg => {
-                            msg.delete(20000);
-                        });
-                        message.delete(100);
+                            .setDescription(ret.map(el => el.name).join('\n'));
+                        message.channel.send(embed);
                     }
                     else {
                         const embed = new RichEmbed()
                             .setTitle('List of playlists')
                             .setColor('#00FF00')
                             .setDescription("No playlists added");
-                        message.channel.send(embed).then(msg => {
-                            msg.delete(20000);
-                        });
-                        message.delete(100);
+                        message.channel.send(embed);
                     }
                 });
             }
@@ -71,10 +65,10 @@ class PlaylistCommand extends commando.Command {
                         console.log(err.content);
                         sendError(message, "**Something went wrong, try again later**");
                     }
-                    else if (ret.length){
+                    else if (ret.songs.length){
                         let songList = [];
-                        for(let i = 0; i < ret.length; i++){
-                            let song = ret[i];
+                        for(let i = 0; i < ret.songs.length; i++){
+                            let song = ret.songs[i];
                             songList.push(`**${i+1}. [${song.name}](${song.url})**`)
                         }
                         sendOk(message, `**List of songs on playlist ${playlistName}**\n${songList.join('\n')}`);
