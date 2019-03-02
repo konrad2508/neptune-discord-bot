@@ -22,8 +22,12 @@ class NowPlayingCommand extends commando.Command {
                 let url = server.nowplaying.url;
                 let description = `\nCurrent time: \`${songTime(time, length)}\``;
 
+                if (server.nowplaying.playlist){
+                    description += `\nPlaylist: ${server.nowplaying.playlist}`;
+                }
+
                 if (server.nowplaying.loop){
-                    description += '\nLooped'
+                    description += '\nLooped';
                 }
 
                 sendOk(message, `**Now playing: [${title}](${url})` + description + '**');

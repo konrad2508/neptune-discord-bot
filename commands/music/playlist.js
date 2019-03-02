@@ -5,6 +5,7 @@ const {sendOk, sendError} = require('../../utils.js');
 const valid = require('valid-url');
 const YTDL = require('ytdl-core');
 const YoutubeDL = require('youtube-dl');
+const PlayCommand = require('play.js');
 
 class PlaylistCommand extends commando.Command {
     constructor(client) {
@@ -33,7 +34,36 @@ class PlaylistCommand extends commando.Command {
     async run(message, {command, args}) {
 
         if (command === 'play') {
+            if (message.guild.voiceConnection) {
+                let playlistName = args.split(' ')[0];
+                if (!playlistName){
+                    sendError(message, "**Specify name of the playlist**");
+                }
+                else {
+                    let server = servers[message.guild.id];
 
+                    if (server) {
+                        let connection = connections[message.guild.id];
+                        connection.dispatcher.end();
+                    }
+
+                    Playlist.findOne({name: playlistName}, 'songs', (err, ret) => {
+                        if (err){
+                            console.log(err.content);
+                            sendError(message, "**Something went wrong, try again later**");
+                        }
+                        else {
+                            servers[message.guild.id] = {queue: ret.songs};
+                            sendOk(message, `**Playing playlist ${playlistName}**`);
+                            PlayCommand._playFunc(message);
+                        }
+                    });
+
+                }
+            }
+            else {
+                sendError(message, "**Bot must be in a voice channel**");
+            }
         }
         else if (command === 'list') {
             let playlistName = args.split(' ')[0];
@@ -69,7 +99,7 @@ class PlaylistCommand extends commando.Command {
                         let songList = [];
                         for(let i = 0; i < ret.songs.length; i++){
                             let song = ret.songs[i];
-                            songList.push(`**${i+1}. [${song.name}](${song.url})**`)
+                            songList.push(`**${i+1}. [${song.title}](${song.url})**`)
                         }
                         sendOk(message, `**List of songs on playlist ${playlistName}**\n${songList.join('\n')}`);
                     }
@@ -137,14 +167,18 @@ class PlaylistCommand extends commando.Command {
                                 if (info) {
 
                                     let songInfo = {
-                                        name: info.title,
-                                        url: info.webpage_url
+                                        title: info.title,
+                                        url: info.webpage_url,
+                                        duration: info._duration_hms,
+                                        loop: false,
+                                        video: undefined,
+                                        playlist: playlistName
                                     };
 
                                     ret.songs.push(songInfo);
                                     ret.save((err) => {
                                         if (!err) {
-                                            sendOk(message, `**Added [${songInfo.name}](${songInfo.url}) to the playlist ${playlistName}**`);
+                                            sendOk(message, `**Added [${songInfo.title}](${songInfo.url}) to the playlist ${playlistName}**`);
                                         }
                                         else {
                                             console.log(err.content);
