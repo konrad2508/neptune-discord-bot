@@ -198,14 +198,14 @@ class PlaylistCommand extends commando.Command {
             }
         }
         else if (command === 'delete') {
-
+            sendError(message, "**Sorry, this function is not yet implemented**");
         }
         else if (command === 'remove') {
             if (message.author.id !== process.env.ADMIN_ID) {
                 sendError(message, "**You do not have access to this command**");
             }
             else {
-
+                sendError(message, "**Sorry, this function is not yet implemented**");
             }
         }
         else if (command === 'help') {
@@ -213,6 +213,7 @@ class PlaylistCommand extends commando.Command {
                 .setTitle('List of possible commands')
                 .setColor('#00FF00')
                 .addField('```!playlist list [PlaylistName]```', 'Lists available playlists. If **PlaylistName** is specified, lists songs on that playlist.')
+                .addField('```!playlist play <PlaylistName>```', 'Plays specified playlist.')
                 .addField('```!playlist new <Name>```', 'Creates a new playlist named **Name**.')
                 .addField('```!playlist add <PlaylistName> <URL | Query>```', 'Adds a song from **URL** or **Query** to **PlaylistName**.')
                 .addField('```!playlist delete <PlaylistName> <SongNumber>```', 'Removes song number **SongNumber** from the **PlaylistName**.');
