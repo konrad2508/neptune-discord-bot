@@ -41,7 +41,7 @@ class ListCommand extends commando.Command {
                 const embed = new RichEmbed()
                     .setTitle('List of commands')
                     .setColor('#00FF00')
-                    .setDescription("No reactions added");
+                    .setDescription("No reactions added!");
                 message.channel.send(embed).then(msg => {
                     msg.delete(10000);
                 });
