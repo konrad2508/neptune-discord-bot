@@ -5,7 +5,7 @@ const {sendOk, sendError} = require('../../utils.js');
 const valid = require('valid-url');
 const YTDL = require('ytdl-core');
 const YoutubeDL = require('youtube-dl');
-const PlayCommand = require('play.js');
+const PlayCommand = require('./play.js');
 
 class PlaylistCommand extends commando.Command {
     constructor(client) {
