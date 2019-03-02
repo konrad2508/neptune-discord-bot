@@ -1,6 +1,6 @@
 const commando = require('discord.js-commando');
 const {RichEmbed} = require('discord.js');
-const Reaction = require('../../Data/Schema/reaction.js');
+const Reaction = require('../../data/schema/reaction.js');
 const {sendError} = require('../../utils.js');
 
 class ListCommand extends commando.Command {
