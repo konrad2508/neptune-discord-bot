@@ -4,7 +4,6 @@
     <list default="true" id="8823d205-44c9-4413-948d-0c9f33b7a26a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/commands/music/playlist.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/music/playlist.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -93,14 +92,14 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gitignore" value="19" />
-          <entry key="js" value="9381" />
-          <entry key="txt" value="304" />
+          <entry key="js" value="10275" />
+          <entry key="txt" value="374" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JavaScript" value="9381" />
-          <entry key="PLAIN_TEXT" value="323" />
+          <entry key="JavaScript" value="10275" />
+          <entry key="PLAIN_TEXT" value="393" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -133,14 +132,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/commands/music/playlist.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="646">
-              <caret line="86" column="28" selection-start-line="86" selection-start-column="28" selection-end-line="86" selection-end-column="28" />
+            <state relative-caret-position="789">
+              <caret line="303" column="60" selection-start-line="303" selection-start-column="60" selection-end-line="303" selection-end-column="60" />
               <folding>
-                <element signature="e#2382#4392#0" />
-                <element signature="e#4430#5536#0" />
-                <element signature="e#5574#8268#0" />
-                <element signature="e#8309#8403#0" />
-                <element signature="e#8444#8733#0" />
+                <element signature="e#1099#2343#0" />
+                <element signature="e#2405#3663#0" />
               </folding>
             </state>
           </provider>
@@ -194,8 +190,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/commands/core/help.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="25" column="61" lean-forward="true" selection-start-line="25" selection-start-column="61" selection-end-line="25" selection-end-column="61" />
+            <state relative-caret-position="391">
+              <caret line="23" column="128" selection-start-line="23" selection-start-column="128" selection-end-line="23" selection-end-column="128" />
             </state>
           </provider>
         </entry>
@@ -271,8 +267,8 @@
         <option value="$PROJECT_DIR$/commands/music/nowplaying.js" />
         <option value="$PROJECT_DIR$/commands/music/skip.js" />
         <option value="$PROJECT_DIR$/commands/music/queue.js" />
-        <option value="$PROJECT_DIR$/commands/core/help.js" />
         <option value="$PROJECT_DIR$/utils.js" />
+        <option value="$PROJECT_DIR$/commands/core/help.js" />
         <option value="$PROJECT_DIR$/commands/music/playlist.js" />
       </list>
     </option>
@@ -426,7 +422,7 @@
       <workItem from="1551549357364" duration="1481000" />
       <workItem from="1551562609344" duration="3218000" />
       <workItem from="1551574383687" duration="3264000" />
-      <workItem from="1551610866919" duration="1025000" />
+      <workItem from="1551610866919" duration="4339000" />
     </task>
     <task id="LOCAL-00001" summary="polishing">
       <created>1537888319205</created>
@@ -526,11 +522,25 @@
       <option name="project" value="LOCAL" />
       <updated>1551577193883</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Implement playshuffle option in PlaylistCommand">
+      <created>1551612681258</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1551612681258</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Edit help message">
+      <created>1551612952863</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1551612952863</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="134408000" />
+    <option name="totallyTimeSpent" value="137722000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -632,6 +642,7 @@
     <MESSAGE value="Implement QueueCommand" />
     <MESSAGE value="Fix incorrect export" />
     <MESSAGE value="Fix queue message" />
+    <MESSAGE value="Implement playshuffle option in PlaylistCommand" />
     <MESSAGE value="Edit help message" />
     <option name="LAST_COMMIT_MESSAGE" value="Edit help message" />
   </component>
@@ -812,13 +823,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/commands/core/help.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="61" lean-forward="true" selection-start-line="25" selection-start-column="61" selection-end-line="25" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/utils.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1071">
@@ -826,16 +830,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/commands/core/help.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="128" selection-start-line="23" selection-start-column="128" selection-end-line="23" selection-end-column="128" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/commands/music/playlist.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="86" column="28" selection-start-line="86" selection-start-column="28" selection-end-line="86" selection-end-column="28" />
+        <state relative-caret-position="789">
+          <caret line="303" column="60" selection-start-line="303" selection-start-column="60" selection-end-line="303" selection-end-column="60" />
           <folding>
-            <element signature="e#2382#4392#0" />
-            <element signature="e#4430#5536#0" />
-            <element signature="e#5574#8268#0" />
-            <element signature="e#8309#8403#0" />
-            <element signature="e#8444#8733#0" />
+            <element signature="e#1099#2343#0" />
+            <element signature="e#2405#3663#0" />
           </folding>
         </state>
       </provider>

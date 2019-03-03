@@ -51,6 +51,9 @@ class PlaylistCommand extends commando.Command {
                             console.log(err.content);
                             sendError(message, "**Something went wrong, try again later**");
                         }
+                        else if (!ret){
+                            sendError(message, "**Playlist with that name does not exist**");
+                        }
                         else {
                             servers[message.guild.id] = {queue: ret.songs};
                             sendOk(message, `**Playing playlist ${playlistName}**`);
@@ -81,6 +84,9 @@ class PlaylistCommand extends commando.Command {
                         if (err) {
                             console.log(err.content);
                             sendError(message, "**Something went wrong, try again later**");
+                        }
+                        else if (!ret){
+                            sendError(message, "**Playlist with that name does not exist**");
                         }
                         else {
                             let playlistSongs = shuffle(ret.songs);
@@ -126,6 +132,9 @@ class PlaylistCommand extends commando.Command {
                     if (err) {
                         console.log(err.content);
                         sendError(message, "**Something went wrong, try again later**");
+                    }
+                    else if (!ret){
+                        sendError(message, "**Playlist with that name does not exist**");
                     }
                     else if (ret.songs.length) {
                         let songList = [];
@@ -233,7 +242,44 @@ class PlaylistCommand extends commando.Command {
         }
 
         else if (command === 'delete') {
-            sendError(message, "**Sorry, this function is not yet implemented**");
+            let playlistName = args.split(' ')[0];
+            let songID = args.split(' ')[1];
+
+            if (!playlistName) {
+                sendError(message, "**Specify name of the playlist**");
+            }
+            else if (!songID) {
+                sendError(message, "**Specify ID of the song to delete**");
+            }
+            else {
+                Playlist.findOne({name: playlistName}, (err, ret) => {
+                    if (err){
+                        console.log(err.content);
+                        sendError(message, "**Something went wrong, try again later**");
+                    }
+                    else if (!ret) {
+                        sendError(message, "**Playlist with that name does not exist**");
+                    }
+                    else {
+                        songID = parseInt(songID);
+                        if (!songID || songID < 0 || ret.songs.length <= songID){
+                            sendError(message, "**Specify a valid ID of the song to delete**");
+                        }
+                        else{
+                            let deleted = ret.songs.splice(songID, 1);
+                            ret.save((err) => {
+                                if (!err) {
+                                    sendOk(message, `**Removed [${deleted.title}](${deleted.url}) from the playlist ${playlistName}**`);
+                                }
+                                else {
+                                    console.log(err.content);
+                                    sendError(message, "**Error while deleting song from the playlist**");
+                                }
+                            });
+                        }
+                    }
+                });
+            }
         }
 
         else if (command === 'remove') {
@@ -241,7 +287,24 @@ class PlaylistCommand extends commando.Command {
                 sendError(message, "**You do not have access to this command**");
             }
             else {
-                sendError(message, "**Sorry, this function is not yet implemented**");
+                let playlistName = args.split(' ')[0];
+                if (!playlistName){
+                    sendError(message, "**Specify name of the playlist**");
+                }
+                else {
+                    Playlist.findOneAndDelete({name: playlistName}, (err, ret) => {
+                        if (err){
+                            console.log(err.content);
+                            sendError(message, "**Something went wrong, try again later**");
+                        }
+                        else if (!ret){
+                            sendError(message, "**Playlist with that name does not exist**");
+                        }
+                        else {
+                            sendOk(message, `**Successfully deleted playlist named ${ret.name}**`)
+                        }
+                    });
+                }
             }
         }
 
