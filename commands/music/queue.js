@@ -16,11 +16,11 @@ class QueueCommand extends commando.Command {
         if (message.guild.voiceConnection) {
             let server = servers[message.guild.id];
             if (server) {
-                let queueMessage = `**\n1. [${server.nowplaying.title}](${server.nowplaying.url}) (currently playing)`;
+                let queueMessage = `\n1. [${server.nowplaying.title}](${server.nowplaying.url}) (currently playing)`;
                 if (server.nowplaying.loop) queueMessage += ' (looped)';
 
                 for (let i = 0; i < server.queue.length; i++){
-                    queueMessage += `\n${i+2} [${server.queue[i].title}](${server.queue[i].url})`;
+                    queueMessage += `\n${i+2}. [${server.queue[i].title}](${server.queue[i].url})`;
                 }
 
                 queueMessage += '**';
