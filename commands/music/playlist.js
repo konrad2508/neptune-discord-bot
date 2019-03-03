@@ -208,7 +208,7 @@ class PlaylistCommand extends commando.Command {
                 sendError(message, "**Sorry, this function is not yet implemented**");
             }
         }
-        else if (command === 'help') {
+        else {
             const embed = new RichEmbed()
                 .setTitle('List of possible commands')
                 .setColor('#00FF00')
@@ -218,9 +218,6 @@ class PlaylistCommand extends commando.Command {
                 .addField('```!playlist add <PlaylistName> <URL | Query>```', 'Adds a song from **URL** or **Query** to **PlaylistName**.')
                 .addField('```!playlist delete <PlaylistName> <SongNumber>```', 'Removes song number **SongNumber** from the **PlaylistName**.');
             message.channel.send(embed);
-        }
-        else {
-            sendError(message, "**Invalid type of command**")
         }
     }
 }

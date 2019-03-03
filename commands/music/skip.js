@@ -7,7 +7,8 @@ class SkipCommand extends commando.Command {
             name: 'skip',
             group: 'music',
             memberName: 'skip',
-            description: 'Skips currently playing song'
+            description: 'Skips currently playing song',
+            aliases: ['s'],
         });
     }
 
