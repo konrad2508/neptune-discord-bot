@@ -38,4 +38,4 @@ class QueueCommand extends commando.Command {
     }
 }
 
-module.exports = SkipCommand;
+module.exports = QueueCommand;
