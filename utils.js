@@ -1,5 +1,21 @@
 const {RichEmbed} = require('discord.js');
 
+function shuffle(array){
+
+    let currIndex = array.length;
+
+    while(currIndex !== 0){
+        let randIndex = Math.floor(Math.random() * currIndex);
+        currIndex -= 1;
+
+        let temp = array[randIndex];
+        array[randIndex] = array[currIndex];
+        array[currIndex] = temp;
+    }
+
+    return array;
+}
+
 function songTime(curr, max) {
     let currSeconds = (curr / 1000).toFixed(0);
     let currMinutes = Math.floor(currSeconds / 60);
@@ -45,3 +61,4 @@ function sendError(message, text){
 module.exports.sendOk = sendOk;
 module.exports.sendError = sendError;
 module.exports.songTime = songTime;
+module.exports.shuffle = shuffle;

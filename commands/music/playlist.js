@@ -1,7 +1,7 @@
 const commando = require('discord.js-commando');
 const Playlist = require('../../data/schema/playlist.js');
 const {RichEmbed} = require('discord.js');
-const {sendOk, sendError} = require('../../utils.js');
+const {sendOk, sendError, shuffle} = require('../../utils.js');
 const valid = require('valid-url');
 const YoutubeDL = require('youtube-dl');
 const PlayCommand = require('./play.js');
@@ -35,7 +35,7 @@ class PlaylistCommand extends commando.Command {
         if (command === 'play') {
             if (message.guild.voiceConnection) {
                 let playlistName = args.split(' ')[0];
-                if (!playlistName){
+                if (!playlistName) {
                     sendError(message, "**Specify name of the playlist**");
                 }
                 else {
@@ -47,13 +47,45 @@ class PlaylistCommand extends commando.Command {
                     }
 
                     Playlist.findOne({name: playlistName}, 'songs', (err, ret) => {
-                        if (err){
+                        if (err) {
                             console.log(err.content);
                             sendError(message, "**Something went wrong, try again later**");
                         }
                         else {
                             servers[message.guild.id] = {queue: ret.songs};
                             sendOk(message, `**Playing playlist ${playlistName}**`);
+                            PlayCommand._playFunc(message);
+                        }
+                    });
+
+                }
+            }
+            else {
+                sendError(message, "**Bot must be in a voice channel**");
+            }
+        }
+
+        else if (command === 'playshuffle') {
+            if (message.guild.voiceConnection) {
+                let playlistName = args.split(' ')[0];
+                if (!playlistName) {
+                    sendError(message, "**Specify name of the playlist**");
+                }
+                else {
+                    let server = servers[message.guild.id];
+                    let connection = connections[message.guild.id];
+
+                    if (server) connection.dispatcher.end();
+
+                    Playlist.findOne({name: playlistName}, 'songs', (err, ret) => {
+                        if (err) {
+                            console.log(err.content);
+                            sendError(message, "**Something went wrong, try again later**");
+                        }
+                        else {
+                            let playlistSongs = shuffle(ret.songs);
+                            servers[message.guild.id] = {queue: playlistSongs};
+                            sendOk(message, `**Playing shuffled playlist ${playlistName}**`);
                             PlayCommand._playFunc(message);
                         }
                     });
@@ -95,11 +127,11 @@ class PlaylistCommand extends commando.Command {
                         console.log(err.content);
                         sendError(message, "**Something went wrong, try again later**");
                     }
-                    else if (ret.songs.length){
+                    else if (ret.songs.length) {
                         let songList = [];
-                        for(let i = 0; i < ret.songs.length; i++){
+                        for (let i = 0; i < ret.songs.length; i++) {
                             let song = ret.songs[i];
-                            songList.push(`**${i+1}. [${song.title}](${song.url})**`)
+                            songList.push(`**${i + 1}. [${song.title}](${song.url})**`)
                         }
                         sendOk(message, `**List of songs on playlist ${playlistName}**\n${songList.join('\n')}`);
                     }
