@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8823d205-44c9-4413-948d-0c9f33b7a26a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/commands/music/playlist.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/music/playlist.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -92,13 +91,13 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gitignore" value="19" />
-          <entry key="js" value="10344" />
+          <entry key="js" value="10371" />
           <entry key="txt" value="463" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JavaScript" value="10344" />
+          <entry key="JavaScript" value="10371" />
           <entry key="PLAIN_TEXT" value="482" />
         </counts>
       </usages-collector>
@@ -132,8 +131,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/commands/music/playlist.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="585">
-              <caret line="269" column="49" lean-forward="true" selection-start-line="269" selection-start-column="49" selection-end-line="269" selection-end-column="49" />
+            <state relative-caret-position="500">
+              <caret line="264" column="44" selection-start-line="264" selection-start-column="44" selection-end-line="264" selection-end-column="44" />
               <folding>
                 <element signature="e#1099#2343#0" />
                 <element signature="e#2405#3663#0" />
@@ -422,7 +421,7 @@
       <workItem from="1551549357364" duration="1481000" />
       <workItem from="1551562609344" duration="3218000" />
       <workItem from="1551574383687" duration="3264000" />
-      <workItem from="1551610866919" duration="4902000" />
+      <workItem from="1551610866919" duration="5251000" />
     </task>
     <task id="LOCAL-00001" summary="polishing">
       <created>1537888319205</created>
@@ -550,11 +549,18 @@
       <option name="project" value="LOCAL" />
       <updated>1551616167581</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Fix delete method">
+      <created>1551616460041</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1551616460041</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="138285000" />
+    <option name="totallyTimeSpent" value="138634000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -855,8 +861,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/commands/music/playlist.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="585">
-          <caret line="269" column="49" lean-forward="true" selection-start-line="269" selection-start-column="49" selection-end-line="269" selection-end-column="49" />
+        <state relative-caret-position="500">
+          <caret line="264" column="44" selection-start-line="264" selection-start-column="44" selection-end-line="264" selection-end-column="44" />
           <folding>
             <element signature="e#1099#2343#0" />
             <element signature="e#2405#3663#0" />
