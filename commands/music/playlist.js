@@ -3,7 +3,6 @@ const Playlist = require('../../data/schema/playlist.js');
 const {RichEmbed} = require('discord.js');
 const {sendOk, sendError} = require('../../utils.js');
 const valid = require('valid-url');
-const YTDL = require('ytdl-core');
 const YoutubeDL = require('youtube-dl');
 const PlayCommand = require('./play.js');
 
@@ -65,6 +64,7 @@ class PlaylistCommand extends commando.Command {
                 sendError(message, "**Bot must be in a voice channel**");
             }
         }
+
         else if (command === 'list') {
             let playlistName = args.split(' ')[0];
             if (!playlistName) {
@@ -109,6 +109,7 @@ class PlaylistCommand extends commando.Command {
                 });
             }
         }
+
         else if (command === 'new') {
             let name = args.split(' ')[0];
             if (!name) {
@@ -138,6 +139,7 @@ class PlaylistCommand extends commando.Command {
 
 
         }
+
         else if (command === 'add') {
             let playlistName = args.split(' ')[0];
             let song = args.split(' ')[1];
@@ -197,9 +199,11 @@ class PlaylistCommand extends commando.Command {
                 });
             }
         }
+
         else if (command === 'delete') {
             sendError(message, "**Sorry, this function is not yet implemented**");
         }
+
         else if (command === 'remove') {
             if (message.author.id !== process.env.ADMIN_ID) {
                 sendError(message, "**You do not have access to this command**");
@@ -208,6 +212,7 @@ class PlaylistCommand extends commando.Command {
                 sendError(message, "**Sorry, this function is not yet implemented**");
             }
         }
+
         else {
             const embed = new RichEmbed()
                 .setTitle('List of possible commands')
