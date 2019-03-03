@@ -92,14 +92,14 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gitignore" value="19" />
-          <entry key="js" value="10275" />
-          <entry key="txt" value="374" />
+          <entry key="js" value="10344" />
+          <entry key="txt" value="463" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JavaScript" value="10275" />
-          <entry key="PLAIN_TEXT" value="393" />
+          <entry key="JavaScript" value="10344" />
+          <entry key="PLAIN_TEXT" value="482" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -132,8 +132,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/commands/music/playlist.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="789">
-              <caret line="303" column="60" selection-start-line="303" selection-start-column="60" selection-end-line="303" selection-end-column="60" />
+            <state relative-caret-position="585">
+              <caret line="269" column="49" lean-forward="true" selection-start-line="269" selection-start-column="49" selection-end-line="269" selection-end-column="49" />
               <folding>
                 <element signature="e#1099#2343#0" />
                 <element signature="e#2405#3663#0" />
@@ -422,7 +422,7 @@
       <workItem from="1551549357364" duration="1481000" />
       <workItem from="1551562609344" duration="3218000" />
       <workItem from="1551574383687" duration="3264000" />
-      <workItem from="1551610866919" duration="4339000" />
+      <workItem from="1551610866919" duration="4902000" />
     </task>
     <task id="LOCAL-00001" summary="polishing">
       <created>1537888319205</created>
@@ -536,11 +536,25 @@
       <option name="project" value="LOCAL" />
       <updated>1551612952863</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Implement remaining methods from PlaylistCommand and apply minor fixes">
+      <created>1551615971410</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1551615971410</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Fix delete method">
+      <created>1551616167581</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1551616167581</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="137722000" />
+    <option name="totallyTimeSpent" value="138285000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -644,7 +658,9 @@
     <MESSAGE value="Fix queue message" />
     <MESSAGE value="Implement playshuffle option in PlaylistCommand" />
     <MESSAGE value="Edit help message" />
-    <option name="LAST_COMMIT_MESSAGE" value="Edit help message" />
+    <MESSAGE value="Implement remaining methods from PlaylistCommand and apply minor fixes" />
+    <MESSAGE value="Fix delete method" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix delete method" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app2.js" />
@@ -839,8 +855,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/commands/music/playlist.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="789">
-          <caret line="303" column="60" selection-start-line="303" selection-start-column="60" selection-end-line="303" selection-end-column="60" />
+        <state relative-caret-position="585">
+          <caret line="269" column="49" lean-forward="true" selection-start-line="269" selection-start-column="49" selection-end-line="269" selection-end-column="49" />
           <folding>
             <element signature="e#1099#2343#0" />
             <element signature="e#2405#3663#0" />
