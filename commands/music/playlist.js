@@ -262,15 +262,15 @@ class PlaylistCommand extends commando.Command {
                     }
                     else {
                         songID = parseInt(songID) - 1;
+                        console.log(songID);
                         if (!songID || songID < 0 || ret.songs.length <= songID){
                             sendError(message, "**Specify a valid ID of the song to delete**");
                         }
                         else{
                             let deleted = ret.songs.splice(songID, 1);
-                            console.log(deleted);
                             ret.save((err) => {
                                 if (!err) {
-                                    sendOk(message, `**Removed [${deleted.title}](${deleted.url}) from the playlist ${playlistName}**`);
+                                    sendOk(message, `**Removed [${deleted[0].title}](${deleted[0].url}) from the playlist ${playlistName}**`);
                                 }
                                 else {
                                     console.log(err.content);
