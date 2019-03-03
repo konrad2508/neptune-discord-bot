@@ -21,11 +21,11 @@ class HelpCommand extends commando.Command {
             .addField("```!list```", "Lists available reactions.")
             .addField("```!join```", "Joins your voice channel.")
             .addField("```!leave```", "Leaves voice channel.")
-            .addField("```!play <URL | Query>```", "Plays song from **URL** or plays first song from YouTube based on **Query**")
-            .addField("```!loop```", "Loops (or unloops) currently playing song")
-            .addField("```!playlist```", "Manages playlists")
-            .addField("```!nowplaying```", "Shows information about the currently playing song")
-            .addField("```!queue```", "Shows song queue")
+            .addField("```!play <URL | Query>```", "Plays song from **URL** or plays first song from YouTube based on **Query**.")
+            .addField("```!loop```", "Loops (or unloops) currently playing song.")
+            .addField("```!playlist```", "Manages playlists.")
+            .addField("```!nowplaying```", "Shows information about the currently playing song.")
+            .addField("```!queue```", "Shows song queue.")
             .addField("```!skip```", "Skips currently playing song.");
         message.channel.send(embed);
 

@@ -247,10 +247,11 @@ class PlaylistCommand extends commando.Command {
 
         else {
             const embed = new RichEmbed()
-                .setTitle('List of possible commands')
+                .setTitle('List of commands')
                 .setColor('#00FF00')
                 .addField('```!playlist list [PlaylistName]```', 'Lists available playlists. If **PlaylistName** is specified, lists songs on that playlist.')
                 .addField('```!playlist play <PlaylistName>```', 'Plays specified playlist.')
+                .addField('```!playlist playshuffle <PlaylistName>```', 'Plays shuffled specified playlist.')
                 .addField('```!playlist new <Name>```', 'Creates a new playlist named **Name**.')
                 .addField('```!playlist add <PlaylistName> <URL | Query>```', 'Adds a song from **URL** or **Query** to **PlaylistName**.')
                 .addField('```!playlist delete <PlaylistName> <SongNumber>```', 'Removes song number **SongNumber** from the **PlaylistName**.');
