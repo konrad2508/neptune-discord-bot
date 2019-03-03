@@ -262,7 +262,6 @@ class PlaylistCommand extends commando.Command {
                     }
                     else {
                         songID = parseInt(songID) - 1;
-                        console.log(songID);
                         if (isNaN(songID) || songID < 0 || ret.songs.length <= songID){
                             sendError(message, "**Specify a valid ID of the song to delete**");
                         }
