@@ -13,8 +13,12 @@ class NowPlayingCommand extends commando.Command {
     }
 
     async run(message) {
-        if (message.guild.voiceConnection) {
+        if (!message.guild.voiceConnection) {
+            sendError(message, "**Bot must be in a voice channel**");
+        }
+        else {
             let server = servers[message.guild.id];
+
             if (server) {
                 let time = server.dispatcher.time;
                 let title = server.nowplaying.title;
@@ -22,11 +26,11 @@ class NowPlayingCommand extends commando.Command {
                 let url = server.nowplaying.url;
                 let description = `\nCurrent time: \`${songTime(time, length)}\``;
 
-                if (server.nowplaying.playlist){
+                if (server.nowplaying.playlist) {
                     description += `\nPlaylist: ${server.nowplaying.playlist}`;
                 }
 
-                if (server.nowplaying.loop){
+                if (server.nowplaying.loop) {
                     description += '\nLooped';
                 }
 
@@ -35,9 +39,6 @@ class NowPlayingCommand extends commando.Command {
             else {
                 sendError(message, "**No song is currently playing**");
             }
-        }
-        else {
-            sendError(message, "**Bot must be in a voice channel**");
         }
 
     }
