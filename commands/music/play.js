@@ -13,7 +13,7 @@ class PlayCommand extends commando.Command {
             argsPromptLimit: 0,
             description: 'Plays song',
             aliases: ['p'],
-            args:[
+            args: [
                 {
                     key: 'url',
                     type: 'string',
@@ -31,9 +31,10 @@ class PlayCommand extends commando.Command {
 
         let info = undefined;
 
-        if (server.nowplaying && server.nowplaying.loop){
+        if (server.nowplaying && server.nowplaying.loop) {
             info = server.nowplaying;
-        } else {
+        }
+        else {
             info = server.queue[0];
 
             server.queue.shift();
@@ -41,15 +42,15 @@ class PlayCommand extends commando.Command {
         }
 
         let video = YTDL.validateURL(info.url)
-                ? YTDL(info.url, {filter: "audioonly", quality: "highestaudio"})
-                : YoutubeDL(info.url, ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames'], undefined);
+            ? YTDL(info.url, {filter: "audioonly", quality: "highestaudio"})
+            : YoutubeDL(info.url, ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames'], undefined);
 
         server.dispatcher = connection.playStream(video);
 
         if (!server.nowplaying.loop) sendOk(message, `**Playing [${info.title}](${info.url})**`);
 
         server.dispatcher.on("end", () => {
-            if (server.queue){
+            if (server.queue) {
                 if (server.queue[0] || server.nowplaying.loop) {
                     PlayCommand._playFunc(message);
                 }
@@ -68,20 +69,20 @@ class PlayCommand extends commando.Command {
                 sendError(message, "**Specify URL of the song**");
             }
             else {
-                if (!valid.isWebUri(url)){
+                if (!valid.isWebUri(url)) {
                     url = 'ytsearch1:' + url
                 }
 
                 YoutubeDL.getInfo(url, ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames'], null, (err, info) => {
-                    if (info){
-                        let vid =   {
-                                        url: info.webpage_url,
-                                        title: info.title,
-                                        duration: info._duration_hms,
-                                        loop: false,
-                                        video: undefined,
-                                        playlist: undefined
-                                    };
+                    if (info) {
+                        let vid = {
+                            url: info.webpage_url,
+                            title: info.title,
+                            duration: info._duration_hms,
+                            loop: false,
+                            video: undefined,
+                            playlist: undefined
+                        };
 
                         if (servers[message.guild.id]) {
                             servers[message.guild.id].queue.push(vid);
