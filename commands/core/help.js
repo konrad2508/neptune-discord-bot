@@ -28,7 +28,6 @@ class HelpCommand extends commando.Command {
             .addField("```!queue```", "Shows song queue.")
             .addField("```!skip```", "Skips currently playing song.");
         message.channel.send(embed);
-
     }
 }
 
