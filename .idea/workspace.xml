@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="8823d205-44c9-4413-948d-0c9f33b7a26a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/reactions/list.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/reactions/list.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/music/join.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/music/join.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -94,21 +94,21 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gitignore" value="19" />
-          <entry key="js" value="10580" />
-          <entry key="txt" value="548" />
+          <entry key="js" value="10698" />
+          <entry key="txt" value="560" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JavaScript" value="10580" />
-          <entry key="PLAIN_TEXT" value="567" />
+          <entry key="JavaScript" value="10698" />
+          <entry key="PLAIN_TEXT" value="579" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="LICENSE" value="1" />
           <entry key="gitignore" value="1" />
-          <entry key="js" value="61" />
+          <entry key="js" value="63" />
           <entry key="json" value="3" />
           <entry key="md" value="1" />
           <entry key="ts" value="4" />
@@ -117,7 +117,7 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="JSON" value="3" />
-          <entry key="JavaScript" value="61" />
+          <entry key="JavaScript" value="63" />
           <entry key="PLAIN_TEXT" value="3" />
           <entry key="TypeScript" value="4" />
         </counts>
@@ -134,8 +134,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/commands/music/playlist.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="401">
-              <caret line="117" column="79" lean-forward="true" selection-start-line="117" selection-start-column="79" selection-end-line="117" selection-end-column="79" />
+            <state relative-caret-position="281">
+              <caret line="130" column="32" selection-start-line="130" selection-start-column="25" selection-end-line="130" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -176,7 +176,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/commands/reactions/list.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="442">
@@ -184,6 +184,15 @@
               <folding>
                 <element signature="n#!!block;n#constructor#0;n#ListCommand#0" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/commands/music/join.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="374">
+              <caret line="22" column="74" selection-start-line="22" selection-start-column="74" selection-end-line="22" selection-end-column="74" />
             </state>
           </provider>
         </entry>
@@ -196,6 +205,11 @@
         <option value="JavaScript File" />
       </list>
     </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>findone</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -219,9 +233,7 @@
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/app.js" />
-        <option value="$PROJECT_DIR$/commands/music/join.js" />
         <option value="$PROJECT_DIR$/commands/music/leave.js" />
-        <option value="$PROJECT_DIR$/commands/reactions/react.js" />
         <option value="$PROJECT_DIR$/commands/music/loop.js" />
         <option value="$PROJECT_DIR$/data/schema/song.js" />
         <option value="$PROJECT_DIR$/data/schema/playlist.js" />
@@ -235,6 +247,8 @@
         <option value="$PROJECT_DIR$/commands/core/help.js" />
         <option value="$PROJECT_DIR$/commands/music/play.js" />
         <option value="$PROJECT_DIR$/commands/reactions/list.js" />
+        <option value="$PROJECT_DIR$/commands/reactions/react.js" />
+        <option value="$PROJECT_DIR$/commands/music/join.js" />
       </list>
     </option>
   </component>
@@ -293,12 +307,6 @@
               <item name="Neptune" type="462c0819:PsiDirectoryNode" />
               <item name="commands" type="462c0819:PsiDirectoryNode" />
               <item name="music" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Neptune" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Neptune" type="462c0819:PsiDirectoryNode" />
-              <item name="commands" type="462c0819:PsiDirectoryNode" />
-              <item name="reactions" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -390,7 +398,7 @@
       <workItem from="1551610866919" duration="5812000" />
       <workItem from="1551621351959" duration="216000" />
       <workItem from="1551708720170" duration="2544000" />
-      <workItem from="1551736105242" duration="386000" />
+      <workItem from="1551736105242" duration="734000" />
     </task>
     <task id="LOCAL-00001" summary="polishing">
       <created>1537888319205</created>
@@ -588,11 +596,25 @@
       <option name="project" value="LOCAL" />
       <updated>1551736201667</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Refactor ListCommand">
+      <created>1551736502573</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1551736502573</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Refactor ReactCommand">
+      <created>1551736628872</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1551736628872</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="142341000" />
+    <option name="totallyTimeSpent" value="142689000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -704,7 +726,9 @@
     <MESSAGE value="Refactor utils" />
     <MESSAGE value="Refactor HelpCommand" />
     <MESSAGE value="Refactor PlayCommand" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactor PlayCommand" />
+    <MESSAGE value="Refactor ListCommand" />
+    <MESSAGE value="Refactor ReactCommand" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor ReactCommand" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app2.js" />
@@ -776,20 +800,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="16" column="54" lean-forward="true" selection-start-line="16" selection-start-column="54" selection-end-line="16" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/commands/reactions/react.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="782">
-          <caret line="46" column="70" lean-forward="true" selection-start-line="46" selection-start-column="70" selection-end-line="46" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/commands/music/join.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="66" selection-start-line="24" selection-start-column="66" selection-end-line="24" selection-end-column="66" />
         </state>
       </provider>
     </entry>
@@ -898,8 +908,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/commands/music/playlist.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="401">
-          <caret line="117" column="79" lean-forward="true" selection-start-line="117" selection-start-column="79" selection-end-line="117" selection-end-column="79" />
+        <state relative-caret-position="281">
+          <caret line="130" column="32" selection-start-line="130" selection-start-column="25" selection-end-line="130" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/commands/reactions/react.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="602">
+          <caret line="44" column="48" selection-start-line="44" selection-start-column="48" selection-end-line="44" selection-end-column="48" />
         </state>
       </provider>
     </entry>
@@ -910,6 +927,13 @@
           <folding>
             <element signature="n#!!block;n#constructor#0;n#ListCommand#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/commands/music/join.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="74" selection-start-line="22" selection-start-column="74" selection-end-line="22" selection-end-column="74" />
         </state>
       </provider>
     </entry>

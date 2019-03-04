@@ -12,17 +12,15 @@ class JoinCommand extends commando.Command {
     }
 
     async run(message) {
-        if (message.member.voiceChannel) {
-            if (!message.guild.voiceConnection) {
-                message.member.voiceChannel.join().then((connection) => {
-                    connections[message.guild.id] = connection;
-                    sendOk(message, "**Joined voice channel**");
-
-                });
-            }
+        if (!message.member.voiceChannel) {
+            sendError(message, "**You must be in a voice channel**");
+        }
+        else if (message.guild.voiceConnection) {
+            sendError(message, "**Bot is already in the voice channel**");
         }
         else {
-            sendError(message, "**You must be in a voice channel**");
+            connections[message.guild.id] = await message.member.voiceChannel.join();
+            sendOk(message, "**Joined voice channel**");
         }
     }
 }
