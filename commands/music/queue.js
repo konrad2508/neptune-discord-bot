@@ -22,7 +22,7 @@ class QueueCommand extends commando.Command {
         else {
             let server = servers[message.guild.id];
 
-            let nowPlaying = `1. [${server.nowplaying.title}](${server.nowplaying.url}) (currently playing)`;
+            let nowPlaying = `\n1. [${server.nowplaying.title}](${server.nowplaying.url}) (currently playing)`;
             if (server.nowplaying.loop) nowPlaying += ' (looped)';
 
             let queueMessage = server.queue.map((e, id) => `${id + 2}. [${e.title}](${e.url})`);
