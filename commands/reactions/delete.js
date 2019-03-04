@@ -29,33 +29,33 @@ class DeleteCommand extends commando.Command {
         if (message.author.id !== process.env.ADMIN_ID) {
             sendError(message, "**You do not have access to this command**");
         }
-        else {
-            if (!name) {
-                sendError(message, "**Specify reaction name to delete**");
-            }
-            else {
-                Reaction.find({'name': name}, 'url', (err, reaction) => {
-                    if (err) {
-                        console.log(err.content);
-                        sendError(message, "**Something went wrong, the reaction was not deleted**");
-                    }
-                    else if (reaction.length) {
-                        Reaction.findOneAndDelete({'name': name}, (err) => {
-                            if (err) {
-                                console.log(err.content)
-                            }
-                            else {
-                                sendOk(message, "**Reaction successfully deleted**");
-                            }
-                        });
-                    }
-                    else {
-                        sendError(message, "**Reaction does not exist**");
-                    }
-                });
-            }
+        else if (!name) {
+            sendError(message, "**Specify reaction name to delete**");
         }
+        else {
 
+            Reaction.find({'name': name}, 'url', (err, reaction) => {
+                if (err) {
+                    console.log(err.content);
+                    sendError(message, "**Something went wrong, the reaction was not deleted**");
+                }
+                else if (!reaction.length) {
+                    sendError(message, "**Reaction does not exist**");
+                }
+                else {
+                    Reaction.findOneAndDelete({'name': name}, (err) => {
+                        if (err) {
+                            console.log(err.content);
+                            sendError(message, "**Something went wrong, the reaction was not deleted**");
+                        }
+                        else {
+                            sendOk(message, "**Reaction successfully deleted**");
+                        }
+                    });
+                }
+            });
+
+        }
     }
 
 }
