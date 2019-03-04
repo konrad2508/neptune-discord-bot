@@ -10,15 +10,15 @@ global.prefix = '!';
 global.servers = {};
 global.connections = {};
 
-let databaseConnectAttempt = mongoose.connect(process.env.DB_URL, {
+mongoose.connect(process.env.DB_URL, {
     'user': process.env.DB_USER,
     'pass': process.env.DB_PASS,
     'useNewUrlParser': true,
-});
-databaseConnectAttempt.catch((err) => {
-    console.log("database connect error:");
-    console.log(err);
-});
+})
+    .catch((err) => {
+        console.log("database connect error:");
+        console.log(err);
+    });
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'database connection error:'));
@@ -38,13 +38,13 @@ client.registry.registerGroup('reactions', 'Reactions')
     .registerCommandsIn(__dirname + "/commands");
 
 client.on('ready', () => {
-    console.log('Ready');
+    console.log('Client ready');
 
-    let setActivityAttempt = client.user.setActivity('!h for help');
-    setActivityAttempt.catch((err) => {
-        console.log("set activity error:");
-        console.log(err)
-    });
+    client.user.setActivity('!h for help')
+        .catch((err) => {
+            console.log("set activity error:");
+            console.log(err)
+        });
 
     setInterval(() => {
         https.get(process.env.APP_URL)
@@ -56,8 +56,8 @@ client.on('error', (err) => {
     console.log(err);
 });
 
-let loginAttempt = client.login(process.env.BOT_TOKEN);
-loginAttempt.catch((err) => {
-    console.log("login attempt error:");
-    console.log(err);
-});
+client.login(process.env.BOT_TOKEN)
+    .catch((err) => {
+        console.log("login attempt error:");
+        console.log(err);
+    });
