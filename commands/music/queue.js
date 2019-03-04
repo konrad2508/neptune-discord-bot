@@ -13,28 +13,23 @@ class QueueCommand extends commando.Command {
     }
 
     async run(message) {
-        if (message.guild.voiceConnection) {
-            let server = servers[message.guild.id];
-            if (server) {
-                let queueMessage = `\n1. [${server.nowplaying.title}](${server.nowplaying.url}) (currently playing)`;
-                if (server.nowplaying.loop) queueMessage += ' (looped)';
-
-                for (let i = 0; i < server.queue.length; i++){
-                    queueMessage += `\n${i+2}. [${server.queue[i].title}](${server.queue[i].url})`;
-                }
-
-                queueMessage += '**';
-
-                sendOk(message, `**Currently in queue${queueMessage}`);
-            }
-            else {
-                sendOk(message, "**The queue is empty**");
-            }
-        }
-        else {
+        if (!message.guild.voiceConnection) {
             sendError(message, "**Bot must be in a voice channel**");
         }
+        else if (!servers[message.guild.id]) {
+            sendOk(message, "**The queue is empty**");
+        }
+        else {
+            let server = servers[message.guild.id];
 
+            let nowPlaying = `1. [${server.nowplaying.title}](${server.nowplaying.url}) (currently playing)`;
+            if (server.nowplaying.loop) nowPlaying += ' (looped)';
+
+            let queueMessage = server.queue.map((e, id) => `${id + 2}. [${e.title}](${e.url})`);
+            queueMessage.unshift(nowPlaying);
+
+            sendOk(message, `**Currently in queue${queueMessage.join('\n')}**`);
+        }
     }
 }
 
