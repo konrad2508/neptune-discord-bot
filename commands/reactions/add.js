@@ -52,7 +52,7 @@ class AddCommand extends commando.Command {
                     sendError(message, "**Reaction with that name already exists**");
                 }
                 else {
-                    Reaction.create({'name': name, 'url': url}, (err, reaction) => {
+                    Reaction.create({'name': name, 'url': url}, (err) => {
                         if (err){
                             console.log(err.content);
                             sendError(message, "**Something went wrong, try again or specify a different reaction**");
