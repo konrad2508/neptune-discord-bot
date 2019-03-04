@@ -12,7 +12,7 @@ class AddCommand extends commando.Command {
             argsPromptLimit: 0,
             description: 'Adds reaction',
             aliases: ['a'],
-            args:[
+            args: [
                 {
                     key: 'name',
                     type: 'string',
@@ -40,25 +40,28 @@ class AddCommand extends commando.Command {
         }
         else {
             if (valid.isWebUri(url)) {
+
                 Reaction.find({'name': name}, 'url', (err, ret_url) => {
                     if (err) {
                         console.log(err.content);
                         sendError(message, "**Something went wrong, try again or specify a different reaction**")
                     }
-                    else if (ret_url) {
-                        if (ret_url.length) {
-                            sendError(message, "**Reaction with that name already exists**");
-                        }
-                        else {
-                            Reaction.create({'name': name, 'url': url}, (err, reaction) => {
-                                if (err) console.log(err.content);
-                                else if (reaction) {
-                                    sendOk(message, "**Saved the reaction**");
-                                }
-                            });
-                        }
+                    else if (ret_url.length) {
+                        sendError(message, "**Reaction with that name already exists**");
+                    }
+                    else {
+                        Reaction.create({'name': name, 'url': url}, (err, reaction) => {
+                            if (err){
+                                console.log(err.content);
+                                sendError(message, "**Something went wrong, try again or specify a different reaction**");
+                            }
+                            else {
+                                sendOk(message, "**Saved the reaction**");
+                            }
+                        });
                     }
                 });
+
             }
             else {
                 sendError(message, "**Invalid URL**");

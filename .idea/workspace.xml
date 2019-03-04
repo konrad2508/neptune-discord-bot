@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8823d205-44c9-4413-948d-0c9f33b7a26a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/commands/music/playlist.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/music/playlist.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/reactions/add.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/reactions/add.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -74,9 +75,10 @@
     <session id="305118865">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="19" />
+          <entry key="project.closed" value="21" />
           <entry key="project.open.time.0" value="2" />
           <entry key="project.open.time.1" value="1" />
+          <entry key="project.open.time.21" value="1" />
           <entry key="project.open.time.23" value="4" />
           <entry key="project.open.time.24" value="2" />
           <entry key="project.open.time.25" value="2" />
@@ -84,21 +86,22 @@
           <entry key="project.open.time.27" value="3" />
           <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.4" value="1" />
+          <entry key="project.open.time.40" value="1" />
           <entry key="project.open.time.5" value="3" />
-          <entry key="project.opened" value="20" />
+          <entry key="project.opened" value="22" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gitignore" value="19" />
-          <entry key="js" value="10371" />
-          <entry key="txt" value="463" />
+          <entry key="js" value="10421" />
+          <entry key="txt" value="498" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JavaScript" value="10371" />
-          <entry key="PLAIN_TEXT" value="482" />
+          <entry key="JavaScript" value="10421" />
+          <entry key="PLAIN_TEXT" value="517" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -128,15 +131,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/commands/music/playlist.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="500">
-              <caret line="264" column="44" selection-start-line="264" selection-start-column="44" selection-end-line="264" selection-end-column="44" />
-              <folding>
-                <element signature="e#1099#2343#0" />
-                <element signature="e#2405#3663#0" />
-              </folding>
+            <state relative-caret-position="4692">
+              <caret line="276" column="33" lean-forward="true" selection-start-line="276" selection-start-column="33" selection-end-line="276" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -145,7 +144,7 @@
         <entry file="file://$PROJECT_DIR$/commands/music/queue.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="459">
-              <caret line="27" column="71" lean-forward="true" selection-start-line="27" selection-start-column="71" selection-end-line="27" selection-end-column="71" />
+              <caret line="27" column="71" selection-start-line="27" selection-start-column="71" selection-end-line="27" selection-end-column="71" />
             </state>
           </provider>
         </entry>
@@ -204,11 +203,14 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/commands/reactions/add.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="748">
-              <caret line="44" column="49" selection-start-line="44" selection-start-column="49" selection-end-line="44" selection-end-column="49" />
+            <state relative-caret-position="677">
+              <caret line="61" column="21" selection-start-line="61" selection-start-column="21" selection-end-line="61" selection-end-column="21" />
+              <folding>
+                <element signature="e#292#917#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -255,7 +257,6 @@
         <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/commands/music/join.js" />
         <option value="$PROJECT_DIR$/commands/music/leave.js" />
-        <option value="$PROJECT_DIR$/commands/reactions/add.js" />
         <option value="$PROJECT_DIR$/commands/reactions/delete.js" />
         <option value="$PROJECT_DIR$/commands/reactions/react.js" />
         <option value="$PROJECT_DIR$/commands/music/loop.js" />
@@ -269,6 +270,7 @@
         <option value="$PROJECT_DIR$/utils.js" />
         <option value="$PROJECT_DIR$/commands/core/help.js" />
         <option value="$PROJECT_DIR$/commands/music/playlist.js" />
+        <option value="$PROJECT_DIR$/commands/reactions/add.js" />
       </list>
     </option>
   </component>
@@ -421,7 +423,9 @@
       <workItem from="1551549357364" duration="1481000" />
       <workItem from="1551562609344" duration="3218000" />
       <workItem from="1551574383687" duration="3264000" />
-      <workItem from="1551610866919" duration="5251000" />
+      <workItem from="1551610866919" duration="5812000" />
+      <workItem from="1551621351959" duration="216000" />
+      <workItem from="1551708720170" duration="1189000" />
     </task>
     <task id="LOCAL-00001" summary="polishing">
       <created>1537888319205</created>
@@ -556,11 +560,32 @@
       <option name="project" value="LOCAL" />
       <updated>1551616460041</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Fix delete method">
+      <created>1551616787372</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1551616787372</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Fix delete method">
+      <created>1551616938507</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1551616938507</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Remove unnecessary console.log()">
+      <created>1551617090333</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1551617090333</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="138634000" />
+    <option name="totallyTimeSpent" value="140600000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -666,7 +691,8 @@
     <MESSAGE value="Edit help message" />
     <MESSAGE value="Implement remaining methods from PlaylistCommand and apply minor fixes" />
     <MESSAGE value="Fix delete method" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix delete method" />
+    <MESSAGE value="Remove unnecessary console.log()" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove unnecessary console.log()" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app2.js" />
@@ -796,10 +822,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/commands/music/playlist.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4692">
+          <caret line="276" column="33" lean-forward="true" selection-start-line="276" selection-start-column="33" selection-end-line="276" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/commands/music/queue.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="459">
-          <caret line="27" column="71" lean-forward="true" selection-start-line="27" selection-start-column="71" selection-end-line="27" selection-end-column="71" />
+          <caret line="27" column="71" selection-start-line="27" selection-start-column="71" selection-end-line="27" selection-end-column="71" />
         </state>
       </provider>
     </entry>
@@ -831,17 +864,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/commands/reactions/add.js">
+    <entry file="file://$PROJECT_DIR$/commands/core/help.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="44" column="49" selection-start-line="44" selection-start-column="49" selection-end-line="44" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/commands/reactions/delete.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="28" column="8" selection-start-line="28" selection-start-column="8" selection-end-line="30" selection-end-column="9" />
+        <state relative-caret-position="391">
+          <caret line="23" column="128" selection-start-line="23" selection-start-column="128" selection-end-line="23" selection-end-column="128" />
         </state>
       </provider>
     </entry>
@@ -852,20 +878,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/commands/core/help.js">
+    <entry file="file://$PROJECT_DIR$/commands/reactions/delete.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="128" selection-start-line="23" selection-start-column="128" selection-end-line="23" selection-end-column="128" />
+        <state relative-caret-position="476">
+          <caret line="28" column="8" selection-start-line="28" selection-start-column="8" selection-end-line="30" selection-end-column="9" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/commands/music/playlist.js">
+    <entry file="file://$PROJECT_DIR$/commands/reactions/add.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="500">
-          <caret line="264" column="44" selection-start-line="264" selection-start-column="44" selection-end-line="264" selection-end-column="44" />
+        <state relative-caret-position="677">
+          <caret line="61" column="21" selection-start-line="61" selection-start-column="21" selection-end-line="61" selection-end-column="21" />
           <folding>
-            <element signature="e#1099#2343#0" />
-            <element signature="e#2405#3663#0" />
+            <element signature="e#292#917#0" />
           </folding>
         </state>
       </provider>
