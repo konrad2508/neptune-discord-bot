@@ -21,29 +21,26 @@ class ListCommand extends commando.Command {
                 console.log(err.content);
                 sendError(message, "**Something went wrong, try again**");
             }
-            else if (reactions.length) {
-                let names = [];
-                for (let i = 0; i < reactions.length; i++) {
-                    names.push(reactions[i].name);
-                }
+            else if (!reactions.length) {
                 const embed = new RichEmbed()
-                    .setTitle('List of commands')
+                    .setTitle('List of reactions')
+                    .setColor('#00FF00')
+                    .setDescription("No reactions added!");
+                message.channel.send(embed).then(msg => {
+                    msg.delete(10000);
+                });
+                message.delete(100);
+            }
+            else {
+                let names = reactions.map(e => e.name);
+                const embed = new RichEmbed()
+                    .setTitle('List of reactions')
                     .setColor('#00FF00')
                     .setDescription(names.sort((a, b) => {
                         return (a.toLowerCase() < b.toLowerCase()) ? -1 : 1
                     }).join("\n"));
                 message.channel.send(embed).then(msg => {
                     msg.delete(15000);
-                });
-                message.delete(100);
-            }
-            else {
-                const embed = new RichEmbed()
-                    .setTitle('List of commands')
-                    .setColor('#00FF00')
-                    .setDescription("No reactions added!");
-                message.channel.send(embed).then(msg => {
-                    msg.delete(10000);
                 });
                 message.delete(100);
             }
