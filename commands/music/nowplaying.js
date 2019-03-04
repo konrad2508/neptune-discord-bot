@@ -19,7 +19,10 @@ class NowPlayingCommand extends commando.Command {
         else {
             let server = servers[message.guild.id];
 
-            if (server) {
+            if (!server) {
+                sendError(message, "**No song is currently playing**");
+            }
+            else {
                 let time = server.dispatcher.time;
                 let title = server.nowplaying.title;
                 let length = server.nowplaying.duration;
@@ -35,9 +38,6 @@ class NowPlayingCommand extends commando.Command {
                 }
 
                 sendOk(message, `**Now playing: [${title}](${url})` + description + '**');
-            }
-            else {
-                sendError(message, "**No song is currently playing**");
             }
         }
 
