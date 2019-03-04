@@ -13,24 +13,24 @@ class SkipCommand extends commando.Command {
     }
 
     async run(message) {
-        if (message.guild.voiceConnection) {
-            let server = servers[message.guild.id];
-            if (server) {
-                if (server.nowplaying.loop){
-                    server.nowplaying.loop = false;
-                }
-                sendOk(message, "**Skipped currently playing song**");
-                server.dispatcher.end();
-            }
-            else {
-                sendError(message, "**No song is currently playing**");
-            }
-        }
-        else {
+        if (!message.guild.voiceConnection) {
             sendError(message, "**Bot must be in a voice channel**");
         }
+        else if (!servers[message.guild.id]) {
+            sendError(message, "**No song is currently playing**");
+        }
+        else {
+            let server = servers[message.guild.id];
 
+            if (server.nowplaying.loop) {
+                server.nowplaying.loop = false;
+            }
+
+            sendOk(message, "**Skipped currently playing song**");
+            server.dispatcher.end();
+        }
     }
+
 }
 
 module.exports = SkipCommand;
