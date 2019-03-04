@@ -1,7 +1,6 @@
 const {RichEmbed} = require('discord.js');
 
 function shuffle(array){
-
     let currIndex = array.length;
 
     while(currIndex !== 0){
