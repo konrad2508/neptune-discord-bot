@@ -1,7 +1,7 @@
 const commando = require('discord.js-commando');
-const Playlist = require('../../data/schema/playlist.js');
+const Playlist = require('../../schema/playlist.js');
 const {RichEmbed} = require('discord.js');
-const {sendOk, sendError, shuffle} = require('../../utils.js');
+const {sendOk, sendError, shuffle} = require('../../core/utils.js');
 const valid = require('valid-url');
 const YoutubeDL = require('youtube-dl');
 const PlayCommand = require('./play.js');

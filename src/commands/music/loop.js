@@ -1,5 +1,5 @@
 const commando = require('discord.js-commando');
-const {sendOk, sendError} = require('../../utils.js');
+const {sendOk, sendError} = require('../../core/utils.js');
 
 class LoopCommand extends commando.Command {
     constructor(client) {

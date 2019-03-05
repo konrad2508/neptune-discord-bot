@@ -22,7 +22,7 @@
     "youtube-dl": "^1.12.2",
     "ytdl-core": "^0.26.2"
   },
-  "main": "app.js",
+  "main": "src/core/app.js",
   "devDependencies": {},
   "author": "",
   "license": "ISC",

@@ -1,7 +1,7 @@
 const commando = require('discord.js-commando');
 const YTDL = require('ytdl-core');
 const YoutubeDL = require('youtube-dl');
-const {sendOk, sendError} = require('../../utils.js');
+const {sendOk, sendError} = require('../../core/utils.js');
 const valid = require('valid-url');
 
 class PlayCommand extends commando.Command {
