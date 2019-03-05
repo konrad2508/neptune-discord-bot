@@ -1,30 +1,20 @@
 {
-  "name": "reactbot",
-  "version": "0.0.0",
-  "private": true,
-  "scripts": {
-    "start": "node app.js"
-  },
+  "name": "neptune-discord-bot",
+  "version": "1.0.0",
+  "description": "Discord bot capable of playing music and saving emotes.",
+  "main": "app.js",
   "dependencies": {
-    "cookie-parser": "~1.4.3",
-    "debug": "~2.6.9",
     "discord.js": "^11.4.2",
     "discord.js-commando": "^0.10.0",
-    "express": "~4.16.0",
-    "ffmpeg": "0.0.4",
-    "http-errors": "~1.6.2",
-    "jssoup": "0.0.10",
     "mongoose": "^5.2.17",
-    "morgan": "~1.9.0",
-    "opusscript": "0.0.6",
-    "pug": "2.0.0-beta11",
+    "ffmpeg": "^0.0.4",
+    "jssoup": "^0.0.10",
     "valid-url": "^1.0.9",
     "youtube-dl": "^1.12.2",
+    "opusscript": "^0.0.6",
     "ytdl-core": "^0.26.2"
   },
-  "main": "src/core/app.js",
   "devDependencies": {},
   "author": "",
-  "license": "ISC",
-  "description": ""
+  "license": "ISC"
 }
