@@ -12,7 +12,8 @@
     "valid-url": "^1.0.9",
     "youtube-dl": "^1.12.2",
     "opusscript": "^0.0.6",
-    "ytdl-core": "^0.26.2"
+    "ytdl-core": "^0.26.2",
+    "express": "latest"
   },
   "devDependencies": {},
   "scripts": {

@@ -1,10 +1,10 @@
 const commando = require('discord.js-commando');
 const mongoose = require('mongoose');
-// const express = require('express');
+const express = require('express');
 // const https = require('https');
 
-// const app = express();
-// app.listen(process.env.PORT || 8080);
+const app = express();
+app.listen(process.env.PORT || 8080);
 
 global.prefix = '!';
 global.servers = {};
