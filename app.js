@@ -1,10 +1,10 @@
 const commando = require('discord.js-commando');
 const mongoose = require('mongoose');
-const express = require('express');
-const https = require('https');
+// const express = require('express');
+// const https = require('https');
 
-const app = express();
-app.listen(process.env.PORT || 8080);
+// const app = express();
+// app.listen(process.env.PORT || 8080);
 
 global.prefix = '!';
 global.servers = {};
@@ -46,9 +46,9 @@ client.on('ready', () => {
             console.log(err)
         });
 
-    setInterval(() => {
-        https.get(process.env.APP_URL)
-    }, 180000);
+    // setInterval(() => {
+    //     //     https.get(process.env.APP_URL)
+    //     // }, 180000);
 });
 
 client.on('error', (err) => {
