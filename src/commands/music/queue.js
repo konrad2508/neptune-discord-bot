@@ -1,5 +1,5 @@
 const commando = require('discord.js-commando');
-const {sendOk, sendError} = require('../../core/utils.js');
+const {sendOk, sendError} = require('../../helpers/utils.js');
 
 class QueueCommand extends commando.Command {
     constructor(client) {

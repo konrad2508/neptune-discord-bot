@@ -1,6 +1,6 @@
 const commando = require('discord.js-commando');
 const Reaction = require('../../schema/reaction.js');
-const {sendOk, sendError} = require('../../core/utils.js');
+const {sendOk, sendError} = require('../../helpers/utils.js');
 
 class DeleteCommand extends commando.Command {
 

@@ -1,7 +1,7 @@
 const commando = require('discord.js-commando');
 const {RichEmbed} = require('discord.js');
 const Reaction = require('../../schema/reaction.js');
-const {sendError} = require('../../core/utils.js');
+const {sendError} = require('../../helpers/utils.js');
 
 class ReactCommand extends commando.Command {
     constructor(client) {

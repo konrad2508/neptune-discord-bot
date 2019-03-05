@@ -35,7 +35,7 @@ client.registry.registerGroup('reactions', 'Reactions')
     .registerGroup('music', 'Music')
     .registerGroup('core', 'Core')
     .registerDefaultTypes()
-    .registerCommandsIn(__dirname + "/src");
+    .registerCommandsIn(__dirname + "/src/commands");
 
 client.on('ready', () => {
     console.log('Client ready');

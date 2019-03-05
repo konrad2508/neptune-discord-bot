@@ -1,7 +1,7 @@
 const commando = require('discord.js-commando');
 const Reaction = require('../../schema/reaction.js');
 const valid = require('valid-url');
-const {sendOk, sendError} = require('../../core/utils.js');
+const {sendOk, sendError} = require('../../helpers/utils.js');
 
 class AddCommand extends commando.Command {
     constructor(client) {
