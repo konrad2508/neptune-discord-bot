@@ -25,7 +25,7 @@ class PlayCommand extends commando.Command {
         });
     }
 
-    static _playFunc(message) {
+    static playFunc(message) {
         let server = servers[message.guild.id];
         let connection = connections[message.guild.id];
 
@@ -52,7 +52,7 @@ class PlayCommand extends commando.Command {
         server.dispatcher.on("end", () => {
             if (server.queue) {
                 if (server.queue[0] || server.nowplaying.loop) {
-                    PlayCommand._playFunc(message);
+                    PlayCommand.playFunc(message);
                 }
                 else {
                     servers[message.guild.id] = undefined;
@@ -91,7 +91,7 @@ class PlayCommand extends commando.Command {
                         else {
                             servers[message.guild.id] = {queue: []};
                             servers[message.guild.id].queue.push(vid);
-                            PlayCommand._playFunc(message);
+                            PlayCommand.playFunc(message);
                         }
                     }
                     else {
