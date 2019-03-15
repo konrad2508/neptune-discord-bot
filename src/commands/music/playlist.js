@@ -283,7 +283,7 @@ class PlaylistCommand extends commando.Command {
         }
 
         else if (command === 'remove') {
-            if (message.author.id !== process.env.ADMIN_ID) {
+            if (!ADMIN.some(e => e === message.author.id)) {
                 sendError(message, "**You do not have access to this command**");
             }
             else {

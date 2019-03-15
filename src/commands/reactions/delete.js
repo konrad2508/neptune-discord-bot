@@ -26,7 +26,7 @@ class DeleteCommand extends commando.Command {
     async run(message, {name}) {
         name = name.split(" ")[0];
 
-        if (message.author.id !== process.env.ADMIN_ID) {
+        if (!ADMIN.some(e => e === message.author.id)){
             sendError(message, "**You do not have access to this command**");
         }
         else if (!name) {

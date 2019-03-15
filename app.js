@@ -1,18 +1,19 @@
 const commando = require('discord.js-commando');
 const mongoose = require('mongoose');
-const express = require('express');
 const https = require('https');
+const express = require('express');
 
-const app = express();
-app.listen(process.env.PORT || 8080);
-
-global.prefix = '!';
 global.servers = {};
 global.connections = {};
 
-mongoose.connect(process.env.DB_URL, {
-    'user': process.env.DB_USER,
-    'pass': process.env.DB_PASS,
+if (IS_HEROKU_APP) {
+    const app = express();
+    app.listen(PORT);
+}
+
+mongoose.connect(DB_URL, {
+    'user': DB_USER,
+    'pass': DB_PASS,
     'useNewUrlParser': true,
 })
     .catch((err) => {
@@ -27,7 +28,7 @@ db.once('open', () => {
 });
 
 const client = new commando.Client({
-    commandPrefix: global.prefix,
+    commandPrefix: PREFIX,
     unknownCommandResponse: false
 });
 
@@ -46,9 +47,11 @@ client.on('ready', () => {
             console.log(err)
         });
 
-    setInterval(() => {
-            https.get(process.env.APP_URL)
+    if (IS_HEROKU_APP) {
+        setInterval(() => {
+            https.get(APP_URL)
         }, 300000);
+    }
 });
 
 client.on('error', (err) => {
@@ -56,7 +59,7 @@ client.on('error', (err) => {
     console.log(err);
 });
 
-client.login(process.env.BOT_TOKEN)
+client.login(BOT_TOKEN)
     .catch((err) => {
         console.log("login attempt error:");
         console.log(err);
