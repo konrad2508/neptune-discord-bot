@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const https = require('https');
 const express = require('express');
 
+require('./config.js');
+
 global.servers = {};
 global.connections = {};
 
