@@ -16,7 +16,7 @@ class ListCommand extends commando.Command {
     }
 
     async run(message) {
-        Reaction.find({}, 'name', (err, reactions) => {
+        Reaction.find({'server': message.guild.id}, 'name', (err, reactions) => {
             if (err) {
                 console.log(err.content);
                 sendError(message, "**Something went wrong, try again**");

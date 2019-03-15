@@ -43,7 +43,7 @@ class AddCommand extends commando.Command {
         }
         else {
 
-            Reaction.find({'name': name}, 'url', (err, ret_url) => {
+            Reaction.find({'name': name, 'server': message.guild.id}, 'url', (err, ret_url) => {
                 if (err) {
                     console.log(err.content);
                     sendError(message, "**Something went wrong, try again or specify a different reaction**")
@@ -52,7 +52,7 @@ class AddCommand extends commando.Command {
                     sendError(message, "**Reaction with that name already exists**");
                 }
                 else {
-                    Reaction.create({'name': name, 'url': url}, (err) => {
+                    Reaction.create({'name': name, 'url': url, 'server': message.guild.id}, (err) => {
                         if (err){
                             console.log(err.content);
                             sendError(message, "**Something went wrong, try again or specify a different reaction**");

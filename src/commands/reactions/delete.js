@@ -34,7 +34,7 @@ class DeleteCommand extends commando.Command {
         }
         else {
 
-            Reaction.find({'name': name}, 'url', (err, reaction) => {
+            Reaction.find({'name': name, 'server': message.guild.id}, 'url', (err, reaction) => {
                 if (err) {
                     console.log(err.content);
                     sendError(message, "**Something went wrong, the reaction was not deleted**");
@@ -43,7 +43,7 @@ class DeleteCommand extends commando.Command {
                     sendError(message, "**Reaction does not exist**");
                 }
                 else {
-                    Reaction.findOneAndDelete({'name': name}, (err) => {
+                    Reaction.findOneAndDelete({'name': name, 'server': message.guild.id}, (err) => {
                         if (err) {
                             console.log(err.content);
                             sendError(message, "**Something went wrong, the reaction was not deleted**");

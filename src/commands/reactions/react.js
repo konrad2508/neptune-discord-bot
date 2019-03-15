@@ -30,7 +30,7 @@ class ReactCommand extends commando.Command {
             sendError(message, "**Specify reaction name**");
         }
         else {
-            Reaction.findOne({'name': name}, (err, response) => {
+            Reaction.findOne({'name': name, 'server': message.guild.id}, (err, response) => {
                 if (err) {
                     console.log(err.content);
                     sendError("**Something went wrong, try again or specify a different reaction**");
