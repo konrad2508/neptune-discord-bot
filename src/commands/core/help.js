@@ -4,7 +4,7 @@ const {RichEmbed} = require('discord.js');
 class HelpCommand extends commando.Command {
     constructor(client) {
         super(client, {
-            name: 'help',
+            name: 'help me',
             group: 'core',
             memberName: 'help',
             description: 'Returns help section for the bot',
