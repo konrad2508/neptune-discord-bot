@@ -46,7 +46,7 @@ class PlaylistCommand extends commando.Command {
                         connection.dispatcher.end();
                     }
 
-                    Playlist.findOne({name: playlistName}, 'songs', (err, ret) => {
+                    Playlist.findOne({name: playlistName, server: message.guild.id}, 'songs', (err, ret) => {
                         if (err) {
                             console.log(err.content);
                             sendError(message, "**Something went wrong, try again later**");
@@ -80,7 +80,7 @@ class PlaylistCommand extends commando.Command {
 
                     if (server) connection.dispatcher.end();
 
-                    Playlist.findOne({name: playlistName}, 'songs', (err, ret) => {
+                    Playlist.findOne({name: playlistName, server: message.guild.id}, 'songs', (err, ret) => {
                         if (err) {
                             console.log(err.content);
                             sendError(message, "**Something went wrong, try again later**");
@@ -106,7 +106,7 @@ class PlaylistCommand extends commando.Command {
         else if (command === 'list') {
             let playlistName = args.split(' ')[0];
             if (!playlistName) {
-                Playlist.find({}, 'name', (err, ret) => {
+                Playlist.find({server: message.guild.id}, 'name', (err, ret) => {
                     if (err) {
                         console.log(err.content);
                         sendError(message, "**Something went wrong, try again later**");
@@ -128,7 +128,7 @@ class PlaylistCommand extends commando.Command {
                 });
             }
             else {
-                Playlist.findOne({name: playlistName}, 'songs', (err, ret) => {
+                Playlist.findOne({name: playlistName, server: message.guild.id}, 'songs', (err, ret) => {
                     if (err) {
                         console.log(err.content);
                         sendError(message, "**Something went wrong, try again later**");
@@ -157,7 +157,7 @@ class PlaylistCommand extends commando.Command {
                 sendError(message, "**Specify name of the playlist**");
             }
             else {
-                Playlist.find({name: name}, (err, ret) => {
+                Playlist.find({name: name, server: message.guild.id}, (err, ret) => {
                     if (err) {
                         console.log(err.content);
                         sendError(message, "**Something went wrong, try again or specify a different name**");
@@ -167,7 +167,7 @@ class PlaylistCommand extends commando.Command {
                             sendError(message, "**Playlist with that name already exists**");
                         }
                         else {
-                            Playlist.create({name: name}, (err, playlist) => {
+                            Playlist.create({name: name, server: message.guild.id}, (err, playlist) => {
                                 if (err) console.log(err.content);
                                 else if (playlist) {
                                     sendOk(message, "**Saved the playlist**");
@@ -192,7 +192,7 @@ class PlaylistCommand extends commando.Command {
                 sendError(message, "**Specify song to add to the playlist**");
             }
             else {
-                Playlist.findOne({name: playlistName}, (err, ret) => {
+                Playlist.findOne({name: playlistName, server: message.guild.id}, (err, ret) => {
                     if (err) {
                         console.log(err.content);
                         sendError(message, "**Something went wrong, try again or specify a different name**");
@@ -252,7 +252,7 @@ class PlaylistCommand extends commando.Command {
                 sendError(message, "**Specify ID of the song to delete**");
             }
             else {
-                Playlist.findOne({name: playlistName}, (err, ret) => {
+                Playlist.findOne({name: playlistName, server: message.guild.id}, (err, ret) => {
                     if (err){
                         console.log(err.content);
                         sendError(message, "**Something went wrong, try again later**");
@@ -292,7 +292,7 @@ class PlaylistCommand extends commando.Command {
                     sendError(message, "**Specify name of the playlist**");
                 }
                 else {
-                    Playlist.findOneAndDelete({name: playlistName}, (err, ret) => {
+                    Playlist.findOneAndDelete({name: playlistName, server: message.guild.id}, (err, ret) => {
                         if (err){
                             console.log(err.content);
                             sendError(message, "**Something went wrong, try again later**");
