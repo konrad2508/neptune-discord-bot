@@ -13,7 +13,10 @@ class SkipCommand extends commando.Command {
     }
 
     async run(message) {
-        if (!message.guild.voiceConnection) {
+        if (!message.guild) {
+            sendError('Command unavailable through DM');
+        }
+        else if (!message.guild.voiceConnection) {
             sendError(message, "**Bot must be in a voice channel**");
         }
         else if (!servers[message.guild.id]) {

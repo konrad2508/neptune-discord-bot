@@ -32,7 +32,10 @@ class AddCommand extends commando.Command {
     async run(message, {name, url}) {
         url = url.split(" ")[0];
 
-        if (!name) {
+        if (!message.guild) {
+            sendError('Command unavailable through DM');
+        }
+        else if (!name) {
             sendError(message, "**Specify reaction name to add**");
         }
         else if (!url) {
@@ -53,7 +56,7 @@ class AddCommand extends commando.Command {
                 }
                 else {
                     Reaction.create({'name': name, 'url': url, 'server': message.guild.id}, (err) => {
-                        if (err){
+                        if (err) {
                             console.log(err.content);
                             sendError(message, "**Something went wrong, try again or specify a different reaction**");
                         }

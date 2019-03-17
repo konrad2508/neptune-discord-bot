@@ -318,34 +318,30 @@ class PlaylistCommand extends commando.Command {
     }
 
     async run(message, {command, args}) {
-
-        if (command === 'play') {
+        if (!message.guild) {
+            sendError('Command unavailable through DM');
+        }
+        else if (command === 'play') {
             this.play(message, args);
         }
         else if (command === 'playshuffle') {
             this.playshuffle(message, args);
         }
-
         else if (command === 'list') {
             this.list(message, args);
         }
-
         else if (command === 'new') {
             this.new(message, args);
         }
-
         else if (command === 'add') {
             this.add(message, args);
         }
-
         else if (command === 'delete') {
             this.delete(message, args);
         }
-
         else if (command === 'remove') {
             this.remove(message, args);
         }
-
         else {
             this.help(message, args);
         }
