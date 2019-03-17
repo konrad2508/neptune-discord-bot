@@ -66,7 +66,7 @@ class PlaylistCommand extends commando.Command {
         }
     }
 
-    playshuffle(message, args){
+    playshuffle(message, args) {
         if (message.guild.voiceConnection) {
             let playlistName = args.split(' ')[0];
             if (!playlistName) {
@@ -101,7 +101,7 @@ class PlaylistCommand extends commando.Command {
         }
     }
 
-    list(message, args){
+    list(message, args) {
         let playlistName = args.split(' ')[0];
         if (!playlistName) {
             Playlist.find({server: message.guild.id}, 'name', (err, ret) => {
@@ -149,7 +149,7 @@ class PlaylistCommand extends commando.Command {
         }
     }
 
-    new(message, args){
+    new(message, args) {
         let name = args.split(' ')[0];
         if (!name) {
             sendError(message, "**Specify name of the playlist**");
@@ -177,7 +177,7 @@ class PlaylistCommand extends commando.Command {
         }
     }
 
-    add(message, args){
+    add(message, args) {
         let playlistName = args.split(' ')[0];
         let song = args.split(' ')[1];
 
@@ -237,7 +237,7 @@ class PlaylistCommand extends commando.Command {
         }
     }
 
-    delete(message, args){
+    delete(message, args) {
         let playlistName = args.split(' ')[0];
         let songID = args.split(' ')[1];
 
@@ -278,7 +278,7 @@ class PlaylistCommand extends commando.Command {
         }
     }
 
-    remove(message, args){
+    remove(message, args) {
         if (!ADMIN.some(e => e === message.author.id)) {
             sendError(message, "**You do not have access to this command**");
         }
@@ -304,7 +304,7 @@ class PlaylistCommand extends commando.Command {
         }
     }
 
-    help(message, args){
+    help(message, args) {
         const embed = new RichEmbed()
             .setTitle('List of commands')
             .setColor('#00FF00')
