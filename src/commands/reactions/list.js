@@ -17,7 +17,7 @@ class ListCommand extends commando.Command {
 
     async run(message) {
         if (!message.guild) {
-            sendError('Command unavailable through DM');
+            sendError(message, 'Command unavailable through DM');
         }
         else {
             Reaction.find({'server': message.guild.id}, 'name', (err, reactions) => {

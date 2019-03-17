@@ -319,7 +319,7 @@ class PlaylistCommand extends commando.Command {
 
     async run(message, {command, args}) {
         if (!message.guild) {
-            sendError('Command unavailable through DM');
+            sendError(message, 'Command unavailable through DM');
         }
         else if (command === 'play') {
             this.play(message, args);

@@ -30,7 +30,7 @@ class DeleteCommand extends commando.Command {
             sendError(message, "**You do not have access to this command**");
         }
         else if (!message.guild) {
-            sendError('Command unavailable through DM');
+            sendError(message, 'Command unavailable through DM');
         }
         else if (!name) {
             sendError(message, "**Specify reaction name to delete**");

@@ -14,7 +14,7 @@ class NowPlayingCommand extends commando.Command {
 
     async run(message) {
         if (!message.guild) {
-            sendError('Command unavailable through DM');
+            sendError(message, 'Command unavailable through DM');
         }
         else if (!message.guild.voiceConnection) {
             sendError(message, "**Bot must be in a voice channel**");

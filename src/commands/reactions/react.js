@@ -27,7 +27,7 @@ class ReactCommand extends commando.Command {
         name = name.split(" ")[0];
 
         if (!message.guild) {
-            sendError('Command unavailable through DM');
+            sendError(message, 'Command unavailable through DM');
         }
         else if (!name) {
             sendError(message, "**Specify reaction name**");

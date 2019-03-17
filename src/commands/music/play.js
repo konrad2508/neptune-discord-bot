@@ -65,7 +65,7 @@ class PlayCommand extends commando.Command {
 
     async run(message, {url}) {
         if (!message.guild) {
-            sendError('Command unavailable through DM');
+            sendError(message, 'Command unavailable through DM');
         }
         else if (message.guild.voiceConnection) {
             if (!url) {

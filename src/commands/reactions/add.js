@@ -33,7 +33,7 @@ class AddCommand extends commando.Command {
         url = url.split(" ")[0];
 
         if (!message.guild) {
-            sendError('Command unavailable through DM');
+            sendError(message, 'Command unavailable through DM');
         }
         else if (!name) {
             sendError(message, "**Specify reaction name to add**");

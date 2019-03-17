@@ -13,7 +13,7 @@ class JoinCommand extends commando.Command {
 
     async run(message) {
         if (!message.guild) {
-            sendError('Command unavailable through DM');
+            sendError(message, 'Command unavailable through DM');
         }
         else if (!message.member.voiceChannel) {
             sendError(message, "**You must be in a voice channel**");
