@@ -19,6 +19,6 @@
   "scripts": {
     "start": "node app.js"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "konrad2508",
+  "license": "MIT"
 }
