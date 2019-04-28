@@ -6,14 +6,13 @@
   "dependencies": {
     "discord.js": "^11.4.2",
     "discord.js-commando": "^0.10.0",
+    "express": "^4.17.0",
+    "fluent-ffmpeg": "^2.1.2",
     "mongoose": "^5.2.17",
-    "ffmpeg": "^0.0.4",
-    "jssoup": "^0.0.10",
-    "valid-url": "^1.0.9",
-    "youtube-dl": "^1.12.2",
     "opusscript": "^0.0.6",
-    "ytdl-core": "^0.26.2",
-    "express": "latest"
+    "valid-url": "^1.0.9",
+    "@microlink/youtube-dl": "^2.0.0",
+    "ytdl-core": "^0.29.2"
   },
   "devDependencies": {},
   "scripts": {

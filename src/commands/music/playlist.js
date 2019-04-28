@@ -3,7 +3,7 @@ const Playlist = require('../../schema/playlist.js');
 const {RichEmbed} = require('discord.js');
 const {sendOk, sendError, shuffle} = require('../../helpers/utils.js');
 const valid = require('valid-url');
-const YoutubeDL = require('youtube-dl');
+const YoutubeDL = require('@microlink/youtube-dl');
 const PlayCommand = require('./play.js');
 
 class PlaylistCommand extends commando.Command {

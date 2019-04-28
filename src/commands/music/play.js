@@ -1,6 +1,6 @@
 const commando = require('discord.js-commando');
 const YTDL = require('ytdl-core');
-const YoutubeDL = require('youtube-dl');
+const YoutubeDL = require('@microlink/youtube-dl');
 const {sendOk, sendError} = require('../../helpers/utils.js');
 const valid = require('valid-url');
 
@@ -75,8 +75,7 @@ class PlayCommand extends commando.Command {
                 if (!valid.isWebUri(url)) {
                     url = 'ytsearch1:' + url
                 }
-
-                YoutubeDL.getInfo(url, ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames'], null, (err, info) => {
+                YoutubeDL.getInfo(url, ['-q', '--force-ipv4', '--restrict-filenames', '--verbose'], null, (err, info) => {
                     if (info) {
                         let vid = {
                             url: info.webpage_url,
@@ -99,6 +98,7 @@ class PlayCommand extends commando.Command {
                     }
                     else {
                         sendError(message, "**Error while adding song to queue, try again or specify different song**");
+                        console.log(err);
                     }
                 });
             }
