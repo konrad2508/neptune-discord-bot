@@ -43,7 +43,7 @@ client.registry.registerGroup('reactions', 'Reactions')
 client.on('ready', () => {
     console.log('Client ready');
 
-    client.user.setActivity('!h for help')
+    client.user.setActivity(`${PREFIX}h for help`)
         .catch((err) => {
             console.log("set activity error:");
             console.log(err)

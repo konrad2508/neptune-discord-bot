@@ -308,12 +308,12 @@ class PlaylistCommand extends commando.Command {
         const embed = new RichEmbed()
             .setTitle('List of commands')
             .setColor('#00FF00')
-            .addField('```!playlist list [PlaylistName]```', 'Lists available playlists. If **PlaylistName** is specified, lists songs on that playlist.')
-            .addField('```!playlist play <PlaylistName>```', 'Plays specified playlist.')
-            .addField('```!playlist playshuffle <PlaylistName>```', 'Plays shuffled specified playlist.')
-            .addField('```!playlist new <Name>```', 'Creates a new playlist named **Name**.')
-            .addField('```!playlist add <PlaylistName> <URL | Query>```', 'Adds a song from **URL** or **Query** to **PlaylistName**.')
-            .addField('```!playlist delete <PlaylistName> <SongNumber>```', 'Removes song number **SongNumber** from the **PlaylistName**.');
+            .addField(`\`\`\`${PREFIX}playlist list [PlaylistName]\`\`\``, 'Lists available playlists. If **PlaylistName** is specified, lists songs on that playlist.')
+            .addField(`\`\`\`${PREFIX}playlist play <PlaylistName>\`\`\``, 'Plays specified playlist.')
+            .addField(`\`\`\`${PREFIX}playlist playshuffle <PlaylistName>\`\`\``, 'Plays shuffled specified playlist.')
+            .addField(`\`\`\`${PREFIX}playlist new <Name>\`\`\``, 'Creates a new playlist named **Name**.')
+            .addField(`\`\`\`${PREFIX}playlist add <PlaylistName> <URL | Query>\`\`\``, 'Adds a song from **URL** or **Query** to **PlaylistName**.')
+            .addField(`\`\`\`${PREFIX}playlist delete <PlaylistName> <SongNumber>\`\`\``, 'Removes song number **SongNumber** from the **PlaylistName**.');
         message.channel.send(embed);
     }
 
