@@ -13,6 +13,7 @@ class PlaylistCommand extends commando.Command {
             group: 'music',
             memberName: 'playlist',
             description: 'Manages everything playlist related',
+            aliases: ['pl'],
             args: [
                 {
                     key: 'command',
@@ -321,29 +322,37 @@ class PlaylistCommand extends commando.Command {
         if (!message.guild) {
             sendError(message, 'Command unavailable through DM');
         }
-        else if (command === 'play') {
-            this.play(message, args);
-        }
-        else if (command === 'playshuffle') {
-            this.playshuffle(message, args);
-        }
-        else if (command === 'list') {
-            this.list(message, args);
-        }
-        else if (command === 'new') {
-            this.new(message, args);
-        }
-        else if (command === 'add') {
-            this.add(message, args);
-        }
-        else if (command === 'delete') {
-            this.delete(message, args);
-        }
-        else if (command === 'remove') {
-            this.remove(message, args);
-        }
-        else {
-            this.help(message, args);
+        else switch (command) {
+            case 'play':
+            case 'p':
+                this.play(message, args);
+                break;
+            case 'playshuffle':
+            case 'ps':
+                this.playshuffle(message, args);
+                break;
+            case 'list':
+            case 'l':
+                this.list(message, args);
+                break;
+            case 'new':
+            case 'n':
+                this.new(message, args);
+                break;
+            case 'add':
+            case 'a':
+                this.add(message, args);
+                break;
+            case 'delete':
+            case 'd':
+                this.delete(message, args);
+                break;
+            case 'remove':
+            case 'r':
+                this.remove(message, args);
+                break;
+            default:
+                this.help(message, args);
         }
     }
 }
