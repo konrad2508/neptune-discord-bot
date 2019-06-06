@@ -1,8 +1,14 @@
+const util = require('util');
 const commando = require('discord.js-commando');
 const YTDL = require('ytdl-core');
 const YoutubeDL = require('@microlink/youtube-dl');
+const YoutubePlaylist = require('youtube-playlist');
 const {sendOk, sendError} = require('../../helpers/utils.js');
 const valid = require('valid-url');
+
+let options = ['-pl', '--playlist'];
+let playlistLinkRegex = /^https?:\/\/www\.youtube\.com\/playlist.*$/g;
+let playlistLinkWithVideoRegex = /^https?:\/\/www.youtube.com\/watch\?v=.*&list=.*$/g;
 
 class PlayCommand extends commando.Command {
     constructor(client) {
@@ -19,13 +25,19 @@ class PlayCommand extends commando.Command {
                     type: 'string',
                     prompt: 'Url of the song',
                     default: ''
+                },
+                {
+                    key: 'opt',
+                    type: 'string',
+                    prompt: 'Option',
+                    default: ''
                 }
             ]
 
         });
     }
 
-    static playFunc(message) {
+    static async playFunc(message) {
         let server = servers[message.guild.id];
         let connection = connections[message.guild.id];
 
@@ -36,8 +48,38 @@ class PlayCommand extends commando.Command {
         }
         else {
             info = server.queue[0];
-
             server.queue.shift();
+
+            if (!info.duration){
+                let keepSkipping;
+                let emptyQueue = false;
+                do {
+                    keepSkipping = false;
+
+                    const getBasicInfo = util.promisify(YTDL.getBasicInfo);
+                    await getBasicInfo(info.url)
+                        .then(res => info.duration = new Date(res.length_seconds * 1000).toISOString().substr(11, 8))
+                        .catch(err => {
+                            sendError(message, `**Could not play [${info.title}](${info.url}), skipping.**`);
+
+                            if (server.queue.length > 0) {
+                                keepSkipping = true;
+                                info = server.queue[0];
+                                server.queue.shift();
+                            } else{
+                                emptyQueue = true;
+                            }
+                        })
+                } while(keepSkipping);
+
+                if (emptyQueue) {
+                    servers[message.guild.id] = undefined;
+                    sendOk(message, "**Queue ended**");
+
+                    return;
+                }
+            }
+
             server.nowplaying = info;
         }
 
@@ -63,7 +105,7 @@ class PlayCommand extends commando.Command {
 
     }
 
-    async run(message, {url}) {
+    async run(message, {url, opt}) {
         if (!message.guild) {
             sendError(message, 'Command unavailable through DM');
         }
@@ -71,36 +113,78 @@ class PlayCommand extends commando.Command {
             if (!url) {
                 sendError(message, "**Specify URL of the song**");
             }
+            else if (opt && !options.some(e => e === opt)){
+                sendError(message, "**Unknown option**");
+            }
             else {
-                if (!valid.isWebUri(url)) {
-                    url = 'ytsearch1:' + url
-                }
-                YoutubeDL.getInfo(url, ['-q', '--force-ipv4', '--restrict-filenames', '--verbose'], null, (err, info) => {
-                    if (info) {
-                        let vid = {
-                            url: info.webpage_url,
-                            title: info.title,
-                            duration: info._duration_hms,
-                            loop: false,
-                            video: undefined,
-                            playlist: undefined
-                        };
-
-                        if (servers[message.guild.id]) {
-                            servers[message.guild.id].queue.push(vid);
-                            sendOk(message, `**Added [${vid.title}](${vid.url}) to the queue**`);
-                        }
-                        else {
-                            servers[message.guild.id] = {queue: []};
-                            servers[message.guild.id].queue.push(vid);
-                            PlayCommand.playFunc(message);
-                        }
+                if (opt === '-pl' || opt === '--playlist') {
+                    if (!url.match(playlistLinkRegex) && !url.match(playlistLinkWithVideoRegex)){
+                        sendError(message, "**Specified URL does not leads to a playlist. Try adding it to the queue without --playlist option.**");
                     }
                     else {
-                        sendError(message, "**Error while adding song to queue, try again or specify different song**");
-                        console.log(err);
+                        let urls;
+                        await YoutubePlaylist(url, ['url', 'name']).then(res => urls = res.data.playlist);
+
+                        if (urls.length < 1){
+                            sendError(message, `**Could not add the playlist to the queue**`);
+                        }
+                        else {
+                            urls = urls.map(el => {
+                                return {
+                                    url: el.url,
+                                    title: el.name,
+                                    duration: undefined,
+                                    loop: false,
+                                    video: undefined,
+                                    playlist: undefined
+                                };
+                            });
+
+                            if (servers[message.guild.id]) {
+                                urls.forEach(vid => servers[message.guild.id].queue.push(vid));
+                            } else {
+                                servers[message.guild.id] = {queue: []};
+                                urls.forEach(vid => servers[message.guild.id].queue.push(vid));
+                                PlayCommand.playFunc(message);
+                            }
+                            sendOk(message, `**Added ${urls.length} songs to the queue**`);
+                        }
                     }
-                });
+                }
+                else {
+                    if (url.match(playlistLinkRegex)){
+                        sendError(message, "**Specified URL leads to a playlist, not a song. Use --playlist option to extract songs from a playlist.**")
+                    }
+                    else {
+                        if (!valid.isWebUri(url)) {
+                            url = 'ytsearch1:' + url
+                        }
+                        YoutubeDL.getInfo(url, ['-q', '--force-ipv4', '--restrict-filenames', '--verbose'], null, (err, info) => {
+                            if (info) {
+                                let vid = {
+                                    url: info.webpage_url,
+                                    title: info.title,
+                                    duration: info._duration_hms,
+                                    loop: false,
+                                    video: undefined,
+                                    playlist: undefined
+                                };
+
+                                if (servers[message.guild.id]) {
+                                    servers[message.guild.id].queue.push(vid);
+                                    sendOk(message, `**Added [${vid.title}](${vid.url}) to the queue**`);
+                                } else {
+                                    servers[message.guild.id] = {queue: []};
+                                    servers[message.guild.id].queue.push(vid);
+                                    PlayCommand.playFunc(message);
+                                }
+                            } else {
+                                sendError(message, "**Error while adding song to queue, try again or specify different song**");
+                                console.log(err);
+                            }
+                        });
+                    }
+                }
             }
         }
         else {

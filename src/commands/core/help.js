@@ -21,7 +21,8 @@ class HelpCommand extends commando.Command {
             .addField(`\`\`\`${PREFIX}list\`\`\``, "Lists available reactions.")
             .addField(`\`\`\`${PREFIX}join\`\`\``, "Joins your voice channel.")
             .addField(`\`\`\`${PREFIX}leave\`\`\``, "Leaves voice channel.")
-            .addField(`\`\`\`${PREFIX}play <URL | Query>\`\`\``, "Plays song from **URL** or plays first song from YouTube based on **Query**.")
+            .addField(`\`\`\`${PREFIX}play <URL | Query> [--playlist]\`\`\``, "Plays song from **URL** or plays first song from YouTube based on **Query**." +
+                "\n**--playlist** specifies whether to extract songs from given YouTube playlist or not.")
             .addField(`\`\`\`${PREFIX}loop\`\`\``, "Loops (or unloops) currently playing song.")
             .addField(`\`\`\`${PREFIX}playlist\`\`\``, "Manages playlists.")
             .addField(`\`\`\`${PREFIX}nowplaying\`\`\``, "Shows information about the currently playing song.")

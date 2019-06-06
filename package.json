@@ -4,6 +4,7 @@
   "description": "Discord bot capable of playing music and saving emotes.",
   "main": "app.js",
   "dependencies": {
+    "@microlink/youtube-dl": "^2.0.0",
     "discord.js": "^11.4.2",
     "discord.js-commando": "^0.10.0",
     "express": "^4.17.0",
@@ -11,8 +12,8 @@
     "mongoose": "^5.2.17",
     "opusscript": "^0.0.6",
     "valid-url": "^1.0.9",
-    "@microlink/youtube-dl": "^2.0.0",
-    "ytdl-core": "^0.29.2"
+    "ytdl-core": "^0.29.2",
+    "youtube-playlist": "^1.0.2"
   },
   "devDependencies": {},
   "scripts": {
