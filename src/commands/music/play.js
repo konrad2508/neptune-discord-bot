@@ -2,13 +2,26 @@ const util = require('util');
 const commando = require('discord.js-commando');
 const YTDL = require('ytdl-core');
 const YoutubeDL = require('@microlink/youtube-dl');
+const valid = require('valid-url');
 const YoutubePlaylist = require('youtube-playlist');
 const {sendOk, sendError} = require('../../helpers/utils.js');
-const valid = require('valid-url');
 
-let options = ['-pl', '--playlist'];
-let playlistLinkRegex = /^https?:\/\/www\.youtube\.com\/playlist.*$/g;
-let playlistLinkWithVideoRegex = /^https?:\/\/www.youtube.com\/watch\?v=.*&list=.*$/g;
+
+const getBasicInfo = util.promisify(YTDL.getBasicInfo);
+const getInfo = util.promisify(YoutubeDL.getInfo);
+
+const extractInfo = (message) => {
+    let server = servers[message.guild.id];
+
+    let info = server.queue[0];
+    server.queue.shift();
+
+    return info
+};
+
+const options = ['-pl', '--playlist'];
+const playlistLinkRegex = /^https?:\/\/www\.youtube\.com\/playlist.*$/g;
+const videoLinkWithPlaylistRegex = /^https?:\/\/www.youtube.com\/watch\?v=.*&list=.*$/g;
 
 class PlayCommand extends commando.Command {
     constructor(client) {
@@ -45,18 +58,15 @@ class PlayCommand extends commando.Command {
 
         if (server.nowplaying && server.nowplaying.loop) {
             info = server.nowplaying;
-        }
-        else {
-            info = server.queue[0];
-            server.queue.shift();
+        } else {
+            info = extractInfo(message);
 
-            if (!info.duration){
+            if (!info.duration) {
                 let keepSkipping;
                 let emptyQueue = false;
                 do {
                     keepSkipping = false;
 
-                    const getBasicInfo = util.promisify(YTDL.getBasicInfo);
                     await getBasicInfo(info.url)
                         .then(res => info.duration = new Date(res.length_seconds * 1000).toISOString().substr(11, 8))
                         .catch(err => {
@@ -64,18 +74,16 @@ class PlayCommand extends commando.Command {
 
                             if (server.queue.length > 0) {
                                 keepSkipping = true;
-                                info = server.queue[0];
-                                server.queue.shift();
-                            } else{
+                                info = extractInfo(message);
+                            } else {
                                 emptyQueue = true;
                             }
                         })
-                } while(keepSkipping);
+                } while (keepSkipping);
 
                 if (emptyQueue) {
                     servers[message.guild.id] = undefined;
                     sendOk(message, "**Queue ended**");
-
                     return;
                 }
             }
@@ -95,8 +103,7 @@ class PlayCommand extends commando.Command {
             if (server.queue) {
                 if (server.queue[0] || server.nowplaying.loop) {
                     PlayCommand.playFunc(message);
-                }
-                else {
+                } else {
                     servers[message.guild.id] = undefined;
                     sendOk(message, "**Queue ended**");
                 }
@@ -108,27 +115,22 @@ class PlayCommand extends commando.Command {
     async run(message, {url, opt}) {
         if (!message.guild) {
             sendError(message, 'Command unavailable through DM');
-        }
-        else if (message.guild.voiceConnection) {
+        } else if (message.guild.voiceConnection) {
             if (!url) {
                 sendError(message, "**Specify URL of the song**");
-            }
-            else if (opt && !options.some(e => e === opt)){
+            } else if (opt && !options.some(e => e === opt)) {
                 sendError(message, "**Unknown option**");
-            }
-            else {
+            } else {
                 if (opt === '-pl' || opt === '--playlist') {
-                    if (!url.match(playlistLinkRegex) && !url.match(playlistLinkWithVideoRegex)){
+                    if (!url.match(playlistLinkRegex) && !url.match(videoLinkWithPlaylistRegex)) {
                         sendError(message, "**Specified URL does not leads to a playlist. Try adding it to the queue without --playlist option.**");
-                    }
-                    else {
+                    } else {
                         let urls;
                         await YoutubePlaylist(url, ['url', 'name']).then(res => urls = res.data.playlist);
 
-                        if (urls.length < 1){
+                        if (urls.length < 1) {
                             sendError(message, `**Could not add the playlist to the queue**`);
-                        }
-                        else {
+                        } else {
                             urls = urls.map(el => {
                                 return {
                                     url: el.url,
@@ -150,17 +152,16 @@ class PlayCommand extends commando.Command {
                             sendOk(message, `**Added ${urls.length} songs to the queue**`);
                         }
                     }
-                }
-                else {
-                    if (url.match(playlistLinkRegex)){
+                } else {
+                    if (url.match(playlistLinkRegex)) {
                         sendError(message, "**Specified URL leads to a playlist, not a song. Use --playlist option to extract songs from a playlist.**")
-                    }
-                    else {
+                    } else {
                         if (!valid.isWebUri(url)) {
                             url = 'ytsearch1:' + url
                         }
-                        YoutubeDL.getInfo(url, ['-q', '--force-ipv4', '--restrict-filenames', '--verbose'], null, (err, info) => {
-                            if (info) {
+
+                        getInfo(url, ['-q', '--force-ipv4', '--restrict-filenames', '--verbose'])
+                            .then(info => {
                                 let vid = {
                                     url: info.webpage_url,
                                     title: info.title,
@@ -178,16 +179,15 @@ class PlayCommand extends commando.Command {
                                     servers[message.guild.id].queue.push(vid);
                                     PlayCommand.playFunc(message);
                                 }
-                            } else {
+                            })
+                            .catch(err => {
                                 sendError(message, "**Error while adding song to queue, try again or specify different song**");
                                 console.log(err);
-                            }
-                        });
+                            });
                     }
                 }
             }
-        }
-        else {
+        } else {
             sendError(message, "**Bot must be in a voice channel**");
         }
 
