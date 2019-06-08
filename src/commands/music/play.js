@@ -34,17 +34,18 @@ class PlayCommand extends commando.Command {
             aliases: ['p'],
             args: [
                 {
-                    key: 'url',
-                    type: 'string',
-                    prompt: 'Url of the song',
-                    default: ''
-                },
-                {
                     key: 'opt',
                     type: 'string',
                     prompt: 'Option',
                     default: ''
+                },
+                {
+                    key: 'url',
+                    type: 'string',
+                    prompt: 'Url of the song',
+                    default: ''
                 }
+
             ]
 
         });
@@ -112,7 +113,12 @@ class PlayCommand extends commando.Command {
 
     }
 
-    async run(message, {url, opt}) {
+    async run(message, {opt, url}) {
+        if (!opt.match(/^-.*$/g)){
+            url = url ? `${opt} ${url}` : opt;
+            opt = '';
+        }
+
         if (!message.guild) {
             sendError(message, 'Command unavailable through DM');
         } else if (message.guild.voiceConnection) {
