@@ -56,7 +56,7 @@ class PlaylistCommand extends commando.Command {
                     else {
                         servers[message.guild.id] = {queue: ret.songs};
                         sendOk(message, `**Playing playlist ${playlistName}**`);
-                        PlayCommand.playFunc(message);
+                        PlayCommand.playSong(message);
                     }
                 });
 
@@ -91,7 +91,7 @@ class PlaylistCommand extends commando.Command {
                         let playlistSongs = shuffle(ret.songs);
                         servers[message.guild.id] = {queue: playlistSongs};
                         sendOk(message, `**Playing shuffled playlist ${playlistName}**`);
-                        PlayCommand.playFunc(message);
+                        PlayCommand.playSong(message);
                     }
                 });
 
