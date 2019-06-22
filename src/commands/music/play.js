@@ -83,7 +83,9 @@ class PlayCommand extends commando.Command {
 
   async run(message, { opt, url }) {
     if (!opt.match(optionRegex)) {
-      url = url ? `${opt} ${url}` : opt;
+      url = url
+        ? `${opt} ${url}`
+        : opt;
       opt = '';
     }
 
