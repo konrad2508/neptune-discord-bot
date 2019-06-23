@@ -1,63 +1,66 @@
-const {RichEmbed} = require('discord.js');
+const { RichEmbed } = require('discord.js');
 
-function shuffle(array){
-    let currIndex = array.length;
+const shuffle = (array) => {
+  let currIndex = array.length;
 
-    while(currIndex !== 0){
-        let randIndex = Math.floor(Math.random() * currIndex);
-        currIndex -= 1;
+  while (currIndex !== 0) {
+    const randIndex = Math.floor(Math.random() * currIndex);
+    currIndex -= 1;
 
-        let temp = array[randIndex];
-        array[randIndex] = array[currIndex];
-        array[currIndex] = temp;
-    }
+    const temp = array[randIndex];
+    array[randIndex] = array[currIndex];
+    array[currIndex] = temp;
+  }
 
-    return array;
-}
+  return array;
+};
 
-function songTime(curr, max) {
-    let currSeconds = (curr / 1000).toFixed(0);
-    let currMinutes = Math.floor(currSeconds / 60);
-    let currHours = "00";
+const songTime = (curr, max) => {
+  let currSeconds = (curr / 1000).toFixed(0);
+  let currMinutes = Math.floor(currSeconds / 60);
+  let currHours = '00';
 
-    let maxSeconds = max.split(":")[2];
-    let maxMinutes = max.split(":")[1];
-    let maxHours = max.split(":")[0];
+  const [maxHours, maxMinutes, maxSeconds] = max.split(':');
 
-    if (currMinutes > 59) {
-        currHours = Math.floor(currMinutes / 60);
-        currHours = (currHours >= 10) ? currHours : "0" + currHours;
+  if (currMinutes > 59) {
+    currHours = Math.floor(currMinutes / 60);
+    currHours = (currHours >= 10)
+      ? currHours
+      : `0${currHours}`;
 
-        currMinutes = currMinutes - (currHours * 60);
-    }
+    currMinutes -= (currHours * 60);
+  }
 
-    currMinutes = (currMinutes >= 10) ? currMinutes : "0" + currMinutes;
+  currMinutes = (currMinutes >= 10)
+    ? currMinutes
+    : `0${currMinutes}`;
 
-    currSeconds = Math.floor(currSeconds % 60);
-    currSeconds = (currSeconds >= 10) ? currSeconds : "0" + currSeconds;
+  currSeconds = Math.floor(currSeconds % 60);
+  currSeconds = (currSeconds >= 10)
+    ? currSeconds
+    : `0${currSeconds}`;
 
-    if (maxHours !== "00") {
-        return currHours + ":" + currMinutes + ":" + currSeconds + "/" + maxHours + ":" + maxMinutes + ":" + maxSeconds;
-    } else {
-        return currMinutes + ":" + currSeconds + "/" + maxMinutes + ":" + maxSeconds;
-    }
-}
+  return (maxHours !== '00')
+    ? `${currHours}:${currMinutes}:${currSeconds}/${maxHours}:${maxMinutes}:${maxSeconds}`
+    : `${currMinutes}:${currSeconds}/${maxMinutes}:${maxSeconds}`;
+};
 
-function sendOk(message, text){
-    const embed = new RichEmbed()
-        .setColor('#00FF00')
-        .setDescription(text);
-    message.channel.send(embed);
-}
+const sendOk = (message, text) => {
+  const embed = new RichEmbed()
+    .setColor('#00FF00')
+    .setDescription(text);
 
-function sendError(message, text){
-    const embed = new RichEmbed()
-        .setColor('#FF0000')
-        .setDescription(text);
-    message.channel.send(embed);
-}
+  message.channel.send(embed);
+};
 
-module.exports.sendOk = sendOk;
-module.exports.sendError = sendError;
-module.exports.songTime = songTime;
-module.exports.shuffle = shuffle;
+const sendError = (message, text) => {
+  const embed = new RichEmbed()
+    .setColor('#FF0000')
+    .setDescription(text);
+
+  message.channel.send(embed);
+};
+
+module.exports = {
+  sendOk, sendError, songTime, shuffle,
+};

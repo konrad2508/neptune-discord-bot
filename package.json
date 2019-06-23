@@ -21,7 +21,7 @@
     "eslint-plugin-import": "^2.17.3"
   },
   "scripts": {
-    "start": "node app.js"
+    "start": "./node_modules/@microlink/youtube-dl/bin/youtube-dl -U && node app.js"
   },
   "author": "konrad2508",
   "license": "MIT"

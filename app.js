@@ -7,14 +7,11 @@ const express = require('express');
 require('./config.js');
 
 global.optsYTDL = { filter: 'audioonly', quality: 'highestaudio' };
-global.optsYoutubeDL = ['-q', '--no-warnings', '--force-ipv4', '--restrict-filenames'];
+global.optsYoutubeDL = ['--no-warnings', '--force-ipv4', '--restrict-filenames'];
 global.servers = {};
 global.connections = {};
 
-if (IS_HEROKU_APP) {
-  const app = express();
-  app.listen(PORT);
-}
+if (IS_HEROKU_APP) express().listen(PORT);
 
 mongoose.connect(DB_URL, {
   user: DB_USER,
@@ -28,16 +25,15 @@ mongoose.connect(DB_URL, {
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'database connection error:'));
-db.once('open', () => {
-  console.log('Connection open');
-});
+db.once('open', () => console.log('Connection open'));
 
 const client = new commando.Client({
   commandPrefix: PREFIX,
   unknownCommandResponse: false,
 });
 
-client.registry.registerGroup('reactions', 'Reactions')
+client.registry
+  .registerGroup('reactions', 'Reactions')
   .registerGroup('music', 'Music')
   .registerGroup('core', 'Core')
   .registerDefaultTypes()
@@ -52,11 +48,7 @@ client.on('ready', () => {
       console.log(err);
     });
 
-  if (IS_HEROKU_APP) {
-    setInterval(() => {
-      https.get(APP_URL);
-    }, 300000);
-  }
+  if (IS_HEROKU_APP) setInterval(() => https.get(APP_URL), 300000);
 });
 
 client.on('error', (err) => {
