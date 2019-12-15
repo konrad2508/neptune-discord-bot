@@ -1,6 +1,7 @@
 /* globals connections */
 const commando = require('discord.js-commando');
 const { sendOk, sendError } = require('../../helpers/utils.js');
+const fs = require('fs');
 
 class JoinCommand extends commando.Command {
   constructor(client) {
@@ -18,6 +19,10 @@ class JoinCommand extends commando.Command {
     else if (message.guild.voiceConnection) sendError(message, '**Bot is already in the voice channel**');
     else {
       connections[message.guild.id] = await message.member.voiceChannel.join();
+      
+      const greetingStream = fs.createReadStream('./static/nepgya.mp3');
+      connections[message.guild.id].playStream(greetingStream);
+      
       sendOk(message, '**Joined voice channel**');
     }
   }
