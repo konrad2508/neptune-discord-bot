@@ -28,7 +28,8 @@ class HelpCommand extends commando.Command {
       .addField(`\`\`\`${PREFIX}playlist\`\`\``, 'Manages playlists.')
       .addField(`\`\`\`${PREFIX}nowplaying\`\`\``, 'Shows information about the currently playing song.')
       .addField(`\`\`\`${PREFIX}queue\`\`\``, 'Shows song queue.')
-      .addField(`\`\`\`${PREFIX}skip\`\`\``, 'Skips currently playing song.');
+      .addField(`\`\`\`${PREFIX}skip\`\`\``, 'Skips currently playing song.')
+      .addField(`\`\`\`${PREFIX}purge\`\`\``, 'Clears the song queue.');
 
     message.channel.send(embed);
   }
