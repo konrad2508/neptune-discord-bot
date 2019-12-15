@@ -21,7 +21,7 @@ class JoinCommand extends commando.Command {
       connections[message.guild.id] = await message.member.voiceChannel.join();
       
       const greetingStream = fs.createReadStream('./static/nepgya.mp3');
-      connections[message.guild.id].playStream(greetingStream);
+      connections[message.guild.id].playStream(greetingStream).setVolume(25);
       
       sendOk(message, '**Joined voice channel**');
     }
