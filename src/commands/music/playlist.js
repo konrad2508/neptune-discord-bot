@@ -2,7 +2,7 @@
 const util = require('util');
 const commando = require('discord.js-commando');
 const valid = require('valid-url');
-const YoutubeDL = require('@microlink/youtube-dl');
+const YoutubeDL = require('youtube-dl');
 const { RichEmbed } = require('discord.js');
 const Playlist = require('../../schema/playlist.js');
 const PlayCommand = require('./play.js');

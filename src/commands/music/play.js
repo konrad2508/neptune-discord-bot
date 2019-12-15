@@ -2,7 +2,7 @@
 const util = require('util');
 const commando = require('discord.js-commando');
 const YTDL = require('ytdl-core');
-const YoutubeDL = require('@microlink/youtube-dl');
+const YoutubeDL = require('youtube-dl');
 const valid = require('valid-url');
 const YoutubePlaylist = require('youtube-playlist');
 const { sendOk, sendError } = require('../../helpers/utils.js');
