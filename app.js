@@ -13,10 +13,9 @@ global.connections = {};
 
 if (IS_HEROKU_APP) express().listen(PORT);
 
-mongoose.connect(DB_URL, {
-  user: DB_USER,
-  pass: DB_PASS,
-  useNewUrlParser: true,
+let connString = `mongodb://${DB_USER}:${DB_PASS}${DB_URL}`;
+mongoose.connect(connString, {
+  useNewUrlParser: true
 })
   .catch((err) => {
     console.log('database connect error:');
