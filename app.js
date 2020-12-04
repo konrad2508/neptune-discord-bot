@@ -13,7 +13,7 @@ global.connections = {};
 
 if (IS_HEROKU_APP) express().listen(PORT);
 
-let connString = `mongodb://${DB_USER}:${DB_PASS}${DB_URL}`;
+let connString = `mongodb+srv://${DB_USER}:${DB_PASS}${DB_URL}`;
 mongoose.connect(connString, {
   useNewUrlParser: true
 })
