@@ -13,7 +13,7 @@
     "opusscript": "^0.0.6",
     "valid-url": "^1.0.9",
     "youtube-playlist": "^1.0.2",
-    "ytdl-core": "^2.1.7"
+    "ytdl-core": "^4.1.2"
   },
   "devDependencies": {
     "eslint": "^5.16.0",
