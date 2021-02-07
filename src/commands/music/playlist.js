@@ -3,7 +3,7 @@ const util = require('util');
 const commando = require('discord.js-commando');
 const valid = require('valid-url');
 const YoutubeDL = require('youtube-dl');
-const { RichEmbed } = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const Playlist = require('../../schema/playlist.js');
 const PlayCommand = require('./play.js');
 const { sendOk, sendError, shuffle } = require('../../helpers/utils.js');
@@ -82,7 +82,7 @@ const handlePlay = (message, args) => {
     opt = '';
   }
 
-  if (!message.guild.voiceConnection) sendError(message, '**Bot must be in a voice channel**');
+  if (!message.member.voice.channel) sendError(message, '**Bot must be in a voice channel**');
   else if (!playlistName) sendError(message, '**Specify name of the playlist**');
   else if (opt && !playOptions.some(e => e === opt)) sendError(message, '**Unknown option**');
   else {
@@ -128,14 +128,14 @@ const handleList = (message, args) => {
 
 const listAll = (message, ret) => {
   if (ret.length) {
-    const embed = new RichEmbed()
+    const embed = new MessageEmbed()
       .setTitle('List of playlists')
       .setColor('#00FF00')
       .setDescription(ret.map(el => el.name).join('\n'));
 
     message.channel.send(embed);
   } else {
-    const embed = new RichEmbed()
+    const embed = new MessageEmbed()
       .setTitle('List of playlists')
       .setColor('#00FF00')
       .setDescription('No playlists added');
@@ -284,7 +284,7 @@ const handleDelete = (message, args) => {
 };
 
 const handleHelp = (message) => {
-  const embed = new RichEmbed()
+  const embed = new MessageEmbed()
     .setTitle('List of commands')
     .setColor('#00FF00')
     .addField(`\`\`\`${PREFIX}playlist list [PlaylistName]\`\`\``, 'Lists available playlists. If **PlaylistName** is specified, lists songs on that playlist.')

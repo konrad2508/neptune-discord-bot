@@ -67,8 +67,8 @@ class PlayCommand extends commando.Command {
       ? YTDL(info.url, optsYTDL)
       : YoutubeDL(info.url, optsYoutubeDL, undefined);
 
-    server.dispatcher = connection.playStream(song);
-    server.dispatcher.on('end', () => {
+    server.dispatcher = connection.play(song);
+    server.dispatcher.on('finish', () => {
       if (server.queue) {
         if (server.queue[0] || server.nowplaying.loop) PlayCommand.playSong(message);
         else {
@@ -90,7 +90,7 @@ class PlayCommand extends commando.Command {
     }
 
     if (!message.guild) sendError(message, 'Command unavailable through DM');
-    else if (!message.guild.voiceConnection) sendError(message, '**Bot must be in a voice channel**');
+    else if (!message.member.voice.channel) sendError(message, '**Bot must be in a voice channel**');
     else if (!url) sendError(message, '**Specify URL of the song**');
     else if (opt && !playOptions.some(e => e === opt)) sendError(message, '**Unknown option**');
     else await handleUrl(message, opt, url);

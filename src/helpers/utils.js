@@ -1,4 +1,4 @@
-const { RichEmbed } = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 
 const shuffle = (array) => {
   let currIndex = array.length;
@@ -46,7 +46,7 @@ const songTime = (curr, max) => {
 };
 
 const sendOk = (message, text) => {
-  const embed = new RichEmbed()
+  const embed = new MessageEmbed()
     .setColor('#00FF00')
     .setDescription(text);
 
@@ -54,7 +54,7 @@ const sendOk = (message, text) => {
 };
 
 const sendError = (message, text) => {
-  const embed = new RichEmbed()
+  const embed = new MessageEmbed()
     .setColor('#FF0000')
     .setDescription(text);
 

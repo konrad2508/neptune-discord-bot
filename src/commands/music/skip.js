@@ -17,7 +17,7 @@ class SkipCommand extends commando.Command {
     const server = servers[message.guild.id];
 
     if (!message.guild) sendError(message, 'Command unavailable through DM');
-    else if (!message.guild.voiceConnection) sendError(message, '**Bot must be in a voice channel**');
+    else if (!message.member.voice.channel) sendError(message, '**Bot must be in a voice channel**');
     else if (!server) sendError(message, '**No song is currently playing**');
     else {
       if (server.nowplaying.loop) server.nowplaying.loop = false;

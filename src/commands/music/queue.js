@@ -17,7 +17,7 @@ class QueueCommand extends commando.Command {
     const server = servers[message.guild.id];
 
     if (!message.guild) sendError(message, 'Command unavailable through DM');
-    else if (!message.guild.voiceConnection) sendError(message, '**Bot must be in a voice channel**');
+    else if (!message.member.voice.channel) sendError(message, '**Bot must be in a voice channel**');
     else if (!server) sendOk(message, '**The queue is empty**');
     else {
       const numberOfSongs = servers[message.guild.id].queue.length + 1;

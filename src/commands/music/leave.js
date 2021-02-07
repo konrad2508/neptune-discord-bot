@@ -14,9 +14,9 @@ class LeaveCommand extends commando.Command {
 
   async run(message) {
     if (!message.guild) sendError(message, 'Command unavailable through DM');
-    else if (!message.guild.voiceConnection) sendError(message, '**Bot is not in a voice channel**');
+    else if (!message.guild.voice?.connection) sendError(message, '**Bot is not in a voice channel**');
     else {
-      message.guild.voiceConnection.disconnect();
+      message.guild.voice.connection.disconnect();
       connections[message.guild.id] = null;
 
       if (servers[message.guild.id]) servers[message.guild.id] = null;

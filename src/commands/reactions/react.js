@@ -1,5 +1,5 @@
 const commando = require('discord.js-commando');
-const { RichEmbed } = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const Reaction = require('../../schema/reaction.js');
 const { sendError } = require('../../helpers/utils.js');
 
@@ -43,7 +43,7 @@ class ReactCommand extends commando.Command {
 }
 
 const react = (message, ret) => {
-  const embed = new RichEmbed()
+  const embed = new MessageEmbed()
     .setColor('#00FF00')
     .setTitle(`${message.member.user.tag} reacts with ${ret.name}`)
     .setImage(ret.url);

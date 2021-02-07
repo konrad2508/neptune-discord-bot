@@ -1,6 +1,6 @@
 /* globals PREFIX */
 const commando = require('discord.js-commando');
-const { RichEmbed } = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 
 class HelpCommand extends commando.Command {
   constructor(client) {
@@ -14,7 +14,7 @@ class HelpCommand extends commando.Command {
   }
 
   async run(message) {
-    const embed = new RichEmbed()
+    const embed = new MessageEmbed()
       .setTitle('List of commands')
       .setColor('#00FF00')
       .addField(`\`\`\`${PREFIX}react Name\`\`\``, 'Reacts with **Name**.')

@@ -1,5 +1,5 @@
 const commando = require('discord.js-commando');
-const { RichEmbed } = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const Reaction = require('../../schema/reaction.js');
 const { sendError } = require('../../helpers/utils.js');
 
@@ -28,7 +28,7 @@ class ListCommand extends commando.Command {
 }
 
 const listReactions = (message, ret) => {
-  const embed = new RichEmbed()
+  const embed = new MessageEmbed()
     .setTitle('List of reactions')
     .setColor('#00FF00');
 

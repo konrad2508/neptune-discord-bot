@@ -15,13 +15,13 @@ class JoinCommand extends commando.Command {
 
   async run(message) {
     if (!message.guild) sendError(message, 'Command unavailable through DM');
-    else if (!message.member.voiceChannel) sendError(message, '**You must be in a voice channel**');
-    else if (message.guild.voiceConnection) sendError(message, '**Bot is already in the voice channel**');
+    else if (!message.member.voice.channel) sendError(message, '**You must be in a voice channel**');
+    else if (message.guild.voice?.connection) sendError(message, '**Bot is already in a voice channel**');
     else {
-      connections[message.guild.id] = await message.member.voiceChannel.join();
+      connections[message.guild.id] = await message.member.voice.channel.join();
       
       const greetingStream = fs.createReadStream('./static/nepu.mp3');
-      connections[message.guild.id].playStream(greetingStream).setVolume(25);
+      connections[message.guild.id].play(greetingStream).setVolume(25);
       
       sendOk(message, '**Joined voice channel**');
     }
