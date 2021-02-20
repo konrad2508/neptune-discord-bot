@@ -1,19 +1,23 @@
-/* globals IS_HEROKU_APP PORT DB_URL DB_USER DB_PASS PREFIX APP_URL BOT_TOKEN */
-const commando = require('discord.js-commando');
-const mongoose = require('mongoose');
-const https = require('https');
-const express = require('express');
+import mongoose from 'mongoose';
+import https from 'https';
+import express from 'express';
+import { Client, CommandoClientOptions } from 'discord.js-commando';
 
-require('./config.js');
+import config from './config';
 
+// configure global variables
 global.optsYTDL = { filter: 'audioonly', quality: 'highestaudio' };
 global.optsYoutubeDL = ['--no-warnings', '--force-ipv4', '--restrict-filenames'];
 global.servers = {};
 global.connections = {};
 
-if (IS_HEROKU_APP) express().listen(PORT);
+// start listening on port
+if (config.IS_HEROKU_APP) {
+  express().listen(config.PORT);
+}
 
-let connString = `mongodb+srv://${DB_USER}:${DB_PASS}${DB_URL}`;
+// connect to database
+const connString = `mongodb+srv://${config.DB_USER}:${config.DB_PASS}${config.DB_URL}`;
 mongoose.connect(connString, {
   useNewUrlParser: true
 })
@@ -26,28 +30,31 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'database connection error:'));
 db.once('open', () => console.log('Connection open'));
 
-const client = new commando.Client({
-  commandPrefix: PREFIX,
-  unknownCommandResponse: false,
-});
+// configure discord client
+const clientOptions: CommandoClientOptions = {
+  commandPrefix: config.PREFIX
+};
+const client = new Client(clientOptions);
 
 client.registry
   .registerGroup('reactions', 'Reactions')
   .registerGroup('music', 'Music')
   .registerGroup('core', 'Core')
   .registerDefaultTypes()
-  .registerCommandsIn(`${__dirname}/src/commands`);
+  .registerCommandsIn(`${__dirname}/commands`);
 
 client.on('ready', () => {
   console.log('Client ready');
 
-  client.user.setActivity(`${PREFIX}h for help`)
+  client.user.setActivity(`${config.PREFIX}h for help`)
     .catch((err) => {
       console.log('set activity error:');
       console.log(err);
     });
 
-  if (IS_HEROKU_APP) setInterval(() => https.get(APP_URL), 300000);
+  if (config.IS_HEROKU_APP){
+    setInterval(() => https.get(config.APP_URL), 300000);
+  }
 });
 
 client.on('error', (err) => {
@@ -55,7 +62,7 @@ client.on('error', (err) => {
   console.log(err);
 });
 
-client.login(BOT_TOKEN)
+client.login(config.BOT_TOKEN)
   .catch((err) => {
     console.log('login attempt error:');
     console.log(err);

@@ -48,7 +48,6 @@ bower_components
 # misc
 .sass-cache
 connect.lock
-typings
 
 # Logs
 logs
@@ -92,3 +91,6 @@ Thumbs.db
 
 # package lock
 package-lock.json
+
+# User defined
+.vscode/
