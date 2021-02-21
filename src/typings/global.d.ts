@@ -1,8 +1,12 @@
-declare namespace NodeJS {
-  interface Global {
-    optsYTDL: any,
-    optsYoutubeDL: any,
-    servers: any,
-    connections: any
+import { downloadOptions } from 'ytdl-core';
+import { ServerInfo } from './serverinfo';
+
+declare global {
+  namespace NodeJS {
+    interface Global {
+      optsYTDL: downloadOptions,
+      optsYoutubeDL: string[],
+      servers: Record<string, ServerInfo>
+    }
   }
 }

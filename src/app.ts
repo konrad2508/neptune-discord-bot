@@ -9,7 +9,6 @@ import config from './config';
 global.optsYTDL = { filter: 'audioonly', quality: 'highestaudio' };
 global.optsYoutubeDL = ['--no-warnings', '--force-ipv4', '--restrict-filenames'];
 global.servers = {};
-global.connections = {};
 
 // start listening on port
 if (config.IS_HEROKU_APP) {
