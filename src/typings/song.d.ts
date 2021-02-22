@@ -3,5 +3,6 @@ interface Song {
   title: string,
   duration: string,
   isLooping: boolean,
-  playlist?: string
+  useOpus: boolean,
+  playlist: string
 }
