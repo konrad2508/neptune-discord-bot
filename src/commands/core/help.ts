@@ -1,6 +1,5 @@
 import { Command, CommandInfo, CommandoClient, CommandoMessage } from 'discord.js-commando';
 import { MessageEmbed } from 'discord.js';
-
 import config from '../../config';
 
 class HelpCommand extends Command {

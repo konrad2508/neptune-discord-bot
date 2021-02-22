@@ -1,5 +1,5 @@
-import mongoose, { Schema } from 'mongoose';
 import { Reaction } from '../typings/reaction';
+import mongoose, { Schema } from 'mongoose';
 
 const reaction = new Schema({
     server: { type: String, required: true },

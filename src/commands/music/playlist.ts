@@ -3,9 +3,9 @@ import { MessageEmbed } from 'discord.js';
 import { sendOk, sendError, shuffle } from '../../helpers/utils.js';
 import { findSong, playSong } from '../../helpers/musicplayer';
 import { optionRegex } from '../../helpers/strings';
+import { Playlist } from '../../typings/playlist';
 import PlaylistRepository from '../../schema/playlist';
 import config from '../../config';
-import { Playlist } from '../../typings/playlist';
 
 const playOptions = ['-sh', '--shuffle'];
 

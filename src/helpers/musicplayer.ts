@@ -1,10 +1,10 @@
-import YTDL from 'ytdl-core-discord';
-import yts, { PlaylistItem, VideoMetadataResult, VideoSearchResult } from 'yt-search';
-import YoutubeDL from 'youtube-dl';
-import util from 'util';
 import { CommandoMessage } from 'discord.js-commando';
 import { extractDomain, sendOk } from './utils';
 import { youtubePlaylistLinkRegex, youtubeWatchLinkWithPlaylistRegex, youtubeWatchLinkRegex, youtubeWatchBaseUrl } from './strings';
+import yts, { PlaylistItem, VideoMetadataResult, VideoSearchResult } from 'yt-search';
+import YTDL from 'ytdl-core-discord';
+import YoutubeDL from 'youtube-dl';
+import util from 'util';
 
 const otherDomains = ['soundcloud.com', 'nicovideo.jp'];
 const getInfo = util.promisify(YoutubeDL.getInfo);

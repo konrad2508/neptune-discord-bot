@@ -1,8 +1,7 @@
+import { Client, CommandoClientOptions } from 'discord.js-commando';
 import mongoose from 'mongoose';
 import https from 'https';
 import express from 'express';
-import { Client, CommandoClientOptions } from 'discord.js-commando';
-
 import config from './config';
 
 // configure global variables
