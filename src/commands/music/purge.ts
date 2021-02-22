@@ -39,7 +39,7 @@ class PurgeCommand extends Command {
     server.nowPlaying.isLooping = false;
 
     server.dispatcher.end();
-    
+
     sendOk(message, '**Cleared the queue**');
   }
 }

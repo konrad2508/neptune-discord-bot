@@ -1,11 +1,9 @@
 import { Command, CommandInfo, CommandoClient, CommandoMessage } from 'discord.js-commando';
-import { findSong, playSong } from '../../helpers/musicplayer';
+import { findSong, findPlaylistVideos, playSong } from '../../helpers/musicplayer';
+import { optionRegex, youtubePlaylistLinkRegex, youtubeWatchLinkWithPlaylistRegex } from '../../helpers/strings';
 import { sendError, sendOk } from '../../helpers/utils';
 
 const playlistOptions = ['-pl', '--playlist'];
-const optionRegex = /^-.*$/g;
-const playlistLinkRegex = /^https?:\/\/www\.youtube\.com\/playlist.*$/g;
-const videoLinkWithPlaylistRegex = /^https?:\/\/www.youtube.com\/watch\?v=.*&list=.*$/g;
 
 class PlayCommand extends Command {
   public constructor(client: CommandoClient) {
@@ -39,7 +37,7 @@ class PlayCommand extends Command {
     const serverId = message.guild.id;
     const server = global.servers[serverId];
 
-    const [option, link] = this.fixArgs(opt, url);
+    const [ option, link ] = this.fixArgs(opt, url);
 
     if (!message.guild) {
       sendError(message, 'Command unavailable through DM');
@@ -74,24 +72,53 @@ class PlayCommand extends Command {
     }
   }
 
-  private handleOptionCase(message: CommandoMessage, option: string, link: string): void {
+  private async handleOptionCase(message: CommandoMessage, option: string, link: string): Promise<void> {
     if (!playlistOptions.some(e => e === option)) {
       sendError(message, '**Unknown option**');
 
       return;
     }
 
-    if (!link.match(playlistLinkRegex) && !link.match(videoLinkWithPlaylistRegex)) {
+    if (!link.match(youtubePlaylistLinkRegex) && !link.match(youtubeWatchLinkWithPlaylistRegex)) {
       sendError(message, '**Specified URL does not leads to a playlist. Try adding it to the queue without --playlist option.**');
 
       return;
     }
 
-    //TODO implement
-    sendError(message, '**Could not add the playlist to the queue**');
+    const serverId = message.guild.id;
+    const server = global.servers[serverId];
+
+    const { songs, deletedSongs } = await findPlaylistVideos(link);
+
+    if (songs.length == 0) {
+      sendError(message, '**Could not add the playlist to the queue**');
+
+      return;
+    }
+
+    let okMessage = `**Added ${songs.length} songs to the queue`;
+    if (deletedSongs > 0) {
+      okMessage += `\nCould not add ${deletedSongs} songs`;
+    }
+    okMessage += '**';
+
+    if (server.songQueue) {
+      server.songQueue = [...server.songQueue, ...songs];
+      sendOk(message, okMessage);
+    } else {
+      server.songQueue = songs;
+      sendOk(message, okMessage);
+      playSong(message);
+    }
   }
 
   private async handleOptionlessCase(message: CommandoMessage, link: string): Promise<void> {
+    if (link.match(youtubePlaylistLinkRegex)) {
+      sendError(message, '**Specified URL leads to a playlist. Try adding it to the queue with --playlist option.**');
+
+      return;
+    }
+    
     const serverId = message.guild.id;
     const server = global.servers[serverId];
     

@@ -1,9 +1,10 @@
 import YTDL from 'ytdl-core-discord';
-import yts from 'yt-search';
+import yts, { PlaylistItem, VideoMetadataResult, VideoSearchResult } from 'yt-search';
 import YoutubeDL from 'youtube-dl';
 import util from 'util';
 import { CommandoMessage } from 'discord.js-commando';
 import { extractDomain, sendOk } from './utils';
+import { youtubePlaylistLinkRegex, youtubeWatchLinkWithPlaylistRegex, youtubeWatchLinkRegex, youtubeWatchBaseUrl } from './strings';
 
 const otherDomains = ['soundcloud.com', 'nicovideo.jp'];
 const getInfo = util.promisify(YoutubeDL.getInfo);
@@ -16,6 +17,18 @@ export async function findSong(query: string): Promise<Song> {
   } else {
     return await getSong(query);
   }
+}
+
+export async function findPlaylistVideos(link: string): Promise<PlaylistQueryResult> {
+  const playlistId = getPlaylistId(link);
+
+  const query = await yts({ listId: playlistId });
+  const playlistVideos = query.videos;
+
+  const songs = await getSongPlaylist(playlistVideos);
+  const deletedSongs = playlistVideos.length - songs.length;
+
+  return { songs, deletedSongs };
 }
 
 export async function playSong(message: CommandoMessage): Promise<void> {
@@ -35,7 +48,7 @@ export async function playSong(message: CommandoMessage): Promise<void> {
   }
 
   server.dispatcher.on('finish', () => {
-    if (server.songQueue[0] || server.nowPlaying.isLooping) {
+    if ((server.songQueue && server.songQueue[0]) || server.nowPlaying.isLooping) {
       playSong(message);
     } else {
       server.songQueue = undefined;
@@ -51,7 +64,7 @@ export async function playSong(message: CommandoMessage): Promise<void> {
   }
 }
 
-export async function getSongStream(url: string): Promise<any> {
+async function getSongStream(url: string): Promise<any> {
   if (YTDL.validateURL(url)) {
     return await YTDL(url);
   } else {
@@ -84,13 +97,28 @@ async function getOtherDomainSong(query: string): Promise<Song> {
 }
 
 async function getSong(query: string): Promise<Song> {
-  const songResults = await yts(query);
-    
-  if (songResults.videos.length <= 1) {
-    return null;
-  }
+  const match = query.match(youtubeWatchLinkRegex);
 
-  const foundSong = songResults.videos[0];
+  let foundSong: VideoMetadataResult | VideoSearchResult;
+  if (match) {
+    query = match[1];
+
+    const songResult = await yts( { videoId: query } );
+
+    if (!songResult) {
+      return null;
+    }
+
+    foundSong = songResult;
+  } else {
+    const songResults = await yts(query);
+    
+    if (songResults.videos.length <= 1) {
+      return null;
+    }
+  
+    foundSong = songResults.videos[0];
+  }
 
   const song: Song = {
     url: foundSong.url,
@@ -102,4 +130,39 @@ async function getSong(query: string): Promise<Song> {
   };
 
   return song;
+}
+
+function getPlaylistId(link: string): string {
+  const match1 = link.match(youtubePlaylistLinkRegex);
+  
+  if (match1) {
+    return match1[1];
+  } else {
+    const match2 = link.match(youtubeWatchLinkWithPlaylistRegex);
+
+    return match2[1];
+  }
+}
+
+async function getSongPlaylist(playlistVideos: PlaylistItem[]): Promise<Song[]> {
+  const ret: Song[] = [];
+
+  for (const video of playlistVideos) {
+    if (video.title != '[Deleted video]' && video.title != '[Private video]') {
+      const video2 = video as any; // hack to get song duration without invoking yts again, obviously type-unsafe
+
+      const song: Song = {
+        url: `${youtubeWatchBaseUrl}${video.videoId}`,
+        title: video.title,
+        duration: video2.duration.timestamp,
+        isLooping: false,
+        useOpus: true,
+        playlist: undefined
+      };
+
+      ret.push(song);
+    }
+  }
+
+  return ret;
 }
