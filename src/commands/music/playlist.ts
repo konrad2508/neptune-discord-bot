@@ -1,10 +1,11 @@
 import { Command, CommandInfo, CommandoClient, CommandoMessage } from 'discord.js-commando';
 import { MessageEmbed } from 'discord.js';
 import { sendOk, sendError, shuffle } from '../../helpers/utils.js';
-import { findSong, playSong } from '../../helpers/musicplayer.js';
-import { optionRegex } from '../../helpers/strings.js';
-import Playlist from '../../schema/playlist.js';
+import { findSong, playSong } from '../../helpers/musicplayer';
+import { optionRegex } from '../../helpers/strings';
+import PlaylistRepository from '../../schema/playlist';
 import config from '../../config';
+import { Playlist } from '../../typings/playlist';
 
 const playOptions = ['-sh', '--shuffle'];
 
@@ -93,7 +94,7 @@ class PlaylistCommand extends Command {
             return;
         }
 
-        Playlist.findOne({ name: playlistName, server: message.guild.id }, 'songs').exec()
+        PlaylistRepository.findOne({ name: playlistName, server: message.guild.id }, 'songs').exec()
             .then(ret => this.playFoundPlaylist(message, opt, playlistName, ret))
             .catch((err) => {
                 sendError(message, '**Something went wrong, try again later**');
@@ -112,7 +113,7 @@ class PlaylistCommand extends Command {
         }
     }
 
-    private playFoundPlaylist(message: CommandoMessage, opt: string, playlistName: string, ret: any): void {
+    private playFoundPlaylist(message: CommandoMessage, opt: string, playlistName: string, ret: Playlist): void {
         const serverId = message.guild.id;
         const server = global.servers[serverId];
         
@@ -150,14 +151,14 @@ class PlaylistCommand extends Command {
         const [ playlistName ] = args.split(' ');
     
         if (!playlistName) {
-            Playlist.find({ server: message.guild.id }, 'name').exec()
+            PlaylistRepository.find({ server: message.guild.id }, 'name').exec()
                 .then(ret => this.listAll(message, ret))
                 .catch((err) => {
                     sendError(message, '**Something went wrong, try again later**');
                     console.log(err);
                 });
         } else {
-            Playlist.findOne({ name: playlistName, server: message.guild.id }).exec()
+            PlaylistRepository.findOne({ name: playlistName, server: message.guild.id }).exec()
                 .then(ret => this.listPlaylist(message, playlistName, ret))
                 .catch((err) => {
                     sendError(message, '**Something went wrong, try again later**');
@@ -166,12 +167,12 @@ class PlaylistCommand extends Command {
         }
     }
 
-    private listAll(message: CommandoMessage, ret: any): void {
+    private listAll(message: CommandoMessage, ret: Playlist[]): void {
         if (ret.length) {
             const embed = new MessageEmbed()
                 .setTitle('List of playlists')
                 .setColor('#00FF00')
-                .setDescription(ret.map((el: any) => el.name).join('\n'));
+                .setDescription(ret.map(el => el.name).join('\n'));
     
             message.channel.send(embed);
         } else {
@@ -184,7 +185,7 @@ class PlaylistCommand extends Command {
         }
     }
 
-    private listPlaylist(message: CommandoMessage, playlistName: string, ret: any): void {
+    private listPlaylist(message: CommandoMessage, playlistName: string, ret: Playlist): void {
         if (!ret) {
             sendError(message, '**Playlist with that name does not exist**');
 
@@ -192,7 +193,7 @@ class PlaylistCommand extends Command {
         }
 
         if (ret.songs.length) {
-            const songList = ret.songs.map((song: any, id: number) => `**${id + 1}. [${song.title}](${song.url})**`);
+            const songList = ret.songs.map((song, id) => `**${id + 1}. [${song.title}](${song.url})**`);
     
             sendOk(message, `**List of songs on playlist ${playlistName}**\n${songList.join('\n')}`);
         } else {
@@ -209,7 +210,7 @@ class PlaylistCommand extends Command {
             return;
         }
 
-        Playlist.find({ name, server: message.guild.id }).exec()
+        PlaylistRepository.find({ name, server: message.guild.id }).exec()
             .then(ret => this.persistPlaylist(message, name, ret))
             .catch((err) => {
                 sendError(message, '**Something went wrong, try again or specify a different name**');
@@ -218,17 +219,21 @@ class PlaylistCommand extends Command {
 
     }
 
-    private persistPlaylist(message: CommandoMessage, name: string, playlists: any): any {
+    private persistPlaylist(message: CommandoMessage, name: string, playlists: Playlist[]): void {
         if (playlists.length) {
             sendError(message, '**Playlist with that name already exists**');
 
             return;
         }
 
-        Playlist.create({ name, server: message.guild.id })
+        PlaylistRepository.create({ name, server: message.guild.id })
             .then((ret) => {
-                if (!ret) sendError(message, '**Could not save the playlist, try again later**');
-                else sendOk(message, '**Saved the playlist**');
+                if (!ret) {
+                    sendError(message, '**Could not save the playlist, try again later**');
+                }
+                else {
+                    sendOk(message, '**Saved the playlist**');
+                }
             })
             .catch((err) => {
                 sendError(message, '**Error while creating playlist**');
@@ -251,7 +256,7 @@ class PlaylistCommand extends Command {
             return;
         }
 
-        Playlist.findOne({ name: playlistName, server: message.guild.id }).exec()
+        PlaylistRepository.findOne({ name: playlistName, server: message.guild.id }).exec()
             .then(ret => this.addSong(message, playlistName, song, ret))
             .catch((err) => {
                 sendError(message, '**Something went wrong, try again or specify a different name**');
@@ -259,7 +264,7 @@ class PlaylistCommand extends Command {
             });
     }
 
-    private async addSong(message: CommandoMessage, playlistName: string, query: string, ret: any): Promise<void> {
+    private async addSong(message: CommandoMessage, playlistName: string, query: string, ret: Playlist): Promise<void> {
         if (!ret) {
             sendError(message, '**Playlist with that name does not exist**');
 
@@ -276,7 +281,7 @@ class PlaylistCommand extends Command {
 
         ret.songs.push(song);
 
-        ret.save((err: any) => {
+        ret.save(err => {
             if (err) {
                 sendError(message, '**Error while adding song to the playlist**');
                 console.log(err);
@@ -301,7 +306,7 @@ class PlaylistCommand extends Command {
             return;
         }
 
-        Playlist.findOne({ name: playlistName, server: message.guild.id }).exec()
+        PlaylistRepository.findOne({ name: playlistName, server: message.guild.id }).exec()
             .then(ret => this.removeSong(message, playlistName, songID, ret))
             .catch((err) => {
                 console.log(err);
@@ -309,7 +314,7 @@ class PlaylistCommand extends Command {
             });
     }
 
-    private removeSong(message: CommandoMessage, playlistName: string, songID: string, ret: any): void {
+    private removeSong(message: CommandoMessage, playlistName: string, songID: string, ret: Playlist): void {
         if (!ret) {
             sendError(message, '**Playlist with that name does not exist**');
 
@@ -324,9 +329,9 @@ class PlaylistCommand extends Command {
             return;
         }
 
-        const deleted = ret.songs.splice(songID, 1)[0];
+        const deleted = ret.songs.splice(songIDParsed, 1)[0];
 
-        ret.save((err: any) => {
+        ret.save(err => {
             if (err) {
                 sendError(message, '**Error while removing song from the playlist**');
                 console.log(err);
@@ -351,8 +356,8 @@ class PlaylistCommand extends Command {
             return;
         }
 
-        Playlist.findOneAndDelete({ name: playlistName, server: message.guild.id }).exec()
-            .then((ret: any) => {
+        PlaylistRepository.findOneAndDelete({ name: playlistName, server: message.guild.id }).exec()
+            .then(ret => {
                 if (!ret) {
                     sendError(message, '**Playlist with that name does not exist**');
                 }
