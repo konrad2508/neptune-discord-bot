@@ -1,4 +1,4 @@
-interface RunArgs {
+interface PlayRunArgs {
     opt: string,
     url: string
 }

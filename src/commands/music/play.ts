@@ -33,7 +33,7 @@ class PlayCommand extends Command {
         super(client, commandInfo);
     }
 
-    public async run(message: CommandoMessage, { opt, url }: RunArgs): Promise<any> {
+    public async run(message: CommandoMessage, { opt, url }: PlayRunArgs): Promise<any> {
         const serverId = message.guild.id;
         const server = global.servers[serverId];
 
