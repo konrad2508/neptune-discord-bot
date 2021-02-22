@@ -1,4 +1,4 @@
 interface YTDLOptions {
-  filter: string,
-  quality: string
+    filter: string,
+    quality: string
 }

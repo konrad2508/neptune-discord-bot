@@ -1,4 +1,4 @@
 interface PlaylistQueryResult {
-  songs: Song[],
-  deletedSongs: number
+    songs: Song[],
+    deletedSongs: number
 }

@@ -2,70 +2,70 @@ const { MessageEmbed } = require('discord.js');
 const { getDomain } = require('tldjs');
 
 const shuffle = (array) => {
-  let currIndex = array.length;
+    let currIndex = array.length;
 
-  while (currIndex !== 0) {
-    const randIndex = Math.floor(Math.random() * currIndex);
-    currIndex -= 1;
+    while (currIndex !== 0) {
+        const randIndex = Math.floor(Math.random() * currIndex);
+        currIndex -= 1;
 
-    const temp = array[randIndex];
-    array[randIndex] = array[currIndex];
-    array[currIndex] = temp;
-  }
+        const temp = array[randIndex];
+        array[randIndex] = array[currIndex];
+        array[currIndex] = temp;
+    }
 
-  return array;
+    return array;
 };
 
 const songTime = (curr, max) => {
-  let currSeconds = (curr / 1000).toFixed(0);
-  let currMinutes = Math.floor(currSeconds / 60);
-  let currHours = '00';
+    let currSeconds = (curr / 1000).toFixed(0);
+    let currMinutes = Math.floor(currSeconds / 60);
+    let currHours = '00';
 
-  const [maxHours, maxMinutes, maxSeconds] = max.split(':');
+    const [maxHours, maxMinutes, maxSeconds] = max.split(':');
 
-  if (currMinutes > 59) {
-    currHours = Math.floor(currMinutes / 60);
-    currHours = (currHours >= 10)
-      ? currHours
-      : `0${currHours}`;
+    if (currMinutes > 59) {
+        currHours = Math.floor(currMinutes / 60);
+        currHours = (currHours >= 10)
+            ? currHours
+            : `0${currHours}`;
 
-    currMinutes -= (currHours * 60);
-  }
+        currMinutes -= (currHours * 60);
+    }
 
-  currMinutes = (currMinutes >= 10)
-    ? currMinutes
-    : `0${currMinutes}`;
+    currMinutes = (currMinutes >= 10)
+        ? currMinutes
+        : `0${currMinutes}`;
 
-  currSeconds = Math.floor(currSeconds % 60);
-  currSeconds = (currSeconds >= 10)
-    ? currSeconds
-    : `0${currSeconds}`;
+    currSeconds = Math.floor(currSeconds % 60);
+    currSeconds = (currSeconds >= 10)
+        ? currSeconds
+        : `0${currSeconds}`;
 
-  return (maxHours !== '00')
-    ? `${currHours}:${currMinutes}:${currSeconds}/${maxHours}:${maxMinutes}:${maxSeconds}`
-    : `${currMinutes}:${currSeconds}/${maxMinutes}:${maxSeconds}`;
+    return (maxHours !== '00')
+        ? `${currHours}:${currMinutes}:${currSeconds}/${maxHours}:${maxMinutes}:${maxSeconds}`
+        : `${currMinutes}:${currSeconds}/${maxMinutes}:${maxSeconds}`;
 };
 
 const sendOk = (message, text) => {
-  const embed = new MessageEmbed()
-    .setColor('#00FF00')
-    .setDescription(text);
+    const embed = new MessageEmbed()
+        .setColor('#00FF00')
+        .setDescription(text);
 
-  message.channel.send(embed);
+    message.channel.send(embed);
 };
 
 const sendError = (message, text) => {
-  const embed = new MessageEmbed()
-    .setColor('#FF0000')
-    .setDescription(text);
+    const embed = new MessageEmbed()
+        .setColor('#FF0000')
+        .setDescription(text);
 
-  message.channel.send(embed);
+    message.channel.send(embed);
 };
 
 const extractDomain = (url) => {
-  return getDomain(url);
+    return getDomain(url);
 };
 
 module.exports = {
-  sendOk, sendError, songTime, shuffle, extractDomain
+    sendOk, sendError, songTime, shuffle, extractDomain
 };

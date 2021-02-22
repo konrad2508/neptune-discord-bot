@@ -1,4 +1,4 @@
 interface RunArgs {
-  opt: string,
-  url: string
+    opt: string,
+    url: string
 }
