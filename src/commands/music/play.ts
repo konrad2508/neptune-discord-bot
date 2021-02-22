@@ -1,17 +1,16 @@
-import util from 'util';
 import { Command, CommandInfo, CommandoClient, CommandoMessage } from 'discord.js-commando';
-import YTDL from 'ytdl-core';
+import { extractDomain, sendError, sendOk } from '../../helpers/utils';
+import YTDL from 'ytdl-core-discord';
+import yts from 'yt-search';
 import YoutubeDL from 'youtube-dl';
-import valid from 'valid-url';
-import YoutubePlaylist from 'youtube-playlist';
-import { sendOk, sendError } from '../../helpers/utils.js';
+import util from 'util';
 
-const playOptions = ['-pl', '--playlist'];
+const playlistOptions = ['-pl', '--playlist'];
 const optionRegex = /^-.*$/g;
 const playlistLinkRegex = /^https?:\/\/www\.youtube\.com\/playlist.*$/g;
 const videoLinkWithPlaylistRegex = /^https?:\/\/www.youtube.com\/watch\?v=.*&list=.*$/g;
+const otherDomains = ['soundcloud.com'];
 
-const getBasicInfo = util.promisify(YTDL.getBasicInfo);
 const getInfo = util.promisify(YoutubeDL.getInfo);
 
 class PlayCommand extends Command {
@@ -46,123 +45,140 @@ class PlayCommand extends Command {
     const serverId = message.guild.id;
     const server = global.servers[serverId];
 
-    if (!opt.match(optionRegex)) {
-      url = url
-        ? `${opt} ${url}`
-        : opt;
-      opt = '';
-    }
+    const [option, link] = this.fixArgs(opt, url);
 
     if (!message.guild) {
       sendError(message, 'Command unavailable through DM');
 
       return;
     }
-    
+
     if (!server) {
       sendError(message, '**Bot must be in a voice channel**');
 
       return;
     }
 
-    if (!url) {
+    if (!link) {
       sendError(message, '**Specify URL of the song**');
 
       return;
     }
 
-    if (opt && !playOptions.some(e => e === opt)) {
+    if (option) {
+      this.handleOptionCase(message, option, link);
+    } else {
+      this.handleOptionlessCase(message, link);
+    }    
+  }
+
+  private fixArgs(arg1: string, arg2: string): string[] {
+    if (arg1.match(optionRegex)) {
+      return [arg1, arg2];
+    } else {
+      return ['', `${arg1} ${arg2}`.trim()];
+    }
+  }
+
+  private handleOptionCase(message: CommandoMessage, option: string, link: string): void {
+    if (!playlistOptions.some(e => e === option)) {
       sendError(message, '**Unknown option**');
 
       return;
     }
-    
-    await this.handleUrl(message, opt, url);
-  }
 
-  private async handleUrl(message: CommandoMessage, opt: string, url: string): Promise<void> {
-    if (opt === '-pl' || opt === '--playlist') {
-      if (!url.match(playlistLinkRegex) && !url.match(videoLinkWithPlaylistRegex)) {
-        sendError(message, '**Specified URL does not leads to a playlist. Try adding it to the queue without --playlist option.**');
-      } // TODO
-      else {
-        await this.handlePlaylist(message, url);
-      }
-    } else if (url.match(playlistLinkRegex)) {
-      sendError(message, '**Specified URL leads to a playlist, not a song. Use --playlist option to extract songs from a playlist.**');
-    }
-    else {
-      this.handleSong(message, url);
-    }
-  }
-
-  private async handlePlaylist(message: CommandoMessage, url: string): Promise<void> {
-    let urls: any[] = [];
-    await YoutubePlaylist(url, ['url', 'name'])
-      .then((res: any) => urls = res.data.playlist);
-  
-    if (urls.length < 1) {
-      sendError(message, '**Could not add the playlist to the queue**');
+    if (!link.match(playlistLinkRegex) && !link.match(videoLinkWithPlaylistRegex)) {
+      sendError(message, '**Specified URL does not leads to a playlist. Try adding it to the queue without --playlist option.**');
 
       return;
     }
 
-    this.addPlaylistToQueue(message, urls);
+    //TODO implement
+    sendError(message, '**Could not add the playlist to the queue**');
   }
 
-  private addPlaylistToQueue(message: CommandoMessage, urls: any): void {
-    const server = global.servers[message.guild.id];
+  private async handleOptionlessCase(message: CommandoMessage, link: string): Promise<void> {
+    const serverId = message.guild.id;
+    const server = global.servers[serverId];
     
-    const songs: Song[] = urls.map((el: any) => ({
-      url: el.url,
-      title: el.name,
-      duration: undefined,
-      isLooping: false
-    } as Song));
-  
+    const song = await this.findSong(link);
+
+    if (!song) {
+      sendError(message, '**Could not add that song, add a different song**');
+
+      return;
+    }
+
     if (server.songQueue) {
-      songs.forEach(vid => server.songQueue.push(vid));
+      server.songQueue.push(song);
+      sendOk(message, `**Added [${song.title}](${song.url}) to the queue**`);
+    } else {
+      server.songQueue = [song];
+      this.playSong(message);
     }
-    else {
-      server.songQueue = [];
-      songs.forEach(vid => server.songQueue.push(vid));
-      PlayCommand.playSong(message);
-    }
-  
-    sendOk(message, `**Added ${urls.length} songs to the queue**`);
   }
 
-  public static async playSong(message: CommandoMessage): Promise<void> {
-    const server = global.servers[message.guild.id];
-
-    let song: Song;
-    if (server.nowPlaying?.isLooping) {
-      song = server.nowPlaying;
-    }
-    else {
-      song = this.extractInfo(message);
-
-      if (!song.duration) {
-        const newSong = await this.fetchInfo(message, song);
-        if (!newSong) {
-          server.songQueue = undefined;
-          sendOk(message, '**Queue ended**');
-          return;
-        }
-        song = newSong;
+  private async findSong(query: string): Promise<Song> {
+    const domain = extractDomain(query);
+    
+    if (otherDomains.some(e => e === domain)) {
+      let songInfo: any = null;
+      await getInfo(query)
+            .then(info => songInfo = info)
+            .catch((err) => {
+              console.log(err);
+            });
+      
+      if (!songInfo) {
+        return null;
       }
 
-      server.nowPlaying = song;
+      const song: Song = {
+        url: songInfo.webpage_url,
+        title: songInfo.title,
+        duration: songInfo._duration_hms,
+        isLooping: false,
+        playlist: undefined,
+      };
+
+      console.log(song);
+
+      return song;
+    } else {
+      const songResults = await yts(query);
+      
+      if (songResults.videos.length <= 1) {
+        return null;
+      }
+
+      const foundSong = songResults.videos[0];
+
+      const song: Song = {
+        url: foundSong.url,
+        title: foundSong.title,
+        duration: foundSong.timestamp,
+        isLooping: false,
+        playlist: undefined
+      };
+
+      return song;
+    }
+  }
+
+  private async playSong(message: CommandoMessage): Promise<void> {
+    const serverId = message.guild.id;
+    const server = global.servers[serverId];
+
+    if (!server.nowPlaying?.isLooping) {
+      server.nowPlaying = server.songQueue.shift();
     }
 
-    const songStream = YTDL.validateURL(song.url)
-      ? YTDL(song.url, global.optsYTDL)
-      : YoutubeDL(song.url, global.optsYoutubeDL, undefined);
-
-    server.dispatcher = server.connection.play(songStream);
+    const songStream = await this.getSongStream(server.nowPlaying.url);
+    
+    server.dispatcher = server.connection.play(songStream, { type: 'opus' });
     server.dispatcher.on('finish', () => {
       if (server.songQueue[0] || server.nowPlaying.isLooping) {
-        PlayCommand.playSong(message);
+        this.playSong(message);
       } else {
         server.songQueue = undefined;
         server.nowPlaying = undefined;
@@ -173,76 +189,12 @@ class PlayCommand extends Command {
     });
 
     if (!server.nowPlaying.isLooping) {
-      sendOk(message, `**Playing [${song.title}](${song.url})**`);
+      sendOk(message, `**Playing [${server.nowPlaying.title}](${server.nowPlaying.url})**`);
     }
   }
 
-  private static extractInfo(message: CommandoMessage): Song {
-    const server = global.servers[message.guild.id];
-  
-    const info = server.songQueue.shift();
-    
-    return info;
-  }
-
-  private static async fetchInfo(message: CommandoMessage, song: Song): Promise<Song> {
-    const server = global.servers[message.guild.id];
-  
-    let keepSkipping = true;
-    while (keepSkipping) {
-      keepSkipping = false;
-  
-      await getBasicInfo(song.url, undefined) //TODO
-        .then((res: any) => song.duration = new Date(res.length_seconds * 1000).toISOString().substr(11, 8))
-        .catch(() => {
-          sendError(message, `**Could not play [${song.title}](${song.url}), skipping.**`);
-  
-          if (server.songQueue?.length === 0) {
-            song = undefined;
-          }
-          else {
-            keepSkipping = true;
-            song = this.extractInfo(message);
-          }
-        });
-    }
-  
-    return song;
-  }
-
-  private handleSong(message: CommandoMessage, url: string): void {
-    if (!valid.isWebUri(url)) {
-      url = `ytsearch1:${url}`;
-    }
-  
-    // getInfo(url, global.optsYoutubeDL)
-    getInfo(url)
-      .then(info => this.addSongToQueue(message, info))
-      .catch((err) => {
-        sendError(message, '**Error while adding song to queue, try again or specify different song**');
-        console.log(err);
-      });
-  }
-
-  private addSongToQueue(message: CommandoMessage, info: any): void {
-    const vid: Song = {
-      url: info.webpage_url,
-      title: info.title,
-      duration: info._duration_hms,
-      isLooping: false,
-      playlist: undefined,
-    };
-    
-    const server = global.servers[message.guild.id];
-
-    if (server.songQueue) {
-      server.songQueue.push(vid);
-      sendOk(message, `**Added [${vid.title}](${vid.url}) to the queue**`);
-    } else {
-      server.songQueue = [];
-      server.songQueue.push(vid);
-      PlayCommand.playSong(message);
-    }
+  private async getSongStream(url: string): Promise<any> {
+    return YTDL.validateURL(url) ? await YTDL(url) : YoutubeDL(url, global.optsYoutubeDL, undefined);
   }
 }
 

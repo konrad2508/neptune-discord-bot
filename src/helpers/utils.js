@@ -1,4 +1,5 @@
 const { MessageEmbed } = require('discord.js');
+const { getDomain } = require('tldjs');
 
 const shuffle = (array) => {
   let currIndex = array.length;
@@ -61,6 +62,10 @@ const sendError = (message, text) => {
   message.channel.send(embed);
 };
 
+const extractDomain = (url) => {
+  return getDomain(url);
+};
+
 module.exports = {
-  sendOk, sendError, songTime, shuffle,
+  sendOk, sendError, songTime, shuffle, extractDomain
 };
