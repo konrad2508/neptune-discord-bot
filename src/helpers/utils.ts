@@ -27,7 +27,7 @@ export function songTime(curr: number, max: string): string {
     if (splittedMax.length === 3) {
         [ maxHours, maxMinutes, maxSeconds ] = splittedMax;
 
-        if (maxHours === '00' || maxHours == '0') {
+        if (maxHours === '00' || maxHours === '0') {
             maxHours = null;
         } else if (Number(maxHours) < 10 && maxHours.length === 1) {
             maxHours = `0${maxHours}`;

@@ -148,7 +148,7 @@ async function getSongPlaylist(playlistVideos: PlaylistItem[]): Promise<Song[]> 
     const ret: Song[] = [];
 
     for (const video of playlistVideos) {
-        if (video.title != '[Deleted video]' && video.title != '[Private video]') {
+        if (video.title !== '[Deleted video]' && video.title !== '[Private video]') {
             const video2 = video as any; // hack to get song duration without invoking yts again, obviously type-unsafe
 
             const song: Song = {

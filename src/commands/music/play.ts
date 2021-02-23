@@ -90,7 +90,7 @@ class PlayCommand extends Command {
 
         const { songs, deletedSongs } = await findPlaylistVideos(link);
 
-        if (songs.length == 0) {
+        if (songs.length === 0) {
             sendError(message, '**Could not add the playlist to the queue**');
 
             return;
