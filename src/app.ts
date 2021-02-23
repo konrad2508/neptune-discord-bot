@@ -5,7 +5,6 @@ import express from 'express';
 import config from './config';
 
 // configure global variables
-global.optsYTDL = { filter: 'audioonly', quality: 'highestaudio' };
 global.optsYoutubeDL = ['--no-warnings', '--force-ipv4', '--restrict-filenames'];
 global.servers = {};
 
