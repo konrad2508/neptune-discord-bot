@@ -1,6 +1,6 @@
 {
     "name": "neptune-discord-bot",
-    "version": "1.2.0",
+    "version": "2.0.0",
     "description": "Discord bot capable of playing music and saving emotes.",
     "main": "app.js",
     "dependencies": {
