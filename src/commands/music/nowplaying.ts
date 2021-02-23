@@ -41,8 +41,12 @@ class NowPlayingCommand extends Command {
         const length = server.nowPlaying.duration;
 
         let description = `\nCurrent time: \`${songTime(totalStreamTime, length)}\``;
-        if (server.nowPlaying.playlist) description += `\nPlaylist: ${server.nowPlaying.playlist}`;
-        if (server.nowPlaying.isLooping) description += '\nLooped';
+        if (server.nowPlaying.playlist) {
+            description += `\nPlaylist: ${server.nowPlaying.playlist}`;
+        }
+        if (server.nowPlaying.isLooping) {
+            description += '\nLooped';
+        }
 
         sendOk(message, `**Now playing: [${title}](${url})${description}**`);
     }

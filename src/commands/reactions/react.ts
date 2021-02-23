@@ -50,7 +50,7 @@ class ReactCommand extends Command {
                 }
             })
             .catch(err => {
-                sendError('**Something went wrong, try again or specify a different reaction**');
+                sendError(message, '**Something went wrong, try again or specify a different reaction**');
                 console.log(err);
             });
     }
