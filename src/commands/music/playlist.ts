@@ -230,8 +230,7 @@ class PlaylistCommand extends Command {
             .then((ret) => {
                 if (!ret) {
                     sendError(message, '**Could not save the playlist, try again later**');
-                }
-                else {
+                } else {
                     sendOk(message, '**Saved the playlist**');
                 }
             })
@@ -360,8 +359,7 @@ class PlaylistCommand extends Command {
             .then(ret => {
                 if (!ret) {
                     sendError(message, '**Playlist with that name does not exist**');
-                }
-                else {
+                } else {
                     sendOk(message, `**Successfully deleted playlist named ${ret.name}**`);
                 }
             })
