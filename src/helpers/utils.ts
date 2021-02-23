@@ -18,9 +18,6 @@ export function shuffle(array: any[]): any[] {
 }
 
 export function songTime(curr: number, max: string): string {
-    console.log(curr);
-    console.log(max);
-
     let maxHours: string, maxMinutes: string, maxSeconds: string;
     const splittedMax = max.split(':');
 

@@ -1,6 +1,6 @@
 import { Command, CommandInfo, CommandoClient, CommandoMessage } from 'discord.js-commando';
 import { MessageEmbed } from 'discord.js';
-import { sendError } from '../../helpers/utils.js';
+import { sendError } from '../../helpers/utils';
 import { Reaction } from '../../typings/reaction';
 import ReactionRepository from '../../schema/reaction';
 

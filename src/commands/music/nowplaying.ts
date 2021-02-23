@@ -1,5 +1,5 @@
 import { Command, CommandInfo, CommandoClient, CommandoMessage } from 'discord.js-commando';
-import { sendOk, sendError, songTime } from '../../helpers/utils.js';
+import { sendOk, sendError, songTime } from '../../helpers/utils';
 
 class NowPlayingCommand extends Command {
     public constructor(client: CommandoClient) {

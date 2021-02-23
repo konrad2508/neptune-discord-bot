@@ -1,4 +1,4 @@
-import { sendOk, sendError } from '../../helpers/utils.js';
+import { sendOk, sendError } from '../../helpers/utils';
 import { Command, CommandInfo, CommandoClient, CommandoMessage } from 'discord.js-commando';
 import ReactionRepository from '../../schema/reaction';
 import config from '../../config';

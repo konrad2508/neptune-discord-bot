@@ -1,6 +1,6 @@
 import { Command, CommandInfo, CommandoClient, CommandoMessage } from 'discord.js-commando';
 import { MessageEmbed } from 'discord.js';
-import { sendOk, sendError, shuffle } from '../../helpers/utils.js';
+import { sendOk, sendError, shuffle } from '../../helpers/utils';
 import { findSong, playSong } from '../../helpers/musicplayer';
 import { optionRegex } from '../../helpers/strings';
 import { Playlist } from '../../typings/playlist';

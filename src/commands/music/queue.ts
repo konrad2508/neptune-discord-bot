@@ -1,5 +1,5 @@
 import { Command, CommandInfo, CommandoClient, CommandoMessage } from 'discord.js-commando';
-import { sendOk, sendError } from '../../helpers/utils.js';
+import { sendOk, sendError } from '../../helpers/utils';
 
 class QueueCommand extends Command {
     public constructor(client: CommandoClient) {
