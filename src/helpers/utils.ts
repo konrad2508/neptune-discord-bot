@@ -1,6 +1,5 @@
 import { MessageEmbed } from 'discord.js';
 import { CommandoMessage } from 'discord.js-commando';
-import { getDomain } from 'tldjs';
 
 export function shuffle(array: any[]): any[] {
     let currIndex = array.length;
@@ -24,19 +23,17 @@ export function songTime(curr: number, max: string): string {
     if (splittedMax.length === 3) {
         [ maxHours, maxMinutes, maxSeconds ] = splittedMax;
 
-        if (maxHours === '00' || maxHours === '0') {
-            maxHours = null;
-        } else if (Number(maxHours) < 10 && maxHours.length === 1) {
+        if (Number(maxHours) < 10) {
             maxHours = `0${maxHours}`;
         }
 
-        if (Number(maxMinutes) < 10 && maxMinutes.length === 1) {
+        if (Number(maxMinutes) < 10) {
             maxMinutes = `0${maxMinutes}`;
         }
     } else if (splittedMax.length === 2) {
         [ maxMinutes, maxSeconds ] = splittedMax;
 
-        if (Number(maxMinutes) < 10 && maxMinutes.length === 1) {
+        if (Number(maxMinutes) < 10) {
             maxMinutes = `0${maxMinutes}`;
         }
     } else {
@@ -87,8 +84,4 @@ export function sendError(message: CommandoMessage, text: string): void {
         .setDescription(text);
 
     message.channel.send(embed);
-}
-
-export function extractDomain(url: string): string {
-    return getDomain(url);
 }
