@@ -64,7 +64,7 @@ export async function playSong(message: CommandoMessage): Promise<void> {
     server.dispatcher = server.connection.play(songStream, { type: 'opus' });
 
     server.dispatcher.on('finish', () => {
-        if ((server.songQueue && server.songQueue[0]) || server.nowPlaying.isLooping) {
+        if (server.songQueue?.[0] || server.nowPlaying.isLooping) {
             playSong(message);
         } else {
             server.songQueue = undefined;

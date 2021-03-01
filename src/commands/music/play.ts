@@ -2,6 +2,7 @@ import { Command, CommandInfo, CommandoClient, CommandoMessage } from 'discord.j
 import { findSong, findPlaylistVideos, playSong } from '../../helpers/musicplayer';
 import { optionRegex, youtubePlaylistLinkRegex, youtubeWatchLinkWithPlaylistRegex } from '../../helpers/strings';
 import { sendError, sendOk } from '../../helpers/utils';
+import config from '../../config';
 
 const playlistOptions = ['-pl', '--playlist'];
 
@@ -39,8 +40,14 @@ class PlayCommand extends Command {
 
         const [option, link] = this.fixArgs(opt, url);
 
+        if (server.isQueueLocked && !config.ADMIN.some(e => e === message.author.id)) {
+            sendError(message, '**The queue is locked**');
+
+            return;
+        }
+
         if (!message.guild) {
-            sendError(message, 'Command unavailable through DM');
+            sendError(message, '**Command unavailable through DM**');
 
             return;
         }

@@ -17,7 +17,7 @@ class ListCommand extends Command {
 
     public async run(message: CommandoMessage): Promise<any> {
         if (!message.guild) {
-            sendError(message, 'Command unavailable through DM');
+            sendError(message, '**Command unavailable through DM**');
 
             return;
         }

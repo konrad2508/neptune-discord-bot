@@ -19,7 +19,7 @@ class QueueCommand extends Command {
         const server = global.servers[serverId];
 
         if (!message.guild) {
-            sendError(message, 'Command unavailable through DM');
+            sendError(message, '**Command unavailable through DM**');
 
             return;
         }
@@ -30,8 +30,13 @@ class QueueCommand extends Command {
             return;
         }
 
+        let lockedQueueMessage = '';
+        if (server.isQueueLocked) {
+            lockedQueueMessage = '\nThe queue has been locked';
+        }
+
         if (!server.songQueue) {
-            sendOk(message, '**The queue is empty**');
+            sendOk(message, `**The queue is empty${lockedQueueMessage}**`);
 
             return;
         }
@@ -39,7 +44,6 @@ class QueueCommand extends Command {
         const numberOfSongs = server.songQueue.length + 1;
 
         let nowPlaying = `\n1. [${server.nowPlaying.title}](${server.nowPlaying.url}) (currently playing)`;
-
         if (server.nowPlaying.isLooping) {
             nowPlaying += ' (looped)';
         }
@@ -48,6 +52,10 @@ class QueueCommand extends Command {
 
         if (numberOfSongs > 10) {
             queueMessage.push(`\nTotal number of songs: ${numberOfSongs}`);
+        }
+
+        if (lockedQueueMessage) {
+            queueMessage.push(lockedQueueMessage);
         }
 
         queueMessage.unshift(nowPlaying);

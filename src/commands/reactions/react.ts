@@ -30,7 +30,7 @@ class ReactCommand extends Command {
         [ name ] = name.split(' ');
 
         if (!message.guild) {
-            sendError(message, 'Command unavailable through DM');
+            sendError(message, '**Command unavailable through DM**');
 
             return;
         }

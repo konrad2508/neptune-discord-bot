@@ -38,7 +38,7 @@ class PlaylistCommand extends Command {
 
     public async run(message: CommandoMessage, { command, args }: PlaylistRunArgs): Promise<any> {
         if (!message.guild) {
-            sendError(message, 'Command unavailable through DM');
+            sendError(message, '**Command unavailable through DM**');
 
             return;
         }
@@ -74,8 +74,17 @@ class PlaylistCommand extends Command {
     }
 
     private handlePlay(message: CommandoMessage, args: string) {
+        const serverId = message.guild.id;
+        const server = global.servers[serverId];
+        
         const [ opt, playlistName ] = this.fixArgs(args);
-    
+        
+        if (server.isQueueLocked && !config.ADMIN.some(e => e === message.author.id)) {
+            sendError(message, '**The queue is locked**');
+
+            return;
+        }
+
         if (!message.member.voice.channel) {
             sendError(message, '**Bot must be in a voice channel**');
 

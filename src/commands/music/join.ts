@@ -18,7 +18,7 @@ class JoinCommand extends Command {
         const serverId = message.guild.id;
 
         if (!message.guild) {
-            sendError(message, 'Command unavailable through DM');
+            sendError(message, '**Command unavailable through DM**');
 
             return;
         }
@@ -35,7 +35,10 @@ class JoinCommand extends Command {
             return;
         }
 
-        global.servers[serverId] = { connection: await message.member.voice.channel.join() };
+        global.servers[serverId] = {
+            connection: await message.member.voice.channel.join(),
+            isQueueLocked: false
+        };
 
         const greetingStream = fs.createReadStream('./static/nepu.mp3');
         global.servers[serverId].connection.play(greetingStream).setVolume(25);

@@ -35,7 +35,7 @@ class DeleteCommand extends Command {
         }
         
         if (!message.guild) {
-            sendError(message, 'Command unavailable through DM');
+            sendError(message, '**Command unavailable through DM**');
 
             return;
         }

@@ -4,5 +4,6 @@ interface ServerInfo {
     connection: VoiceConnection,
     songQueue?: Song[],
     nowPlaying?: Song,
-    dispatcher?: StreamDispatcher
+    dispatcher?: StreamDispatcher,
+    isQueueLocked: boolean
 }
